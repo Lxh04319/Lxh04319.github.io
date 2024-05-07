@@ -21,17 +21,6 @@
       </tags>
   </entry>
   <entry>
-    <title>My New Post</title>
-    <url>/posts/10001.html</url>
-    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
-      <categories>
-        <category>Test</category>
-      </categories>
-      <tags>
-        <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaWeb</title>
     <url>/posts/10003.html</url>
     <content><![CDATA[<h2 id="Web前端开发"><a href="#Web前端开发" class="headerlink" title="Web前端开发"></a>Web前端开发</h2><h3 id="前端技术"><a href="#前端技术" class="headerlink" title="前端技术"></a>前端技术</h3><p>Web标准：</p>
@@ -633,60 +622,14 @@
       </tags>
   </entry>
   <entry>
-    <title>使用docker安装elasticsearch kibana ik分词器以及踩雷</title>
-    <url>/posts/10007.html</url>
-    <content><![CDATA[<p><strong>写在前面</strong><br>docker是在win11子系统Linux下安装的(因为前段时间redis在Linux虚拟机里使用的，现在看着虚拟机就烦🙄)<br>由于是初学，并不是很了解其中的原理<br>各种问题的解决方式仅代表个人出错以及成功解决案例</p>
-<p>docker安装省略,这里选择的是7.12.1版本(比较久远，可以去官网查找更新版本😎)</p>
-<h2 id="elasticsearch安装"><a href="#elasticsearch安装" class="headerlink" title="elasticsearch安装"></a>elasticsearch安装</h2><h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><p>后续要与kibana连接<br><code>docker network create es-net</code></p>
-<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull elasticsearch:7.12.1</code></p>
-<h3 id="创建容器、部署单点"><a href="#创建容器、部署单点" class="headerlink" title="创建容器、部署单点"></a>创建容器、部署单点</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name es --network es-net -p 9200:9200 -p 9300:9300 -v /usr/local/es/data:/usr/share/elasticsearch/data -v /usr/local/es/plugins:/usr/share/elasticsearch/plugins -e &quot;discovery.type=single-node&quot; -e &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span><br><span class="line">elasticsearch:7.12.1</span><br></pre></td></tr></table></figure>
-
-<h3 id="重启es容器"><a href="#重启es容器" class="headerlink" title="重启es容器"></a>重启es容器</h3><p><code>docker restart es</code></p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>访问<code>http://localhost:9200</code><br>正常会显示 如图所示<br><img src="https://pic.imgdb.cn/item/65fb0c309f345e8d03b6fcb3.png" alt="alt text"></p>
-<ul>
-<li><strong>错误一：localhost拒绝访问</strong><br>看有些解决方法说是修改elasticsearch.yml文件，因为开启了ssl认证<br>在终端执行<code>curl localhost:9200</code>也可以查看返回信息，有显示上图即成功</li>
-<li><strong>错误二：localhost未发送任何数据</strong><br>es启动有点慢，需要等一等，可能是还没加载出来</li>
-</ul>
-<h2 id="kibana安装"><a href="#kibana安装" class="headerlink" title="kibana安装"></a>kibana安装</h2><h3 id="拉取镜像-1"><a href="#拉取镜像-1" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull kibana:7.12.1</code><br><strong>注意</strong> 版本要与elasticsearch一致</p>
-<h3 id="创建容器、部署kibana"><a href="#创建容器、部署kibana" class="headerlink" title="创建容器、部署kibana"></a>创建容器、部署kibana</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://es:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
-
-<h3 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h3><p>访问<code>http://localhost:5601</code><br><strong>注意</strong> kibana与es连接，一定在es启动成功后再启动kibana，否则报错</p>
-<p><strong>正常访问如图</strong><br><img src="https://pic.imgdb.cn/item/65fb934b9f345e8d0306743f.png" alt="alt text"></p>
-<ul>
-<li><p><strong>错误：<code>kibana server is not ready yet</code></strong><br>查看日志<br><code>docker logs -f kibana</code>查看报错信息<br>多半是与es没连接成功<br>这里有个坑！<br>需要将创建容器时<code>es</code>改为电脑的私有ip</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://私有ip:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
-
-<p>并将配置文件kibana.yml中elasticsearch.url链接也要改为私有ip</p>
-<p>可以采用数据卷挂载、copy到本地等方式修改&#x2F;config&#x2F;kibana.yml</p>
-</li>
-</ul>
-<h3 id="查找ip"><a href="#查找ip" class="headerlink" title="查找ip"></a>查找ip</h3><ul>
-<li><strong>方法一：cmd打开终端命令行</strong><br>输入<code>ipconfig</code><br><img src="https://pic.imgdb.cn/item/65fb98989f345e8d0318fe6e.png" alt="alt text"><br>es改为IPv4地址</li>
-<li><strong>方法二：搜索</strong><br>控制面板-&gt;查看网络状态和任务<br><img src="https://pic.imgdb.cn/item/65fb99a99f345e8d031d4234.png" alt="alt text"><br>连接WIFI-&gt;详细信息-&gt;IPv4地址</li>
-</ul>
-<h2 id="ik分词器安装"><a href="#ik分词器安装" class="headerlink" title="ik分词器安装"></a>ik分词器安装</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><h4 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h4><p><code>docker exec -it es bash</code></p>
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><code>./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.12.1/elasticsearch-analysis-ik-7.12.1.zip</code></p>
-<ul>
-<li><strong>错误：下载失败</strong><br><img src="https://pic.imgdb.cn/item/65fb9d6f9f345e8d032bdaf8.png" alt="alt text"><br><code>Exception in thread &quot;main&quot; java.net.ConnectException: Connection refused</code><br>没找到好的解决办法，遂手动下载安装</li>
-</ul>
-<h3 id="手动下载安装"><a href="#手动下载安装" class="headerlink" title="手动下载安装"></a>手动下载安装</h3><p><strong>注意版本一致</strong></p>
-<h4 id="下载ik分词器"><a href="#下载ik分词器" class="headerlink" title="下载ik分词器"></a>下载ik分词器</h4><p>打开官网<code>https://github.com/medcl/elasticsearch-analysis-ik</code>查找与elasticsearch一致的版本下载zip文件，并解压到一个不含中文和空格的目录下</p>
-<p>之后重命名为<code>ik</code></p>
-<h4 id="将ik转移到docker容器里"><a href="#将ik转移到docker容器里" class="headerlink" title="将ik转移到docker容器里"></a>将<code>ik</code>转移到docker容器里</h4><p><code>docker cp ik文件的路径 elasticsearch:/usr/share/elasticsearch/plugins</code></p>
-<h4 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h4><p><code>docker restart es</code></p>
-<p><strong>注意！</strong> 尽量不采用此种方式(操控容器)</p>
-<p><a href="https://juejin.cn/post/6915355569679400974?searchId=20240320191417641463D0E23F12114A2A">ik分词器安装参考解决方案以及尽量不采用此种方式操控容器的解释</a></p>
-<h4 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h4><p><img src="https://pic.imgdb.cn/item/65fba22f9f345e8d033ec548.png" alt="alt text"></p>
-<p><strong>解决成功就可以愉快的在项目中使用elasticsearch结合数据库来进行搜索啦😉</strong></p>
-]]></content>
+    <title>My New Post</title>
+    <url>/posts/10001.html</url>
+    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
       <categories>
-        <category>Learn</category>
-        <category>微服务</category>
-        <category>Docker</category>
-        <category>elasticsearch</category>
+        <category>Test</category>
       </categories>
       <tags>
-        <tag>java</tag>
+        <tag>test</tag>
       </tags>
   </entry>
   <entry>
@@ -848,6 +791,161 @@
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><h4 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h4><h4 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h4>]]></content>
       <categories>
         <category>Learn</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Redis配置及使用的种种坑</title>
+    <url>/posts/10005.html</url>
+    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
+<li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑</li>
+<li>想到哪就更哪 可能不够全面，有点回忆不起来了</li>
+<li>如有错误欢迎指正</li>
+</ul>
+<hr>
+<p><strong>后续2</strong><br>学习了Docker,果然还是用工具好的多…<br>推荐学习！</p>
+<p><strong>后续1</strong><br>重安了一次虚拟机和redis…少了很多bug…也许是第一次安重复了导致的诸多问题</p>
+<p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
+<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><ol>
+<li><p><strong>VMware虚拟机</strong><br><strong>官方正版</strong>：不免费，仅30天试用期，曾经为了完成学校课程把30天免费全耗尽<br><strong>解决方法</strong>：下载vmware player 官方个人免费版，据说更新到现在功能也还算是完善，支持建虚拟机，暂时不知道后续使用有无需求，也许以后还是回归正版</p>
+</li>
+<li><p><strong>Linux</strong><br>linux有很多版本 这里选了ubuntu 可视化<br>主要就是下载镜像文件(清华大学开源镜像站)，新建虚拟机 balabala 不多赘述，有很多教程<br><strong>注意</strong>：安在一个空间较大的磁盘，别都挤在C盘里(没错，第一次安虚拟机不知道安了什么乱七八糟，最后C盘仅剩8G，这次长个教训😎)</p>
+</li>
+<li><p><strong>Ubuntu</strong></p>
+<ol>
+<li>ubuntu里采用的是apt-get安装，并非yum，如果很不幸的采用了yum安装，必然喜提报错<code>E:Unable to locate package yum</code><br><strong>解决方法</strong>：不使用yum</li>
+<li>ubuntu的bug问题 输入密码的时候光标不动，也不显示输入的密码或者隐式密码<br><strong>解决方法</strong>：实际上已经输进去了，输完直接enter就好</li>
+<li>redis基于C语言编写，编译需要有gcc，正常已经安装(build-essential)，如果没有gcc还需自行安装</li>
+<li>修改配置文件 由于没有vim 故采用vi命令<br>保存文件并退出 <code>:wq!</code> 后来发现ubuntu里面有test.editor，直接用很方便</li>
+<li>解压文件 tar -zxvf 这个出现问题的话可能是别的问题，比如压缩包，解压命令问题概率很小</li>
+</ol>
+</li>
+</ol>
+<h3 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h3><p>据说用docker很方便，没试过</p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>官网 <a href="https://redis.io/">https://redis.io</a> 下载安装包(建议稳定版)</p>
+<p><strong>缺点</strong>：直接下载到win系统，需要把压缩包上传到linux，很麻烦<br><strong>解决方法</strong>：这里选取的是FileZilla工具，这之中需要连接虚拟机，可能会产生一些报错(忘记什么报错了，依稀记得是虚拟机连接不上)</p>
+<h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>直接在linux里安装，很快很爽</p>
+<p>命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h4 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h4><p>解压：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>安装：<br>先切换到刚刚安的redis-7.2.4目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>可能出现权限问题 前面加上sudo即可</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><h5 id="前台运行"><a href="#前台运行" class="headerlink" title="前台运行"></a>前台运行</h5><p><code>sudo redis-server</code></p>
+<ul>
+<li>报错一：运行后出现Failed listening on port 6379(TCP)<br>说明6379端口被占用问题<br><strong>解决方法</strong>：查看redis端口情况<code>ps -ef | grep redis</code><br>发现有两行，将第一行进程杀掉<code>sudo kill -9 (PID)</code></li>
+<li>报错二：kill后重新查看端口发现还是有两行<br><strong>解决方法</strong>：百度了一下是redis保护问题，即使杀掉又回有一个新的出来，直接采取命令<code>sudo /etc/init.d/redis-server stop</code>，再查看发现杀掉了，再次启动成功</li>
+</ul>
+<p>可能出现</p>
+<h5 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h5><p>修改redis.conf配置文件(修改最终想指定执行的那个文件，不要修改错文件了)</p>
+<p>主要以下四条：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">daemonize yes 允许后台运行</span><br><span class="line">protected-mode no 关闭守护模式，允许除了本机以外的其他连接</span><br><span class="line"># bind 127.0.0.1 注释掉</span><br><span class="line">requirepass 666(密码设置)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>报错一 <code>set-pro-title yes</code>balabala(后面忘了)<br><strong>解决方法</strong>：多半是redis配置问题，或者安装路径混了，找不到文件，为了省事—重新下载redis，一定一定注意下载、安装目录等</li>
+<li>报错二 重安了一次，没有报错一了(果然遇到困难解决不了的方法就是重头再来！！！)，但这次有了新的报错<code>You need tcl 8.5 or ...</code><br><strong>解决方法</strong>：安！tcl 8.5+版本 不多赘述，直接在linux里下载即可</li>
+<li>报错三 终于终于解决了报错一二，又出现了三🙄，果然人生充满起起落落，这次是<code>Memory overcommit must be enabled!</code><br><strong>解决方法</strong>：后面给出了解决方法,输入命令<code>sudo sysctl vm.overcommit_memory=1</code><br><strong>注意</strong>：这个是每次都要重新声明，很麻烦(唉…)<br>可以采取修改配置文件的方式，一劳永逸(自行百度，忘了)</li>
+</ul>
+<p>报错解决后<br><code>sudo redis-server /启动的配置文件路径(redis.conf)</code><br>启动成功</p>
+<h4 id="redis连接"><a href="#redis连接" class="headerlink" title="redis连接"></a>redis连接</h4><p>此时此刻终于可以启动redis了</p>
+<h5 id="redis-cli客户端连接"><a href="#redis-cli客户端连接" class="headerlink" title="redis-cli客户端连接"></a>redis-cli客户端连接</h5><p><code>redis-cli</code>进入交互控制台<br>输入ping 回应pong说明redis已启动<br><code>redis-cli shutdown</code><br>取消连接</p>
+<p>常用指令</p>
+<ul>
+<li><code>-h 127.0.0.1</code>：指定要连接的redis节点的IP地址，默认是127.0.0.1</li>
+<li><code>-p 6379</code>：指定要连接的redis节点的端口，默认是6379</li>
+<li><code>-a 666</code>：指定redis的访问密码</li>
+</ul>
+<h5 id="RESP-APP可视化redis"><a href="#RESP-APP可视化redis" class="headerlink" title="RESP.APP可视化redis"></a>RESP.APP可视化redis</h5><p>卡了我好久的麻烦来了</p>
+<p>首先安装包<br><a href="https://github.com/lework/RedisDesktopManager-Windows/releases">https://github.com/lework/RedisDesktopManager-Windows/releases</a></p>
+<p>很好安 然后点击连接到redis服务器</p>
+<p><strong>！！！报错：连接不上</strong></p>
+<p>127.0.0.1连接不上<br>改成虚拟机ip也连接不上</p>
+<p>查阅了各大佬的解决方案，操作如下</p>
+<ul>
+<li>查看虚拟机ip <code>ifconfig</code></li>
+<li>win上cmd查看是否能与虚拟机联通  –发现能ping通</li>
+<li>连接规则桥接模式  –应该跟这个没啥关系，寄</li>
+<li>检查redis.conf配置文件  –没啥毛病</li>
+<li>查看linux防火墙是否开放6379端口  –发现根本没有firewalld。。。遂安装<ul>
+<li>开放6379端口 命令自行百度   –开放了但还是寄</li>
+<li>重载防火墙，查看开放的端口(后来又添加了3306端口)</li>
+</ul>
+</li>
+<li>检查windows防火墙入站规则</li>
+<li>重新加载redis</li>
+<li>命令 <code>redis-cli -h 虚拟机ip -p 6379</code> 如果出现 虚拟机ip:6379&gt;即为连接成功</li>
+</ul>
+<p><strong>总结</strong><br>继防火墙端口开放，win防火墙新建入站规则、更改保存redis.conf后还是寄<br>最终猜测我的成功路径应该是先杀掉占用6379的进程(…stop)–&gt;重新启动redis-server–&gt;redis-cli -h ip -p 6379</p>
+<p><strong>成功啦！</strong></p>
+<h3 id="redis的java客户端"><a href="#redis的java客户端" class="headerlink" title="redis的java客户端"></a>redis的java客户端</h3><p>这里先采取Jedis简单测试了一下</p>
+<p>test成功</p>
+<p>如果RESP连接不上，那Jedis多半连接凉凉<br>本质应该是一样的，都是在win上连接linux当中运行的redis</p>
+]]></content>
+      <categories>
+        <category>Learn</category>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用docker安装elasticsearch kibana ik分词器以及踩雷</title>
+    <url>/posts/10007.html</url>
+    <content><![CDATA[<p><strong>写在前面</strong><br>docker是在win11子系统Linux下安装的(因为前段时间redis在Linux虚拟机里使用的，现在看着虚拟机就烦🙄)<br>由于是初学，并不是很了解其中的原理<br>各种问题的解决方式仅代表个人出错以及成功解决案例</p>
+<p>docker安装省略,这里选择的是7.12.1版本(比较久远，可以去官网查找更新版本😎)</p>
+<h2 id="elasticsearch安装"><a href="#elasticsearch安装" class="headerlink" title="elasticsearch安装"></a>elasticsearch安装</h2><h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><p>后续要与kibana连接<br><code>docker network create es-net</code></p>
+<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull elasticsearch:7.12.1</code></p>
+<h3 id="创建容器、部署单点"><a href="#创建容器、部署单点" class="headerlink" title="创建容器、部署单点"></a>创建容器、部署单点</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name es --network es-net -p 9200:9200 -p 9300:9300 -v /usr/local/es/data:/usr/share/elasticsearch/data -v /usr/local/es/plugins:/usr/share/elasticsearch/plugins -e &quot;discovery.type=single-node&quot; -e &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span><br><span class="line">elasticsearch:7.12.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="重启es容器"><a href="#重启es容器" class="headerlink" title="重启es容器"></a>重启es容器</h3><p><code>docker restart es</code></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>访问<code>http://localhost:9200</code><br>正常会显示 如图所示<br><img src="https://pic.imgdb.cn/item/65fb0c309f345e8d03b6fcb3.png" alt="alt text"></p>
+<ul>
+<li><strong>错误一：localhost拒绝访问</strong><br>看有些解决方法说是修改elasticsearch.yml文件，因为开启了ssl认证<br>在终端执行<code>curl localhost:9200</code>也可以查看返回信息，有显示上图即成功</li>
+<li><strong>错误二：localhost未发送任何数据</strong><br>es启动有点慢，需要等一等，可能是还没加载出来</li>
+</ul>
+<h2 id="kibana安装"><a href="#kibana安装" class="headerlink" title="kibana安装"></a>kibana安装</h2><h3 id="拉取镜像-1"><a href="#拉取镜像-1" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull kibana:7.12.1</code><br><strong>注意</strong> 版本要与elasticsearch一致</p>
+<h3 id="创建容器、部署kibana"><a href="#创建容器、部署kibana" class="headerlink" title="创建容器、部署kibana"></a>创建容器、部署kibana</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://es:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h3><p>访问<code>http://localhost:5601</code><br><strong>注意</strong> kibana与es连接，一定在es启动成功后再启动kibana，否则报错</p>
+<p><strong>正常访问如图</strong><br><img src="https://pic.imgdb.cn/item/65fb934b9f345e8d0306743f.png" alt="alt text"></p>
+<ul>
+<li><p><strong>错误：<code>kibana server is not ready yet</code></strong><br>查看日志<br><code>docker logs -f kibana</code>查看报错信息<br>多半是与es没连接成功<br>这里有个坑！<br>需要将创建容器时<code>es</code>改为电脑的私有ip</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://私有ip:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
+
+<p>并将配置文件kibana.yml中elasticsearch.url链接也要改为私有ip</p>
+<p>可以采用数据卷挂载、copy到本地等方式修改&#x2F;config&#x2F;kibana.yml</p>
+</li>
+</ul>
+<h3 id="查找ip"><a href="#查找ip" class="headerlink" title="查找ip"></a>查找ip</h3><ul>
+<li><strong>方法一：cmd打开终端命令行</strong><br>输入<code>ipconfig</code><br><img src="https://pic.imgdb.cn/item/65fb98989f345e8d0318fe6e.png" alt="alt text"><br>es改为IPv4地址</li>
+<li><strong>方法二：搜索</strong><br>控制面板-&gt;查看网络状态和任务<br><img src="https://pic.imgdb.cn/item/65fb99a99f345e8d031d4234.png" alt="alt text"><br>连接WIFI-&gt;详细信息-&gt;IPv4地址</li>
+</ul>
+<h2 id="ik分词器安装"><a href="#ik分词器安装" class="headerlink" title="ik分词器安装"></a>ik分词器安装</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><h4 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h4><p><code>docker exec -it es bash</code></p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><code>./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.12.1/elasticsearch-analysis-ik-7.12.1.zip</code></p>
+<ul>
+<li><strong>错误：下载失败</strong><br><img src="https://pic.imgdb.cn/item/65fb9d6f9f345e8d032bdaf8.png" alt="alt text"><br><code>Exception in thread &quot;main&quot; java.net.ConnectException: Connection refused</code><br>没找到好的解决办法，遂手动下载安装</li>
+</ul>
+<h3 id="手动下载安装"><a href="#手动下载安装" class="headerlink" title="手动下载安装"></a>手动下载安装</h3><p><strong>注意版本一致</strong></p>
+<h4 id="下载ik分词器"><a href="#下载ik分词器" class="headerlink" title="下载ik分词器"></a>下载ik分词器</h4><p>打开官网<code>https://github.com/medcl/elasticsearch-analysis-ik</code>查找与elasticsearch一致的版本下载zip文件，并解压到一个不含中文和空格的目录下</p>
+<p>之后重命名为<code>ik</code></p>
+<h4 id="将ik转移到docker容器里"><a href="#将ik转移到docker容器里" class="headerlink" title="将ik转移到docker容器里"></a>将<code>ik</code>转移到docker容器里</h4><p><code>docker cp ik文件的路径 elasticsearch:/usr/share/elasticsearch/plugins</code></p>
+<h4 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h4><p><code>docker restart es</code></p>
+<p><strong>注意！</strong> 尽量不采用此种方式(操控容器)</p>
+<p><a href="https://juejin.cn/post/6915355569679400974?searchId=20240320191417641463D0E23F12114A2A">ik分词器安装参考解决方案以及尽量不采用此种方式操控容器的解释</a></p>
+<h4 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h4><p><img src="https://pic.imgdb.cn/item/65fba22f9f345e8d033ec548.png" alt="alt text"></p>
+<p><strong>解决成功就可以愉快的在项目中使用elasticsearch结合数据库来进行搜索啦😉</strong></p>
+]]></content>
+      <categories>
+        <category>Learn</category>
+        <category>微服务</category>
+        <category>Docker</category>
+        <category>elasticsearch</category>
       </categories>
       <tags>
         <tag>java</tag>
@@ -1422,104 +1520,6 @@
       <categories>
         <category>Learn</category>
         <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于Redis配置及使用的种种坑</title>
-    <url>/posts/10005.html</url>
-    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
-<li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑</li>
-<li>想到哪就更哪 可能不够全面，有点回忆不起来了</li>
-<li>如有错误欢迎指正</li>
-</ul>
-<hr>
-<p><strong>后续2</strong><br>学习了Docker,果然还是用工具好的多…<br>推荐学习！</p>
-<p><strong>后续1</strong><br>重安了一次虚拟机和redis…少了很多bug…也许是第一次安重复了导致的诸多问题</p>
-<p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
-<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><ol>
-<li><p><strong>VMware虚拟机</strong><br><strong>官方正版</strong>：不免费，仅30天试用期，曾经为了完成学校课程把30天免费全耗尽<br><strong>解决方法</strong>：下载vmware player 官方个人免费版，据说更新到现在功能也还算是完善，支持建虚拟机，暂时不知道后续使用有无需求，也许以后还是回归正版</p>
-</li>
-<li><p><strong>Linux</strong><br>linux有很多版本 这里选了ubuntu 可视化<br>主要就是下载镜像文件(清华大学开源镜像站)，新建虚拟机 balabala 不多赘述，有很多教程<br><strong>注意</strong>：安在一个空间较大的磁盘，别都挤在C盘里(没错，第一次安虚拟机不知道安了什么乱七八糟，最后C盘仅剩8G，这次长个教训😎)</p>
-</li>
-<li><p><strong>Ubuntu</strong></p>
-<ol>
-<li>ubuntu里采用的是apt-get安装，并非yum，如果很不幸的采用了yum安装，必然喜提报错<code>E:Unable to locate package yum</code><br><strong>解决方法</strong>：不使用yum</li>
-<li>ubuntu的bug问题 输入密码的时候光标不动，也不显示输入的密码或者隐式密码<br><strong>解决方法</strong>：实际上已经输进去了，输完直接enter就好</li>
-<li>redis基于C语言编写，编译需要有gcc，正常已经安装(build-essential)，如果没有gcc还需自行安装</li>
-<li>修改配置文件 由于没有vim 故采用vi命令<br>保存文件并退出 <code>:wq!</code> 后来发现ubuntu里面有test.editor，直接用很方便</li>
-<li>解压文件 tar -zxvf 这个出现问题的话可能是别的问题，比如压缩包，解压命令问题概率很小</li>
-</ol>
-</li>
-</ol>
-<h3 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h3><p>据说用docker很方便，没试过</p>
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>官网 <a href="https://redis.io/">https://redis.io</a> 下载安装包(建议稳定版)</p>
-<p><strong>缺点</strong>：直接下载到win系统，需要把压缩包上传到linux，很麻烦<br><strong>解决方法</strong>：这里选取的是FileZilla工具，这之中需要连接虚拟机，可能会产生一些报错(忘记什么报错了，依稀记得是虚拟机连接不上)</p>
-<h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>直接在linux里安装，很快很爽</p>
-<p>命令:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h4 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h4><p>解压：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>安装：<br>先切换到刚刚安的redis-7.2.4目录下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<p>可能出现权限问题 前面加上sudo即可</p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><h5 id="前台运行"><a href="#前台运行" class="headerlink" title="前台运行"></a>前台运行</h5><p><code>sudo redis-server</code></p>
-<ul>
-<li>报错一：运行后出现Failed listening on port 6379(TCP)<br>说明6379端口被占用问题<br><strong>解决方法</strong>：查看redis端口情况<code>ps -ef | grep redis</code><br>发现有两行，将第一行进程杀掉<code>sudo kill -9 (PID)</code></li>
-<li>报错二：kill后重新查看端口发现还是有两行<br><strong>解决方法</strong>：百度了一下是redis保护问题，即使杀掉又回有一个新的出来，直接采取命令<code>sudo /etc/init.d/redis-server stop</code>，再查看发现杀掉了，再次启动成功</li>
-</ul>
-<p>可能出现</p>
-<h5 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h5><p>修改redis.conf配置文件(修改最终想指定执行的那个文件，不要修改错文件了)</p>
-<p>主要以下四条：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">daemonize yes 允许后台运行</span><br><span class="line">protected-mode no 关闭守护模式，允许除了本机以外的其他连接</span><br><span class="line"># bind 127.0.0.1 注释掉</span><br><span class="line">requirepass 666(密码设置)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>报错一 <code>set-pro-title yes</code>balabala(后面忘了)<br><strong>解决方法</strong>：多半是redis配置问题，或者安装路径混了，找不到文件，为了省事—重新下载redis，一定一定注意下载、安装目录等</li>
-<li>报错二 重安了一次，没有报错一了(果然遇到困难解决不了的方法就是重头再来！！！)，但这次有了新的报错<code>You need tcl 8.5 or ...</code><br><strong>解决方法</strong>：安！tcl 8.5+版本 不多赘述，直接在linux里下载即可</li>
-<li>报错三 终于终于解决了报错一二，又出现了三🙄，果然人生充满起起落落，这次是<code>Memory overcommit must be enabled!</code><br><strong>解决方法</strong>：后面给出了解决方法,输入命令<code>sudo sysctl vm.overcommit_memory=1</code><br><strong>注意</strong>：这个是每次都要重新声明，很麻烦(唉…)<br>可以采取修改配置文件的方式，一劳永逸(自行百度，忘了)</li>
-</ul>
-<p>报错解决后<br><code>sudo redis-server /启动的配置文件路径(redis.conf)</code><br>启动成功</p>
-<h4 id="redis连接"><a href="#redis连接" class="headerlink" title="redis连接"></a>redis连接</h4><p>此时此刻终于可以启动redis了</p>
-<h5 id="redis-cli客户端连接"><a href="#redis-cli客户端连接" class="headerlink" title="redis-cli客户端连接"></a>redis-cli客户端连接</h5><p><code>redis-cli</code>进入交互控制台<br>输入ping 回应pong说明redis已启动<br><code>redis-cli shutdown</code><br>取消连接</p>
-<p>常用指令</p>
-<ul>
-<li><code>-h 127.0.0.1</code>：指定要连接的redis节点的IP地址，默认是127.0.0.1</li>
-<li><code>-p 6379</code>：指定要连接的redis节点的端口，默认是6379</li>
-<li><code>-a 666</code>：指定redis的访问密码</li>
-</ul>
-<h5 id="RESP-APP可视化redis"><a href="#RESP-APP可视化redis" class="headerlink" title="RESP.APP可视化redis"></a>RESP.APP可视化redis</h5><p>卡了我好久的麻烦来了</p>
-<p>首先安装包<br><a href="https://github.com/lework/RedisDesktopManager-Windows/releases">https://github.com/lework/RedisDesktopManager-Windows/releases</a></p>
-<p>很好安 然后点击连接到redis服务器</p>
-<p><strong>！！！报错：连接不上</strong></p>
-<p>127.0.0.1连接不上<br>改成虚拟机ip也连接不上</p>
-<p>查阅了各大佬的解决方案，操作如下</p>
-<ul>
-<li>查看虚拟机ip <code>ifconfig</code></li>
-<li>win上cmd查看是否能与虚拟机联通  –发现能ping通</li>
-<li>连接规则桥接模式  –应该跟这个没啥关系，寄</li>
-<li>检查redis.conf配置文件  –没啥毛病</li>
-<li>查看linux防火墙是否开放6379端口  –发现根本没有firewalld。。。遂安装<ul>
-<li>开放6379端口 命令自行百度   –开放了但还是寄</li>
-<li>重载防火墙，查看开放的端口(后来又添加了3306端口)</li>
-</ul>
-</li>
-<li>检查windows防火墙入站规则</li>
-<li>重新加载redis</li>
-<li>命令 <code>redis-cli -h 虚拟机ip -p 6379</code> 如果出现 虚拟机ip:6379&gt;即为连接成功</li>
-</ul>
-<p><strong>总结</strong><br>继防火墙端口开放，win防火墙新建入站规则、更改保存redis.conf后还是寄<br>最终猜测我的成功路径应该是先杀掉占用6379的进程(…stop)–&gt;重新启动redis-server–&gt;redis-cli -h ip -p 6379</p>
-<p><strong>成功啦！</strong></p>
-<h3 id="redis的java客户端"><a href="#redis的java客户端" class="headerlink" title="redis的java客户端"></a>redis的java客户端</h3><p>这里先采取Jedis简单测试了一下</p>
-<p>test成功</p>
-<p>如果RESP连接不上，那Jedis多半连接凉凉<br>本质应该是一样的，都是在win上连接linux当中运行的redis</p>
-]]></content>
-      <categories>
-        <category>Learn</category>
-        <category>Redis</category>
       </categories>
       <tags>
         <tag>java</tag>
