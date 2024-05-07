@@ -21,6 +21,17 @@
       </tags>
   </entry>
   <entry>
+    <title>My New Post</title>
+    <url>/posts/10001.html</url>
+    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
+      <categories>
+        <category>Test</category>
+      </categories>
+      <tags>
+        <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaWeb</title>
     <url>/posts/10003.html</url>
     <content><![CDATA[<h2 id="Web前端开发"><a href="#Web前端开发" class="headerlink" title="Web前端开发"></a>Web前端开发</h2><h3 id="前端技术"><a href="#前端技术" class="headerlink" title="前端技术"></a>前端技术</h3><p>Web标准：</p>
@@ -622,14 +633,60 @@
       </tags>
   </entry>
   <entry>
-    <title>My New Post</title>
-    <url>/posts/10001.html</url>
-    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
+    <title>使用docker安装elasticsearch kibana ik分词器以及踩雷</title>
+    <url>/posts/10007.html</url>
+    <content><![CDATA[<p><strong>写在前面</strong><br>docker是在win11子系统Linux下安装的(因为前段时间redis在Linux虚拟机里使用的，现在看着虚拟机就烦🙄)<br>由于是初学，并不是很了解其中的原理<br>各种问题的解决方式仅代表个人出错以及成功解决案例</p>
+<p>docker安装省略,这里选择的是7.12.1版本(比较久远，可以去官网查找更新版本😎)</p>
+<h2 id="elasticsearch安装"><a href="#elasticsearch安装" class="headerlink" title="elasticsearch安装"></a>elasticsearch安装</h2><h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><p>后续要与kibana连接<br><code>docker network create es-net</code></p>
+<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull elasticsearch:7.12.1</code></p>
+<h3 id="创建容器、部署单点"><a href="#创建容器、部署单点" class="headerlink" title="创建容器、部署单点"></a>创建容器、部署单点</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name es --network es-net -p 9200:9200 -p 9300:9300 -v /usr/local/es/data:/usr/share/elasticsearch/data -v /usr/local/es/plugins:/usr/share/elasticsearch/plugins -e &quot;discovery.type=single-node&quot; -e &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span><br><span class="line">elasticsearch:7.12.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="重启es容器"><a href="#重启es容器" class="headerlink" title="重启es容器"></a>重启es容器</h3><p><code>docker restart es</code></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>访问<code>http://localhost:9200</code><br>正常会显示 如图所示<br><img src="https://pic.imgdb.cn/item/65fb0c309f345e8d03b6fcb3.png" alt="alt text"></p>
+<ul>
+<li><strong>错误一：localhost拒绝访问</strong><br>看有些解决方法说是修改elasticsearch.yml文件，因为开启了ssl认证<br>在终端执行<code>curl localhost:9200</code>也可以查看返回信息，有显示上图即成功</li>
+<li><strong>错误二：localhost未发送任何数据</strong><br>es启动有点慢，需要等一等，可能是还没加载出来</li>
+</ul>
+<h2 id="kibana安装"><a href="#kibana安装" class="headerlink" title="kibana安装"></a>kibana安装</h2><h3 id="拉取镜像-1"><a href="#拉取镜像-1" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull kibana:7.12.1</code><br><strong>注意</strong> 版本要与elasticsearch一致</p>
+<h3 id="创建容器、部署kibana"><a href="#创建容器、部署kibana" class="headerlink" title="创建容器、部署kibana"></a>创建容器、部署kibana</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://es:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h3><p>访问<code>http://localhost:5601</code><br><strong>注意</strong> kibana与es连接，一定在es启动成功后再启动kibana，否则报错</p>
+<p><strong>正常访问如图</strong><br><img src="https://pic.imgdb.cn/item/65fb934b9f345e8d0306743f.png" alt="alt text"></p>
+<ul>
+<li><p><strong>错误：<code>kibana server is not ready yet</code></strong><br>查看日志<br><code>docker logs -f kibana</code>查看报错信息<br>多半是与es没连接成功<br>这里有个坑！<br>需要将创建容器时<code>es</code>改为电脑的私有ip</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://私有ip:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
+
+<p>并将配置文件kibana.yml中elasticsearch.url链接也要改为私有ip</p>
+<p>可以采用数据卷挂载、copy到本地等方式修改&#x2F;config&#x2F;kibana.yml</p>
+</li>
+</ul>
+<h3 id="查找ip"><a href="#查找ip" class="headerlink" title="查找ip"></a>查找ip</h3><ul>
+<li><strong>方法一：cmd打开终端命令行</strong><br>输入<code>ipconfig</code><br><img src="https://pic.imgdb.cn/item/65fb98989f345e8d0318fe6e.png" alt="alt text"><br>es改为IPv4地址</li>
+<li><strong>方法二：搜索</strong><br>控制面板-&gt;查看网络状态和任务<br><img src="https://pic.imgdb.cn/item/65fb99a99f345e8d031d4234.png" alt="alt text"><br>连接WIFI-&gt;详细信息-&gt;IPv4地址</li>
+</ul>
+<h2 id="ik分词器安装"><a href="#ik分词器安装" class="headerlink" title="ik分词器安装"></a>ik分词器安装</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><h4 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h4><p><code>docker exec -it es bash</code></p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><code>./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.12.1/elasticsearch-analysis-ik-7.12.1.zip</code></p>
+<ul>
+<li><strong>错误：下载失败</strong><br><img src="https://pic.imgdb.cn/item/65fb9d6f9f345e8d032bdaf8.png" alt="alt text"><br><code>Exception in thread &quot;main&quot; java.net.ConnectException: Connection refused</code><br>没找到好的解决办法，遂手动下载安装</li>
+</ul>
+<h3 id="手动下载安装"><a href="#手动下载安装" class="headerlink" title="手动下载安装"></a>手动下载安装</h3><p><strong>注意版本一致</strong></p>
+<h4 id="下载ik分词器"><a href="#下载ik分词器" class="headerlink" title="下载ik分词器"></a>下载ik分词器</h4><p>打开官网<code>https://github.com/medcl/elasticsearch-analysis-ik</code>查找与elasticsearch一致的版本下载zip文件，并解压到一个不含中文和空格的目录下</p>
+<p>之后重命名为<code>ik</code></p>
+<h4 id="将ik转移到docker容器里"><a href="#将ik转移到docker容器里" class="headerlink" title="将ik转移到docker容器里"></a>将<code>ik</code>转移到docker容器里</h4><p><code>docker cp ik文件的路径 elasticsearch:/usr/share/elasticsearch/plugins</code></p>
+<h4 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h4><p><code>docker restart es</code></p>
+<p><strong>注意！</strong> 尽量不采用此种方式(操控容器)</p>
+<p><a href="https://juejin.cn/post/6915355569679400974?searchId=20240320191417641463D0E23F12114A2A">ik分词器安装参考解决方案以及尽量不采用此种方式操控容器的解释</a></p>
+<h4 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h4><p><img src="https://pic.imgdb.cn/item/65fba22f9f345e8d033ec548.png" alt="alt text"></p>
+<p><strong>解决成功就可以愉快的在项目中使用elasticsearch结合数据库来进行搜索啦😉</strong></p>
+]]></content>
       <categories>
-        <category>Test</category>
+        <category>Learn</category>
+        <category>微服务</category>
+        <category>Docker</category>
+        <category>elasticsearch</category>
       </categories>
       <tags>
-        <tag>test</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -1365,63 +1422,6 @@
       <categories>
         <category>Learn</category>
         <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用docker安装elasticsearch kibana ik分词器以及踩雷</title>
-    <url>/posts/10007.html</url>
-    <content><![CDATA[<p><strong>写在前面</strong><br>docker是在win11子系统Linux下安装的(因为前段时间redis在Linux虚拟机里使用的，现在看着虚拟机就烦🙄)<br>由于是初学，并不是很了解其中的原理<br>各种问题的解决方式仅代表个人出错以及成功解决案例</p>
-<p>docker安装省略,这里选择的是7.12.1版本(比较久远，可以去官网查找更新版本😎)</p>
-<h2 id="elasticsearch安装"><a href="#elasticsearch安装" class="headerlink" title="elasticsearch安装"></a>elasticsearch安装</h2><h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><p>后续要与kibana连接<br><code>docker network create es-net</code></p>
-<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull elasticsearch:7.12.1</code></p>
-<h3 id="创建容器、部署单点"><a href="#创建容器、部署单点" class="headerlink" title="创建容器、部署单点"></a>创建容器、部署单点</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name es --network es-net -p 9200:9200 -p 9300:9300 -v /usr/local/es/data:/usr/share/elasticsearch/data -v /usr/local/es/plugins:/usr/share/elasticsearch/plugins -e &quot;discovery.type=single-node&quot; -e &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span><br><span class="line">elasticsearch:7.12.1</span><br></pre></td></tr></table></figure>
-
-<h3 id="重启es容器"><a href="#重启es容器" class="headerlink" title="重启es容器"></a>重启es容器</h3><p><code>docker restart es</code></p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>访问<code>http://localhost:9200</code><br>正常会显示 如图所示<br><img src="https://pic.imgdb.cn/item/65fb0c309f345e8d03b6fcb3.png" alt="alt text"></p>
-<ul>
-<li><strong>错误一：localhost拒绝访问</strong><br>看有些解决方法说是修改elasticsearch.yml文件，因为开启了ssl认证<br>在终端执行<code>curl localhost:9200</code>也可以查看返回信息，有显示上图即成功</li>
-<li><strong>错误二：localhost未发送任何数据</strong><br>es启动有点慢，需要等一等，可能是还没加载出来</li>
-</ul>
-<h2 id="kibana安装"><a href="#kibana安装" class="headerlink" title="kibana安装"></a>kibana安装</h2><h3 id="拉取镜像-1"><a href="#拉取镜像-1" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull kibana:7.12.1</code><br><strong>注意</strong> 版本要与elasticsearch一致</p>
-<h3 id="创建容器、部署kibana"><a href="#创建容器、部署kibana" class="headerlink" title="创建容器、部署kibana"></a>创建容器、部署kibana</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://es:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
-
-<h3 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h3><p>访问<code>http://localhost:5601</code><br><strong>注意</strong> kibana与es连接，一定在es启动成功后再启动kibana，否则报错</p>
-<p><strong>正常访问如图</strong><br><img src="https://pic.imgdb.cn/item/65fb934b9f345e8d0306743f.png" alt="alt text"></p>
-<ul>
-<li><p><strong>错误：<code>kibana server is not ready yet</code></strong><br>查看日志<br><code>docker logs -f kibana</code>查看报错信息<br>多半是与es没连接成功<br>这里有个坑！<br>需要将创建容器时<code>es</code>改为电脑的私有ip</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://私有ip:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
-
-<p>并将配置文件kibana.yml中elasticsearch.url链接也要改为私有ip</p>
-<p>可以采用数据卷挂载、copy到本地等方式修改&#x2F;config&#x2F;kibana.yml</p>
-</li>
-</ul>
-<h3 id="查找ip"><a href="#查找ip" class="headerlink" title="查找ip"></a>查找ip</h3><ul>
-<li><strong>方法一：cmd打开终端命令行</strong><br>输入<code>ipconfig</code><br><img src="https://pic.imgdb.cn/item/65fb98989f345e8d0318fe6e.png" alt="alt text"><br>es改为IPv4地址</li>
-<li><strong>方法二：搜索</strong><br>控制面板-&gt;查看网络状态和任务<br><img src="https://pic.imgdb.cn/item/65fb99a99f345e8d031d4234.png" alt="alt text"><br>连接WIFI-&gt;详细信息-&gt;IPv4地址</li>
-</ul>
-<h2 id="ik分词器安装"><a href="#ik分词器安装" class="headerlink" title="ik分词器安装"></a>ik分词器安装</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><h4 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h4><p><code>docker exec -it es bash</code></p>
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><code>./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.12.1/elasticsearch-analysis-ik-7.12.1.zip</code></p>
-<ul>
-<li><strong>错误：下载失败</strong><br><img src="https://pic.imgdb.cn/item/65fb9d6f9f345e8d032bdaf8.png" alt="alt text"><br><code>Exception in thread &quot;main&quot; java.net.ConnectException: Connection refused</code><br>没找到好的解决办法，遂手动下载安装</li>
-</ul>
-<h3 id="手动下载安装"><a href="#手动下载安装" class="headerlink" title="手动下载安装"></a>手动下载安装</h3><p><strong>注意版本一致</strong></p>
-<h4 id="下载ik分词器"><a href="#下载ik分词器" class="headerlink" title="下载ik分词器"></a>下载ik分词器</h4><p>打开官网<code>https://github.com/medcl/elasticsearch-analysis-ik</code>查找与elasticsearch一致的版本下载zip文件，并解压到一个不含中文和空格的目录下</p>
-<p>之后重命名为<code>ik</code></p>
-<h4 id="将ik转移到docker容器里"><a href="#将ik转移到docker容器里" class="headerlink" title="将ik转移到docker容器里"></a>将<code>ik</code>转移到docker容器里</h4><p><code>docker cp ik文件的路径 elasticsearch:/usr/share/elasticsearch/plugins</code></p>
-<h4 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h4><p><code>docker restart es</code></p>
-<p><strong>注意！</strong> 尽量不采用此种方式(操控容器)</p>
-<p><a href="https://juejin.cn/post/6915355569679400974?searchId=20240320191417641463D0E23F12114A2A">ik分词器安装参考解决方案以及尽量不采用此种方式操控容器的解释</a></p>
-<h4 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h4><p><img src="https://pic.imgdb.cn/item/65fba22f9f345e8d033ec548.png" alt="alt text"></p>
-<p><strong>解决成功就可以愉快的在项目中使用elasticsearch结合数据库来进行搜索啦😉</strong></p>
-]]></content>
-      <categories>
-        <category>Learn</category>
-        <category>微服务</category>
-        <category>Docker</category>
-        <category>elasticsearch</category>
       </categories>
       <tags>
         <tag>java</tag>
