@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>关于Redis配置及使用的种种坑 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="配置以及使用redis时踩过的种种坑🥺TAT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Redis配置及使用的种种坑">
+<meta property="og:url" content="http://example.com/2024/02/11/%E5%85%B3%E4%BA%8Eredis%E7%9A%84%E7%A7%8D%E7%A7%8D%E5%9D%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="配置以及使用redis时踩过的种种坑🥺TAT">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-07T06:05:51.944Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-关于redis的种种坑" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/11/%E5%85%B3%E4%BA%8Eredis%E7%9A%84%E7%A7%8D%E7%A7%8D%E5%9D%91/" class="article-date">
+  <time class="dt-published" datetime="2024-02-10T16:00:00.000Z" itemprop="datePublished">2024-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learn/">Learn</a>►<a class="article-category-link" href="/categories/Learn/Redis/">Redis</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      关于Redis配置及使用的种种坑
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
+<li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑坑</li>
+<li>想到哪就更哪，可能不够全面，有点回忆不起来了</li>
+<li>如有错误欢迎指正</li>
+</ul>
+<hr>
+<p><strong>后续2</strong><br>学习了Docker,果然还是用工具好的多…<br>推荐学习！</p>
+<p><strong>后续1</strong><br>重安了一次虚拟机和redis…少了很多bug…也许是第一次安重复了导致的诸多问题</p>
+<p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
+<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><ol>
+<li><p><strong>VMware虚拟机</strong><br><strong>官方正版</strong>：不免费，仅30天试用期，曾经为了完成学校课程把30天免费全耗尽<br><strong>解决方法</strong>：下载vmware player 官方个人免费版，据说更新到现在功能也还算是完善，支持建虚拟机，暂时不知道后续使用有无需求，也许以后还是回归正版</p>
+</li>
+<li><p><strong>Linux</strong><br>linux有很多版本 这里选了ubuntu 可视化<br>主要就是下载镜像文件(清华大学开源镜像站)，新建虚拟机 balabala 不多赘述，有很多教程<br><strong>注意</strong>：安在一个空间较大的磁盘，别都挤在C盘里(没错，第一次安虚拟机不知道安了什么乱七八糟，最后C盘仅剩8G，这次长个教训😎)</p>
+</li>
+<li><p><strong>Ubuntu</strong></p>
+<ol>
+<li>ubuntu里采用的是apt-get安装，并非yum，如果很不幸的采用了yum安装，必然喜提报错<code>E:Unable to locate package yum</code><br><strong>解决方法</strong>：不使用yum</li>
+<li>ubuntu的bug问题 输入密码的时候光标不动，也不显示输入的密码或者隐式密码<br><strong>解决方法</strong>：实际上已经输进去了，输完直接enter就好</li>
+<li>redis基于C语言编写，编译需要有gcc，正常已经安装(build-essential)，如果没有gcc还需自行安装</li>
+<li>修改配置文件 由于没有vim 故采用vi命令<br>保存文件并退出 <code>:wq!</code> 后来发现ubuntu里面有test.editor，直接用很方便</li>
+<li>解压文件 tar -zxvf 这个出现问题的话可能是别的问题，比如压缩包，解压命令问题概率很小</li>
+</ol>
+</li>
+</ol>
+<h3 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h3><p>据说用docker很方便，没试过</p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>官网 <a target="_blank" rel="noopener" href="https://redis.io/">https://redis.io</a> 下载安装包(建议稳定版)</p>
+<p><strong>缺点</strong>：直接下载到win系统，需要把压缩包上传到linux，很麻烦<br><strong>解决方法</strong>：这里选取的是FileZilla工具，这之中需要连接虚拟机，可能会产生一些报错(忘记什么报错了，依稀记得是虚拟机连接不上)</p>
+<h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>直接在linux里安装，很快很爽</p>
+<p>命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h4 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h4><p>解压：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>安装：<br>先切换到刚刚安的redis-7.2.4目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>可能出现权限问题 前面加上sudo即可</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><h5 id="前台运行"><a href="#前台运行" class="headerlink" title="前台运行"></a>前台运行</h5><p><code>sudo redis-server</code></p>
+<ul>
+<li>报错一：运行后出现Failed listening on port 6379(TCP)<br>说明6379端口被占用问题<br><strong>解决方法</strong>：查看redis端口情况<code>ps -ef | grep redis</code><br>发现有两行，将第一行进程杀掉<code>sudo kill -9 (PID)</code></li>
+<li>报错二：kill后重新查看端口发现还是有两行<br><strong>解决方法</strong>：百度了一下是redis保护问题，即使杀掉又回有一个新的出来，直接采取命令<code>sudo /etc/init.d/redis-server stop</code>，再查看发现杀掉了，再次启动成功</li>
+</ul>
+<p>可能出现</p>
+<h5 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h5><p>修改redis.conf配置文件(修改最终想指定执行的那个文件，不要修改错文件了)</p>
+<p>主要以下四条：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">daemonize yes 允许后台运行</span><br><span class="line">protected-mode no 关闭守护模式，允许除了本机以外的其他连接</span><br><span class="line"># bind 127.0.0.1 注释掉</span><br><span class="line">requirepass 666(密码设置)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>报错一 <code>set-pro-title yes</code>balabala(后面忘了)<br><strong>解决方法</strong>：多半是redis配置问题，或者安装路径混了，找不到文件，为了省事—重新下载redis，一定一定注意下载、安装目录等</li>
+<li>报错二 重安了一次，没有报错一了(果然遇到困难解决不了的方法就是重头再来！！！)，但这次有了新的报错<code>You need tcl 8.5 or ...</code><br><strong>解决方法</strong>：安！tcl 8.5+版本 不多赘述，直接在linux里下载即可</li>
+<li>报错三 终于终于解决了报错一二，又出现了三🙄，果然人生充满起起落落，这次是<code>Memory overcommit must be enabled!</code><br><strong>解决方法</strong>：后面给出了解决方法,输入命令<code>sudo sysctl vm.overcommit_memory=1</code><br><strong>注意</strong>：这个是每次都要重新声明，很麻烦(唉…)<br>可以采取修改配置文件的方式，一劳永逸(自行百度，忘了)</li>
+</ul>
+<p>报错解决后<br><code>sudo redis-server /启动的配置文件路径(redis.conf)</code><br>启动成功</p>
+<h4 id="redis连接"><a href="#redis连接" class="headerlink" title="redis连接"></a>redis连接</h4><p>此时此刻终于可以启动redis了</p>
+<h5 id="redis-cli客户端连接"><a href="#redis-cli客户端连接" class="headerlink" title="redis-cli客户端连接"></a>redis-cli客户端连接</h5><p><code>redis-cli</code>进入交互控制台<br>输入ping 回应pong说明redis已启动<br><code>redis-cli shutdown</code><br>取消连接</p>
+<p>常用指令</p>
+<ul>
+<li><code>-h 127.0.0.1</code>：指定要连接的redis节点的IP地址，默认是127.0.0.1</li>
+<li><code>-p 6379</code>：指定要连接的redis节点的端口，默认是6379</li>
+<li><code>-a 666</code>：指定redis的访问密码</li>
+</ul>
+<h5 id="RESP-APP可视化redis"><a href="#RESP-APP可视化redis" class="headerlink" title="RESP.APP可视化redis"></a>RESP.APP可视化redis</h5><p>卡了我好久的麻烦来了</p>
+<p>首先安装包<br><a target="_blank" rel="noopener" href="https://github.com/lework/RedisDesktopManager-Windows/releases">https://github.com/lework/RedisDesktopManager-Windows/releases</a></p>
+<p>很好安 然后点击连接到redis服务器</p>
+<p><strong>！！！报错：连接不上</strong></p>
+<p>127.0.0.1连接不上<br>改成虚拟机ip也连接不上</p>
+<p>查阅了各大佬的解决方案，操作如下</p>
+<ul>
+<li>查看虚拟机ip <code>ifconfig</code></li>
+<li>win上cmd查看是否能与虚拟机联通  –发现能ping通</li>
+<li>连接规则桥接模式  –应该跟这个没啥关系，寄</li>
+<li>检查redis.conf配置文件  –没啥毛病</li>
+<li>查看linux防火墙是否开放6379端口  –发现根本没有firewalld。。。遂安装<ul>
+<li>开放6379端口 命令自行百度   –开放了但还是寄</li>
+<li>重载防火墙，查看开放的端口(后来又添加了3306端口)</li>
+</ul>
+</li>
+<li>检查windows防火墙入站规则</li>
+<li>重新加载redis</li>
+<li>命令 <code>redis-cli -h 虚拟机ip -p 6379</code> 如果出现 虚拟机ip:6379&gt;即为连接成功</li>
+</ul>
+<p><strong>总结</strong><br>继防火墙端口开放，win防火墙新建入站规则、更改保存redis.conf后还是寄<br>最终猜测我的成功路径应该是先杀掉占用6379的进程(…stop)–&gt;重新启动redis-server–&gt;redis-cli -h ip -p 6379</p>
+<p><strong>成功啦！</strong></p>
+<h3 id="redis的java客户端"><a href="#redis的java客户端" class="headerlink" title="redis的java客户端"></a>redis的java客户端</h3><p>这里先采取Jedis简单测试了一下</p>
+<p>test成功</p>
+<p>如果RESP连接不上，那Jedis多半连接凉凉<br>本质应该是一样的，都是在win上连接linux当中运行的redis</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/11/%E5%85%B3%E4%BA%8Eredis%E7%9A%84%E7%A7%8D%E7%A7%8D%E5%9D%91/" data-id="cm2gbt8340010f4gp3gyehypz" data-title="关于Redis配置及使用的种种坑" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/01/MySQL%E9%AB%98%E7%BA%A7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MySQL高级
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/01/31/Git/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Git</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/">Learn</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Docker/">Docker</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Docker/elasticsearch/">elasticsearch</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Test/">Test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D/">文件批量重命名</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D/Windows%E6%89%B9%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E8%84%9A%E6%9C%AC/">Windows批处理文件脚本</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/other/" rel="tag">other</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/other/" style="font-size: 10px;">other</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">July 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/03/%E6%96%87%E4%BB%B6%E6%8C%89%E6%97%B6%E9%97%B4%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%90%8D%E7%A7%B0%E9%A1%BA%E5%BA%8F%E6%89%B9%E9%87%8F%E5%8A%A0%E5%BA%8F%E5%8F%B7%E5%89%8D%E7%BC%80%E9%87%8D%E5%91%BD%E5%90%8D/">文件按时间顺序和名称顺序批量加序号前缀重命名</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%20kibana%20ik%E5%88%86%E8%AF%8D%E5%99%A8%E4%BB%A5%E5%8F%8A%E8%B8%A9%E9%9B%B7/">使用docker安装elasticsearch kibana ik分词器以及踩雷</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/01/MySQL%E9%AB%98%E7%BA%A7/">MySQL高级</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/11/%E5%85%B3%E4%BA%8Eredis%E7%9A%84%E7%A7%8D%E7%A7%8D%E5%9D%91/">关于Redis配置及使用的种种坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

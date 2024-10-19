@@ -108,10 +108,1821 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/19/hello-world/" data-id="cm2g7wz4y0000mggpdzqocwmc" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/19/hello-world/" data-id="cm2gbt82x000af4gphcgtefub" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-文件按时间顺序和名称顺序批量加序号前缀重命名" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/03/%E6%96%87%E4%BB%B6%E6%8C%89%E6%97%B6%E9%97%B4%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%90%8D%E7%A7%B0%E9%A1%BA%E5%BA%8F%E6%89%B9%E9%87%8F%E5%8A%A0%E5%BA%8F%E5%8F%B7%E5%89%8D%E7%BC%80%E9%87%8D%E5%91%BD%E5%90%8D/" class="article-date">
+  <time class="dt-published" datetime="2024-07-02T16:00:00.000Z" itemprop="datePublished">2024-07-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D/">文件批量重命名</a>►<a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D/Windows%E6%89%B9%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E8%84%9A%E6%9C%AC/">Windows批处理文件脚本</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/03/%E6%96%87%E4%BB%B6%E6%8C%89%E6%97%B6%E9%97%B4%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%90%8D%E7%A7%B0%E9%A1%BA%E5%BA%8F%E6%89%B9%E9%87%8F%E5%8A%A0%E5%BA%8F%E5%8F%B7%E5%89%8D%E7%BC%80%E9%87%8D%E5%91%BD%E5%90%8D/">文件按时间顺序和名称顺序批量加序号前缀重命名</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a><strong>写在前面</strong></h3><p>苯人近期学习时发现Typedown和vscode打开文件夹时均会按名称顺序显示(正确的是应该按时间顺序显示)，以Typedown为例(vscode也许有解决办法，但我没找到)<br><img src="https://pic.imgdb.cn/item/6684bac9d9c307b7e95f98e8.png" alt="text"><br>实际上我希望它以修改时间顺序显示，但在本地磁盘修改排序并不能让它们在Typedown上也正确排序，于是联想到给每个文件名前加个序号前缀就能按所需显示了。上网查找批量重命名发现很多是使用第三方软件，几乎都要开昂贵的会员，遂了解到了Windows批量处理脚本</p>
+<h3 id="脚本使用说明"><a href="#脚本使用说明" class="headerlink" title="脚本使用说明"></a>脚本使用说明</h3><p>首先在要修改的文件夹下新建.txt文件，脚本写入后，将该文件名后缀修改为.bat，点击运行即可</p>
+<h3 id="按名称顺序加序号前缀"><a href="#按名称顺序加序号前缀" class="headerlink" title="按名称顺序加序号前缀"></a>按名称顺序加序号前缀</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">for /f &quot;tokens=*&quot; %%i in (&#x27;dir/b/a-d&#x27;) do (</span><br><span class="line">set /a cnt+=1</span><br><span class="line">set fn=00!cnt!_!</span><br><span class="line">ren &quot;%%i&quot; &quot;!fn:~-3!%%i&quot;)</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<p><strong>效果如图：</strong><br><img src="https://pic.imgdb.cn/item/6684bcc3d9c307b7e96324c3.png" alt="text"></p>
+<p><strong>在Typedown中效果：</strong><br><img src="https://pic.imgdb.cn/item/6684bd0ad9c307b7e963a2c6.png" alt="text"></p>
+<h3 id="按时间顺序加序号前缀"><a href="#按时间顺序加序号前缀" class="headerlink" title="按时间顺序加序号前缀"></a>按时间顺序加序号前缀</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">:: 初始化计数器</span><br><span class="line">set /a b=0</span><br><span class="line">:: 遍历当前目录下的所有文件，按时间顺序</span><br><span class="line">for /f &quot;delims=&quot; %%f in (&#x27;dir /b /od *.*&#x27;) do (</span><br><span class="line">  if not &quot;%%f&quot;==&quot;%~nx0&quot; (</span><br><span class="line">    set /a b+=1</span><br><span class="line">    :: 确保序号为两位长度，不足两位时前面补零</span><br><span class="line">    set &quot;num=00!b!&quot;</span><br><span class="line">    set &quot;num=!num:~-2!&quot;</span><br><span class="line">    :: 重命名文件，格式为两位序号加上文件的原始名</span><br><span class="line">    ren &quot;%%f&quot; &quot;!num!_%%f&quot;</span><br><span class="line">    echo Renamed: %%f to !num!_%%f</span><br><span class="line">  )</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong> 为了在Typedown里能够正确按序号显示，这里序号固定为两位长度，不够左位补零。Typedown我真的讨厌你，1之后本来应该是2，你却是10！！！！！！🤬🤬🤬</p>
+<p><strong>效果如图</strong><br><img src="https://pic.imgdb.cn/item/6684befbd9c307b7e9681d51.png" alt="text"></p>
+<p><img src="https://pic.imgdb.cn/item/6684bf2ed9c307b7e968809b.png" alt="text"></p>
+<p><strong>到这就可以按序阅读啦😎</strong></p>
+<h4 id="去掉文件原名第一位后加序号前缀"><a href="#去掉文件原名第一位后加序号前缀" class="headerlink" title="去掉文件原名第一位后加序号前缀"></a>去掉文件原名第一位后加序号前缀</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">:: 初始化计数器</span><br><span class="line">set /a b=0</span><br><span class="line">:: 遍历当前目录下的所有文件，按时间顺序</span><br><span class="line">for /f &quot;delims=&quot; %%f in (&#x27;dir /b /od *.*&#x27;) do (</span><br><span class="line">  if not &quot;%%f&quot;==&quot;%~nx0&quot; (</span><br><span class="line">    set /a b+=1</span><br><span class="line">    :: 确保序号为两位长度，不足两位时前面补零</span><br><span class="line">    set &quot;num=00!b!&quot;</span><br><span class="line">    set &quot;num=!num:~-2!&quot;</span><br><span class="line">    :: 获取文件原始名去掉第一位后的部分</span><br><span class="line">    set &quot;originalName=%%f&quot;</span><br><span class="line">    set &quot;modifiedName=!originalName:~1!&quot;</span><br><span class="line">    :: 重命名文件，格式为两位序号加上文件原始名去掉第一位</span><br><span class="line">    ren &quot;%%f&quot; &quot;!num!!modifiedName!&quot;</span><br><span class="line">    echo Renamed: %%f to !num!_!modifiedName!</span><br><span class="line">  )</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<p><strong>效果如图：</strong><br><img src="https://pic.imgdb.cn/item/6684c029d9c307b7e96aef16.png" alt="text"></p>
+<p><strong>有问题可以一起探讨喔😲</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/03/%E6%96%87%E4%BB%B6%E6%8C%89%E6%97%B6%E9%97%B4%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%90%8D%E7%A7%B0%E9%A1%BA%E5%BA%8F%E6%89%B9%E9%87%8F%E5%8A%A0%E5%BA%8F%E5%8F%B7%E5%89%8D%E7%BC%80%E9%87%8D%E5%91%BD%E5%90%8D/" data-id="cm2gbt8340011f4gp54rme1bt" data-title="文件按时间顺序和名称顺序批量加序号前缀重命名" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/other/" rel="tag">other</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-使用docker安装elasticsearch kibana ik分词器以及踩雷" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/20/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%20kibana%20ik%E5%88%86%E8%AF%8D%E5%99%A8%E4%BB%A5%E5%8F%8A%E8%B8%A9%E9%9B%B7/" class="article-date">
+  <time class="dt-published" datetime="2024-03-19T16:00:00.000Z" itemprop="datePublished">2024-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learn/">Learn</a>►<a class="article-category-link" href="/categories/Learn/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>►<a class="article-category-link" href="/categories/Learn/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Docker/">Docker</a>►<a class="article-category-link" href="/categories/Learn/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Docker/elasticsearch/">elasticsearch</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/20/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%20kibana%20ik%E5%88%86%E8%AF%8D%E5%99%A8%E4%BB%A5%E5%8F%8A%E8%B8%A9%E9%9B%B7/">使用docker安装elasticsearch kibana ik分词器以及踩雷</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>写在前面</strong><br>docker是在win11子系统Linux下安装的(因为前段时间redis在Linux虚拟机里使用的，现在看着虚拟机就烦🙄)<br>由于是初学，并不是很了解其中的原理<br>各种问题的解决方式仅代表个人出错以及成功解决案例</p>
+<p>docker安装省略,这里选择的是7.12.1版本(比较久远，可以去官网查找更新版本😎)</p>
+<h2 id="elasticsearch安装"><a href="#elasticsearch安装" class="headerlink" title="elasticsearch安装"></a>elasticsearch安装</h2><h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><p>后续要与kibana连接<br><code>docker network create es-net</code></p>
+<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull elasticsearch:7.12.1</code></p>
+<h3 id="创建容器、部署单点"><a href="#创建容器、部署单点" class="headerlink" title="创建容器、部署单点"></a>创建容器、部署单点</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name es --network es-net -p 9200:9200 -p 9300:9300 -v /usr/local/es/data:/usr/share/elasticsearch/data -v /usr/local/es/plugins:/usr/share/elasticsearch/plugins -e &quot;discovery.type=single-node&quot; -e &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span><br><span class="line">elasticsearch:7.12.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="重启es容器"><a href="#重启es容器" class="headerlink" title="重启es容器"></a>重启es容器</h3><p><code>docker restart es</code></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>访问<code>http://localhost:9200</code><br>正常会显示 如图所示<br><img src="https://pic.imgdb.cn/item/65fb0c309f345e8d03b6fcb3.png" alt="alt text"></p>
+<ul>
+<li><strong>错误一：localhost拒绝访问</strong><br>看有些解决方法说是修改elasticsearch.yml文件，因为开启了ssl认证<br>在终端执行<code>curl localhost:9200</code>也可以查看返回信息，有显示上图即成功</li>
+<li><strong>错误二：localhost未发送任何数据</strong><br>es启动有点慢，需要等一等，可能是还没加载出来</li>
+</ul>
+<h2 id="kibana安装"><a href="#kibana安装" class="headerlink" title="kibana安装"></a>kibana安装</h2><h3 id="拉取镜像-1"><a href="#拉取镜像-1" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p><code>docker pull kibana:7.12.1</code><br><strong>注意</strong> 版本要与elasticsearch一致</p>
+<h3 id="创建容器、部署kibana"><a href="#创建容器、部署kibana" class="headerlink" title="创建容器、部署kibana"></a>创建容器、部署kibana</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://es:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h3><p>访问<code>http://localhost:5601</code><br><strong>注意</strong> kibana与es连接，一定在es启动成功后再启动kibana，否则报错</p>
+<p><strong>正常访问如图</strong><br><img src="https://pic.imgdb.cn/item/65fb934b9f345e8d0306743f.png" alt="alt text"></p>
+<ul>
+<li><p><strong>错误：<code>kibana server is not ready yet</code></strong><br>查看日志<br><code>docker logs -f kibana</code>查看报错信息<br>多半是与es没连接成功<br>这里有个坑！<br>需要将创建容器时<code>es</code>改为电脑的私有ip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name kibana --network es-net -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://私有ip:9200 </span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
+
+<p>并将配置文件kibana.yml中elasticsearch.url链接也要改为私有ip</p>
+<p>可以采用数据卷挂载、copy到本地等方式修改&#x2F;config&#x2F;kibana.yml</p>
+</li>
+</ul>
+<h3 id="查找ip"><a href="#查找ip" class="headerlink" title="查找ip"></a>查找ip</h3><ul>
+<li><strong>方法一：cmd打开终端命令行</strong><br>输入<code>ipconfig</code><br><img src="https://pic.imgdb.cn/item/65fb98989f345e8d0318fe6e.png" alt="alt text"><br>es改为IPv4地址</li>
+<li><strong>方法二：搜索</strong><br>控制面板-&gt;查看网络状态和任务<br><img src="https://pic.imgdb.cn/item/65fb99a99f345e8d031d4234.png" alt="alt text"><br>连接WIFI-&gt;详细信息-&gt;IPv4地址</li>
+</ul>
+<h2 id="ik分词器安装"><a href="#ik分词器安装" class="headerlink" title="ik分词器安装"></a>ik分词器安装</h2><h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><h4 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h4><p><code>docker exec -it es bash</code></p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p><code>./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.12.1/elasticsearch-analysis-ik-7.12.1.zip</code></p>
+<ul>
+<li><strong>错误：下载失败</strong><br><img src="https://pic.imgdb.cn/item/65fb9d6f9f345e8d032bdaf8.png" alt="alt text"><br><code>Exception in thread &quot;main&quot; java.net.ConnectException: Connection refused</code><br>没找到好的解决办法，遂手动下载安装</li>
+</ul>
+<h3 id="手动下载安装"><a href="#手动下载安装" class="headerlink" title="手动下载安装"></a>手动下载安装</h3><p><strong>注意版本一致</strong></p>
+<h4 id="下载ik分词器"><a href="#下载ik分词器" class="headerlink" title="下载ik分词器"></a>下载ik分词器</h4><p>打开官网<code>https://github.com/medcl/elasticsearch-analysis-ik</code>查找与elasticsearch一致的版本下载zip文件，并解压到一个不含中文和空格的目录下</p>
+<p>之后重命名为<code>ik</code></p>
+<h4 id="将ik转移到docker容器里"><a href="#将ik转移到docker容器里" class="headerlink" title="将ik转移到docker容器里"></a>将<code>ik</code>转移到docker容器里</h4><p><code>docker cp ik文件的路径 elasticsearch:/usr/share/elasticsearch/plugins</code></p>
+<h4 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h4><p><code>docker restart es</code></p>
+<p><strong>注意！</strong> 尽量不采用此种方式(操控容器)</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6915355569679400974?searchId=20240320191417641463D0E23F12114A2A">ik分词器安装参考解决方案以及尽量不采用此种方式操控容器的解释</a></p>
+<h4 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h4><p><img src="https://pic.imgdb.cn/item/65fba22f9f345e8d033ec548.png" alt="alt text"></p>
+<p><strong>解决成功就可以愉快的在项目中使用elasticsearch结合数据库来进行搜索啦😉</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/20/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%20kibana%20ik%E5%88%86%E8%AF%8D%E5%99%A8%E4%BB%A5%E5%8F%8A%E8%B8%A9%E9%9B%B7/" data-id="cm2gbt82y000bf4gpbzopduu6" data-title="使用docker安装elasticsearch kibana ik分词器以及踩雷" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-MySQL高级" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/01/MySQL%E9%AB%98%E7%BA%A7/" class="article-date">
+  <time class="dt-published" datetime="2024-02-29T16:00:00.000Z" itemprop="datePublished">2024-03-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learn/">Learn</a>►<a class="article-category-link" href="/categories/Learn/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/01/MySQL%E9%AB%98%E7%BA%A7/">MySQL高级</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><h4 id="MySQl体系结构"><a href="#MySQl体系结构" class="headerlink" title="MySQl体系结构"></a>MySQl体系结构</h4><p><img src="https://pic.imgdb.cn/item/65e201839f345e8d03418034.png" alt="alt text"></p>
+<h4 id="存储引擎简介"><a href="#存储引擎简介" class="headerlink" title="存储引擎简介"></a>存储引擎简介</h4><ul>
+<li>存储数据、建立索引、更新查询数据的实现方式</li>
+<li>基于<strong>表</strong></li>
+<li>默认<strong>InnoDB引擎</strong></li>
+<li>创建表的时候指定引擎<code>engine=InnoDB</code></li>
+</ul>
+<h4 id="存储引擎特点"><a href="#存储引擎特点" class="headerlink" title="存储引擎特点"></a>存储引擎特点</h4><ul>
+<li>InnoDB<br>支持事务、行级锁、外键<br>逻辑存储结构：<img src="https://pic.imgdb.cn/item/65e326f39f345e8d03e11cc0.jpg" alt="alt text"></li>
+<li>MyISAM<br>支持表锁，不支持行锁、事务、外键</li>
+<li>Memory<br>存储在内存中，只能作为临时表或缓存<br>hash索引</li>
+</ul>
+<h4 id="存储引擎选择"><a href="#存储引擎选择" class="headerlink" title="存储引擎选择"></a>存储引擎选择</h4><p><img src="https://pic.imgdb.cn/item/65e2e2409f345e8d03ffb27f.png" alt="alt text"></p>
+<h4 id="Linux下安装MySQL"><a href="#Linux下安装MySQL" class="headerlink" title="Linux下安装MySQL"></a>Linux下安装MySQL</h4><ul>
+<li>根据redis，还是建议直接在linux里安装mysql</li>
+<li>安装到windows需上传至linux并解压</li>
+</ul>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h4><p>高效获取数据的数据结构</p>
+<h4 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h4><p>不同的存储引擎有不同的索引结构</p>
+<ul>
+<li>B+Tree索引 大部分引擎都支持</li>
+<li>Hash索引 InnoDB不支持</li>
+<li>R-tree 空间索引</li>
+<li>Full-text 全文索引–倒排索引</li>
+</ul>
+<h5 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h5><ul>
+<li>二叉树缺点：顺序插入容易<strong>形成一个链表，且大数据量下层级很深</strong></li>
+<li>红黑树缺点：本质还是二叉树，<strong>大数据量下层级深</strong></li>
+<li>B树(多路平衡查找树)缺点：叶子节点和非叶子节点均储存数据，导致一页中存储的键值减少，增加树高度</li>
+<li>B+树 均在<strong>叶子节点</strong>上，且添加双向指针(双向链表)</li>
+</ul>
+<p><strong>MySQL里的B+树</strong><br>增加了优化<br><img src="https://pic.imgdb.cn/item/65e326ab9f345e8d03dfc3b6.jpg" alt="alt text"></p>
+<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><p>通过hash算法计算值映射<br>InnoDB不支持hash索引，但有自适应功能，指定条件下根据B+索引自动创建<br><strong>只支持等值匹配，不支持范围匹配及排序</strong>–所以选择B+树索引</p>
+<h4 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h4><ul>
+<li>主键索引</li>
+<li>唯一索引</li>
+<li>常规索引</li>
+<li>全文索引</li>
+</ul>
+<p><strong>InnoDB也可以分为两种</strong></p>
+<ul>
+<li>聚集索引<ul>
+<li>存在主键 <strong>主键索引</strong>为聚集索引</li>
+<li>不存在主键 第一个唯一索引为聚集索引</li>
+<li>均没有 自动生成rowid作索引</li>
+</ul>
+</li>
+<li>二级索引</li>
+<li>回表查询<br><img src="https://pic.imgdb.cn/item/65e2e2499f345e8d03ffc98d.png" alt="alt text"></li>
+</ul>
+<h4 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h4><ul>
+<li>创建索引<br><code>create [unique|fulltext] index index_name on table_name (index_col_name,...);</code></li>
+<li>查看索引<br><code>show index from table_name;</code></li>
+<li>删除索引<br><code>drop index index_name on table_name;</code></li>
+</ul>
+<h4 id="SQL性能分析"><a href="#SQL性能分析" class="headerlink" title="SQL性能分析"></a>SQL性能分析</h4><ul>
+<li><p>查看SQL执行频率<br><code>show global status like &#39;Com_______&#39;</code><br>七个下划线<br>查看增删改查的频率–查询频率高要进行sql优化</p>
+</li>
+<li><p>慢查询日志</p>
+<ul>
+<li>定位sql语句，查看哪一句效率低</li>
+<li>首先在<code>/etc/my.cnf</code>中开启慢查询日志<br><code>slow_query_log=1 #开启</code></li>
+<li><code>long_query_time=2 #设置超过时间</code><br>超时则会在慢查询日志中输出</li>
+<li>慢查询日志在<code>/var/lib/mysql/localhost-slow.log</code>里<br><code>tail -f localhost-slow.log</code>命令可查看慢查询日志尾部信息</li>
+</ul>
+</li>
+<li><p>profile详情</p>
+<ul>
+<li><p>打开开关<br><code>select @@have_profiling;</code><br><code>set profiling=1;</code></p>
+</li>
+<li><p>查看</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> profiles;</span><br><span class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> query query_id;</span><br><span class="line"><span class="keyword">show</span> profile cpu <span class="keyword">for</span> query query_id;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>explain执行计划</p>
+<ul>
+<li>查询性能<br><code>explain select 字段 from 表...</code></li>
+<li>查询结果字段含义<br><img src="https://pic.imgdb.cn/item/65e2e24c9f345e8d03ffd43c.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<h4 id="索引使用"><a href="#索引使用" class="headerlink" title="索引使用"></a>索引使用</h4><ul>
+<li>最左前缀法则<ul>
+<li>联合索引遵守最左前缀法则，从最左列开始且不跳过索引中的列，<strong>跳过的话后面的字段索引会失效</strong></li>
+<li>最左索引存在即可，与后面字段位置顺序无关</li>
+<li>联合索引如果出现范围查询(&gt;,&lt;)，范围查询右侧的索引失效–<strong>规避：尽量采用大于等于或小于等于</strong></li>
+</ul>
+</li>
+<li>索引失效<ul>
+<li>在索引列上计算，会导致索引失效</li>
+<li>字符串类型字段使用查询不加引号，会导致索引失效</li>
+<li>尾部模糊匹配索引不失效，<strong>头部模糊匹配</strong>索引失效</li>
+<li>or连接：如果or前的列有索引但后面的列没有，所涉及的索引均失效。<strong>两侧均有索引</strong>才会有效</li>
+<li>数据分布情况：如果评估全表扫描比索引效率高，则不使用索引</li>
+</ul>
+</li>
+<li>SQL提示<ul>
+<li>加入人为的提示来优化，在from 表名后指定<br><code>use index</code> 使用某个索引<br><code>ignore index</code>  不使用某个索引<br><code>force index</code>  强制使用某个索引</li>
+<li>use只是建议mysql使用该索引，最终使用哪个<strong>取决于mysql的判断</strong></li>
+</ul>
+</li>
+<li>覆盖索引<ul>
+<li>尽量不写<code>select *</code>，容易产生回表查询(二级索引没覆盖到需要查询的字段，需要根据返回的id回查聚集索引)，性能低</li>
+<li>查询性能extra字段：<br><img src="https://pic.imgdb.cn/item/65e312039f345e8d038bf803.png" alt="alt text"></li>
+</ul>
+</li>
+<li>前缀索引<ul>
+<li>字段类型为字符串或大文本时需要索引很长的字符串–只将一部分前缀建立索引</li>
+<li><code>create index idx_xxx on table table_name(column(n));</code>n为截取前缀长度</li>
+<li>长度的选择：根据不重复的索引值与数据表总记录数的<strong>比值</strong>(选择性)决定</li>
+</ul>
+</li>
+<li>联合索引<ul>
+<li>如果有多个查询条件，考虑根据查询字段尽力联合索引，避免回表查询</li>
+<li>创建联合索引要<strong>考虑字段顺序</strong>–参考最左前缀法则</li>
+</ul>
+</li>
+</ul>
+<h4 id="索引设计原则"><a href="#索引设计原则" class="headerlink" title="索引设计原则"></a>索引设计原则</h4><p><img src="https://pic.imgdb.cn/item/65e321d79f345e8d03c9457e.jpg" alt="alt text"><br><img src="https://pic.imgdb.cn/item/65e322199f345e8d03ca4c62.jpg" alt="alt text"><br><img src="https://pic.imgdb.cn/item/65e3223c9f345e8d03cad74d.jpg" alt="alt text"></p>
+<h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><p>插入多条数据优化</p>
+<ul>
+<li><p>批量插入<br>大批量数据采用insert插入性能低，可以采用mysql提供的<strong>load指令</strong>插入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 客户端连接服务端时，加上参数 -–local-infile</span></span><br><span class="line">mysql –<span class="operator">-</span><span class="keyword">local</span><span class="operator">-</span>infile <span class="operator">-</span>u root <span class="operator">-</span>p</span><br><span class="line"><span class="comment">-- 设置全局参数local_infile为1，开启从本地加载文件导入数据的开关</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> local_infile <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="comment">-- 执行load指令将准备好的数据，加载到表结构中</span></span><br><span class="line">load data <span class="keyword">local</span> infile <span class="string">&#x27;/root/sql1.log&#x27;</span> <span class="keyword">into</span> <span class="keyword">table</span> tb_user fields</span><br><span class="line">terminated <span class="keyword">by</span> <span class="string">&#x27;,&#x27;</span> lines terminated <span class="keyword">by</span> <span class="string">&#x27;\n&#x27;</span> ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手动事务提交</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">start</span> transaction;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span>... values...;</span><br><span class="line">insert...;</span><br><span class="line"><span class="keyword">commit</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>主键顺序插入</p>
+</li>
+</ul>
+<h4 id="主键优化"><a href="#主键优化" class="headerlink" title="主键优化"></a>主键优化</h4><ul>
+<li>InnoDB中表数据是根据主键顺序存放的</li>
+<li><strong>页分裂，页合并</strong>：主键乱序插入时可能会造成页分裂，删除可能会造成页合并</li>
+<li>主键设计原则<ul>
+<li>尽量降低主键长度</li>
+<li>尽量<strong>顺序插入</strong></li>
+<li>尽量不使用UUID或自然主键如身份证号作主键</li>
+</ul>
+</li>
+</ul>
+<h4 id="order-by优化"><a href="#order-by优化" class="headerlink" title="order by优化"></a>order by优化</h4><ul>
+<li>extra字段<ul>
+<li>using filesort<br>通过表的索引或全表扫描，在排序缓冲区完成排序</li>
+<li>using index<br>通过有序索引扫描直接返回，不需要额外排序<br>前提：使用覆盖索引</li>
+</ul>
+</li>
+<li>优化<ul>
+<li>尽量使用<strong>有序索引</strong>扫描，且<strong>使用覆盖索引</strong></li>
+<li>使用不了有序索引–大数据情况下，可以增大排序缓冲区大小</li>
+</ul>
+</li>
+</ul>
+<h4 id="group-by优化"><a href="#group-by优化" class="headerlink" title="group by优化"></a>group by优化</h4><ul>
+<li>优化<br>建立适当索引提高分组效率(联合索引)<br>满足最左前缀法则</li>
+</ul>
+<h4 id="limit优化"><a href="#limit优化" class="headerlink" title="limit优化"></a>limit优化</h4><ul>
+<li>优化<ul>
+<li>数据量大的情况下，使用limit分页查询很慢，使用orderby排序查询后再查询，降低查询时间</li>
+<li>创建<strong>覆盖索引+子查询</strong><br><code>select * from tb1 a,(select id from tb2 order by limit 10000000,10) b where a.id=b.id;</code><br>说明：直接进行子查询，包含了limit字段会报错，所以采用多表查询，将子查询得到的结果视为一张表，进行多表查询</li>
+</ul>
+</li>
+</ul>
+<h4 id="count优化"><a href="#count优化" class="headerlink" title="count优化"></a>count优化</h4><ul>
+<li>count()字段说明<br><img src="https://pic.imgdb.cn/item/65e349e99f345e8d03863358.jpg" alt="alt text"></li>
+<li>优化<br>效率：字段&lt;主键&lt;1≈*(不需要取值则效率高)<br>尽量使用<code>count(*)</code></li>
+</ul>
+<h4 id="update优化"><a href="#update优化" class="headerlink" title="update优化"></a>update优化</h4><ul>
+<li>优化<ul>
+<li>根据索引字段更新</li>
+<li>InnoDB行锁针对索引加锁，如果索引失效或不使用该索引，就会从行锁升级为表锁，并发性能降低</li>
+</ul>
+</li>
+</ul>
+<h3 id="视图-存储过程-触发器"><a href="#视图-存储过程-触发器" class="headerlink" title="视图&#x2F;存储过程&#x2F;触发器"></a>视图&#x2F;存储过程&#x2F;触发器</h3><h4 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h4><h5 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h5><ul>
+<li>一种虚拟存在的表，不存储数据，保存sql语句，数据均在基表中</li>
+<li>语法<ul>
+<li>创建<br><code>CREATE [OR REPLACE] VIEW 视图名称[(列名列表)] AS SELECT语句 [ WITH [CASCADED | LOCAL ] CHECK OPTION ] </code></li>
+<li>查询<br><code>查看创建视图语句：SHOW CREATE VIEW 视图名称; 查看视图数据：SELECT * FROM 视图名称 ...... ;</code></li>
+<li>修改<br><code> 方式一：CREATE [OR REPLACE] VIEW 视图名称[(列名列表)] AS SELECT语句 [ WITH [ CASCADED | LOCAL ] CHECK OPTION ]</code><br><code>方式二：ALTER VIEW 视图名称[(列名列表)] AS SELECT语句 [ WITH [ CASCADED |LOCAL ] CHECK OPTION ] </code></li>
+<li>删除<br><code>DROP VIEW [IF EXISTS] 视图名称 [,视图名称] ..</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="检查选项"><a href="#检查选项" class="headerlink" title="检查选项"></a>检查选项</h5><ul>
+<li>使用<code>with check option</code>创建视图，mysql通过视图检查每个更改行，使其符合视图定义</li>
+<li>允许基于一个视图创建另一个，检查<strong>依赖视图</strong>中的规则保持一致性</li>
+<li>检查范围<ul>
+<li>cascaded(默认)<br>检查当前视图和其依赖的视图<br><img src="https://pic.imgdb.cn/item/65e352589f345e8d03a8cb53.jpg" alt="alt text"></li>
+<li>local<br>若依赖视图无条件检查，则不检查<br><img src="https://pic.imgdb.cn/item/65e353469f345e8d03ac091a.jpg" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<h5 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h5><ul>
+<li>更新视图条件：<br>视图行与基础表行必须<strong>存在一对一的关系</strong></li>
+<li>包含以下则视图不可更新：<br>聚合&#x2F;窗口函数、distinct、group by、having、union</li>
+<li>作用<ul>
+<li>简单 简化操作与理解</li>
+<li>安全 只查询修改所见到的数据</li>
+<li>数据独立 屏蔽真实表结构变化带来的影响</li>
+</ul>
+</li>
+</ul>
+<h4 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h4><h5 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h5><ul>
+<li>介绍<br>事先经过编译并存储在数据库中的一段sql语句，简化开发，减少数据传输，即<strong>sql语句的封装与重用</strong></li>
+<li>语法<ul>
+<li><p>创建</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> name(参数)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="operator">-</span><span class="keyword">sql</span>语句</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意：在命令行中执行上述语句会报错，因为执行到sql语句分号时视为语句结束，并没有识别到end后的分号<br><strong>解决</strong>：使用<code>delimiter $$</code>设置结束符号(这里设置为<code>$$</code>)，这样将end后的分号改为$$，就可以执行整个创建语句，注意结束后记得将结束符号改回<code>;</code></p>
+</li>
+<li><p>调用<br><code>call name(参数);</code></p>
+</li>
+<li><p>查看</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> information_schema routines <span class="keyword">where</span> routine_schema<span class="operator">=</span><span class="string">&#x27;xxx&#x27;</span>; #查询指定数据库存储过程及状态信息</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">procedure</span> name; #查询某个存储过程定义</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除<br><code>drop procedure [if exists] name;</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><ul>
+<li><p>系统变量</p>
+<ul>
+<li><p>全局变量<strong>global</strong>&#x2F;会话变量<strong>session</strong></p>
+</li>
+<li><p>查看</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> [ SESSION <span class="operator">|</span> <span class="keyword">GLOBAL</span> ] VARIABLES ; <span class="comment">-- 查看所有系统变量</span></span><br><span class="line"><span class="keyword">SHOW</span> [ SESSION <span class="operator">|</span> <span class="keyword">GLOBAL</span> ] VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;......&#x27;</span>; <span class="comment">-- 可以通过LIKE模糊匹配方式查找变量</span></span><br><span class="line"><span class="keyword">SELECT</span> @@[SESSION <span class="operator">|</span> <span class="keyword">GLOBAL</span>] 系统变量名; <span class="comment">-- 查看指定变量的值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> [ SESSION <span class="operator">|</span> <span class="keyword">GLOBAL</span> ] 系统变量名 <span class="operator">=</span> 值 ;</span><br><span class="line"><span class="keyword">SET</span> @@[SESSION <span class="operator">|</span> <span class="keyword">GLOBAL</span>]系统变量名 <span class="operator">=</span> 值 ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用户自定义变量<br><strong>不需要声明</strong>，直接<code>@name</code>即可</p>
+<ul>
+<li><p>赋值<br>方式一：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="variable">@var_name</span> <span class="operator">=</span> expr [, <span class="variable">@var_name</span> <span class="operator">=</span> expr] ... ;</span><br><span class="line"><span class="keyword">SET</span> <span class="variable">@var_name</span> :<span class="operator">=</span> expr [, <span class="variable">@var_name</span> :<span class="operator">=</span> expr] ... ;</span><br></pre></td></tr></table></figure>
+
+<p>方式二：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="variable">@var_name</span> :<span class="operator">=</span> expr [, <span class="variable">@var_name</span> :<span class="operator">=</span> expr] ... ;</span><br><span class="line"><span class="keyword">SELECT</span> 字段名 <span class="keyword">INTO</span> <span class="variable">@var_name</span> <span class="keyword">FROM</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<p>没赋值直接使用也不会报错，返回null</p>
+</li>
+<li><p>使用<br><code>select @var_name;</code></p>
+</li>
+</ul>
+</li>
+<li><p>局部变量<br>访问之前<strong>需要声明</strong>，在begin~end间生效</p>
+<ul>
+<li><p>声明<br><code>DECLARE 变量名 变量类型 [DEFAULT ... ] ;</code></p>
+</li>
+<li><p>赋值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> 变量名 <span class="operator">=</span> 值 ;</span><br><span class="line"><span class="keyword">SET</span> 变量名 :<span class="operator">=</span> 值 ;</span><br><span class="line"><span class="keyword">SELECT</span> 字段名 <span class="keyword">INTO</span> 变量名 <span class="keyword">FROM</span> 表名 ... ;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h5 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h5><ul>
+<li><p>if</p>
+<ul>
+<li>语法</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">IF 条件<span class="number">1</span> <span class="keyword">THEN</span></span><br><span class="line">.....</span><br><span class="line">ELSEIF 条件<span class="number">2</span> <span class="keyword">THEN</span> <span class="comment">-- 可选</span></span><br><span class="line">.....</span><br><span class="line"><span class="keyword">ELSE</span> <span class="comment">-- 可选</span></span><br><span class="line">.....</span><br><span class="line"><span class="keyword">END</span> IF;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>参数</p>
+<ul>
+<li><p>类型</p>
+<ul>
+<li><code>in</code> 输入参数(默认)</li>
+<li><code>out</code> 输出，返回值</li>
+<li><code>inout</code> 既可以输入也可以输出</li>
+</ul>
+</li>
+<li><p>用法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> 存储过程名称 ([ <span class="keyword">IN</span><span class="operator">/</span><span class="keyword">OUT</span><span class="operator">/</span><span class="keyword">INOUT</span> 参数名 参数类型 ])</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="comment">-- SQL语句</span></span><br><span class="line"><span class="keyword">END</span> ;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>case</p>
+<ul>
+<li>语法一</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 含义： 当case_value的值为 when_value1时，执行statement_list1，当值为 when_value2时，</span></span><br><span class="line">执行statement_list2， 否则就执行 statement_list</span><br><span class="line"><span class="keyword">CASE</span> case_value</span><br><span class="line"><span class="keyword">WHEN</span> when_value1 <span class="keyword">THEN</span> statement_list1</span><br><span class="line">[ <span class="keyword">WHEN</span> when_value2 <span class="keyword">THEN</span> statement_list2] ...</span><br><span class="line">[ <span class="keyword">ELSE</span> statement_list ]</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">CASE</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>语法二</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 含义： 当条件search_condition1成立时，执行statement_list1，当条件search_condition2成</span></span><br><span class="line">立时，执行statement_list2， 否则就执行 statement_list</span><br><span class="line"><span class="keyword">CASE</span></span><br><span class="line"><span class="keyword">WHEN</span> search_condition1 <span class="keyword">THEN</span> statement_list1</span><br><span class="line">[<span class="keyword">WHEN</span> search_condition2 <span class="keyword">THEN</span> statement_list2] ...</span><br><span class="line">[<span class="keyword">ELSE</span> statement_list]</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">CASE</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h5><ul>
+<li><p>while</p>
+<ul>
+<li>语法</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 先判定条件，如果条件为true，则执行逻辑，否则，不执行逻辑</span></span><br><span class="line">WHILE 条件 DO</span><br><span class="line"><span class="keyword">SQL</span>逻辑...</span><br><span class="line"><span class="keyword">END</span> WHILE;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>repeat</p>
+<ul>
+<li>语法</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 先执行一次逻辑，然后判定UNTIL条件是否满足，如果满足，则退出。如果不满足，则继续下一次循环</span></span><br><span class="line">REPEAT</span><br><span class="line"><span class="keyword">SQL</span>逻辑...</span><br><span class="line">UNTIL 条件</span><br><span class="line"><span class="keyword">END</span> REPEAT;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>loop</p>
+<ul>
+<li><code>leave</code> 退出循环</li>
+<li><code>iterate</code> 跳过当前，进入下一次循环</li>
+<li>语法</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[begin_label:] LOOP</span><br><span class="line"><span class="keyword">SQL</span>逻辑...</span><br><span class="line"><span class="keyword">END</span> LOOP [end_label];</span><br><span class="line">LEAVE label; <span class="comment">-- 退出指定标记的循环体</span></span><br><span class="line">ITERATE label; <span class="comment">-- 直接进入下一次循环</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h5><p>用于<strong>存储查询结果集</strong>的数据类型，存储过程和函数中使用游标对结果集循环处理</p>
+<ul>
+<li><p>声明<br>需要先声明普通变量，再声明游标<br><code>DECLARE 游标名称 CURSOR FOR 查询语句 ;</code></p>
+</li>
+<li><p>open<br><code>OPEN 游标名称 ;</code></p>
+</li>
+<li><p>fetch<br><code>FETCH 游标名称 INTO 变量 [, 变量 ] ;</code></p>
+</li>
+<li><p>close<br><code>CLOSE 游标名称 ;</code></p>
+</li>
+<li><p>条件处理函数<br>解决使用游标获取数据时循环条件的处理</p>
+<ul>
+<li>语法</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> handler_action HANDLER <span class="keyword">FOR</span> condition_value [, condition_value]</span><br><span class="line">... statement ;</span><br><span class="line">handler_action 的取值：</span><br><span class="line">CONTINUE: 继续执行当前程序</span><br><span class="line">EXIT: 终止执行当前程序</span><br><span class="line">condition_value 的取值：</span><br><span class="line"><span class="keyword">SQLSTATE</span> sqlstate_value: 状态码，如 <span class="number">02000</span></span><br><span class="line"><span class="keyword">SQLWARNING</span>: 所有以<span class="number">01</span>开头的<span class="keyword">SQLSTATE</span>代码的简写</span><br><span class="line"><span class="keyword">NOT</span> FOUND: 所有以<span class="number">02</span>开头的<span class="keyword">SQLSTATE</span>代码的简写</span><br><span class="line"><span class="keyword">SQLEXCEPTION</span>: 所有没有被<span class="keyword">SQLWARNING</span> 或 <span class="keyword">NOT</span> FOUND捕获的<span class="keyword">SQLSTATE</span>代码的简写</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/mysql-errors/8.0/en/server-error-reference.html">状态码官方文档</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="存储函数"><a href="#存储函数" class="headerlink" title="存储函数"></a>存储函数</h4><ul>
+<li><p>有返回值的存储过程，存储函数的参数只能是IN类型的</p>
+</li>
+<li><p>语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> 存储函数名称 ([ 参数列表 ])</span><br><span class="line"><span class="keyword">RETURNS</span> type [characteristic ...]</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="comment">-- SQL语句</span></span><br><span class="line"><span class="keyword">RETURN</span> ...;</span><br><span class="line"><span class="keyword">END</span> ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>characteristic说明</p>
+<ul>
+<li>DETERMINISTIC：相同的输入参数总是产生相同的结果</li>
+<li>NO SQL ：不包含 SQL 语句</li>
+<li>READS SQL DATA：包含读取数据的语句，但不包含写入数据的语句</li>
+</ul>
+</li>
+<li><p>使用较少，而且要求有返回值，通常可以使用<strong>存储过程</strong>代替</p>
+</li>
+</ul>
+<h4 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h4><ul>
+<li><p>介绍：<br>与表有关的数据库对象，指在insert&#x2F;update&#x2F;delete之前(BEFORE)或之后(AFTER)，触发并执行触发器中定义的SQL语句集合。这种特性可以协助应用在数据库端确保数据的完整性、日志记录、数据校验等操作</p>
+</li>
+<li><p>使用别名<strong>OLD和NEW</strong>来引用触发器中发生变化的记录内容，与其他的数据库相似。现在触发器还只支持<strong>行级触发</strong>，不支持语句级触发</p>
+</li>
+<li><p>类型<br><img src="https://pic.imgdb.cn/item/65e49b919f345e8d0317e8a1.jpg" alt="alt text"></p>
+</li>
+<li><p>语法</p>
+<ul>
+<li>创建</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> trigger_name</span><br><span class="line">BEFORE<span class="operator">/</span>AFTER <span class="keyword">INSERT</span><span class="operator">/</span><span class="keyword">UPDATE</span><span class="operator">/</span><span class="keyword">DELETE</span></span><br><span class="line"><span class="keyword">ON</span> tbl_name <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="comment">-- 行级触发器</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">trigger_stmt ;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> TRIGGERS ;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> [schema_name.]trigger_name ; <span class="comment">-- 如果没有指定 schema_name，默认为当前数据库 。</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h3><h4 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h4><p>典型使用场景：做<strong>全库的逻辑备份</strong></p>
+<ul>
+<li>一致性备份语法<ul>
+<li>加全局锁<br><code>flush tables with read lock ;</code></li>
+<li>数据备份<br><code>mysqldump -uroot –p(密码) 数据库名 &gt; 复制后数据库路径.sql</code></li>
+<li>释放锁<br><code>unlock tables ;</code></li>
+</ul>
+</li>
+<li><strong>弊端</strong><ul>
+<li>如果在主库上备份，那么在备份期间都不能执行更新</li>
+<li>如果在从库上备份，那么在备份期间从库不能执行主库同步过来的二进制日志（binlog），会导致主从延迟</li>
+<li>在InnoDB引擎中可以在备份时加上参数 –single-transaction 参数来完成不加锁的一致性数据备份<br><code>mysqldump --single-transaction -uroot –p xxx &gt; xxx.sql</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h4><h5 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h5><ul>
+<li>分类<ul>
+<li>表共享读锁 read lock<br>自身客户端只读不写，不影响其他客户端读，但<strong>阻塞写</strong></li>
+<li>表独占写锁 write lock<br>自身客户端可读写，<strong>阻塞其他客户端读写</strong></li>
+</ul>
+</li>
+<li>语法<ul>
+<li>加锁<br><code>lock tables 表名 read/write</code></li>
+<li>释放锁<br><code>unlock tables / 客户端断开连接</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="元数据锁-MDL"><a href="#元数据锁-MDL" class="headerlink" title="元数据锁(MDL)"></a>元数据锁(MDL)</h5><ul>
+<li>加锁过程是系统自动控制，无需显式使用，在访问一张表的时候会自动加上</li>
+<li>MDL锁主要作用是维护表元数据的数据一致性，在表上有活动事务的时候，不可以对元数据进行写入操作。为了<strong>避免DML与DDL冲突</strong>，保证读写的正确性</li>
+<li>当对一张表进行增删改查的时候，加<strong>MDL读锁(共享)<strong>，当对表结构进行变更操作的时候，加</strong>MDL写锁(排他)</strong></li>
+<li><img src="https://pic.imgdb.cn/item/65e5ca679f345e8d03c98403.jpg" alt="alt text"></li>
+</ul>
+<h5 id="意向锁"><a href="#意向锁" class="headerlink" title="意向锁"></a>意向锁</h5><p>避免DML在执行时，加的行锁与表锁的冲突，在InnoDB中引入了意向锁，使得表锁不用检查每行数据是否加锁，使用意向锁来<strong>减少表锁的检查</strong></p>
+<ul>
+<li>分类<ul>
+<li>意向共享锁(IS): 由语句select … lock in share mode添加。与表锁共享锁(read)兼容，与表锁排他锁(write)<strong>互斥</strong></li>
+<li>意向排他锁(IX): 由insert、update、delete、select…for update添加。与表锁共享锁(read)及排他锁(write)都互斥，<strong>意向锁之间不会互斥</strong></li>
+<li><code>select object_schema,object_name,index_name,lock_type,lock_mode,lock_data from performance_schema.data_locks;</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="行级锁"><a href="#行级锁" class="headerlink" title="行级锁"></a>行级锁</h4><h5 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h5><ul>
+<li>行锁（Record Lock）：锁定单个行记录的锁，防止其他事务对此行进行update和delete。在RC、RR隔离级别下都支持</li>
+<li>间隙锁（Gap Lock）：锁定索引记录间隙（不含该记录），确保索引记录间隙不变，防止其他事务在这个间隙进行insert，产生幻读。在RR隔离级别下都支持</li>
+<li>临键锁（Next-Key Lock）：行锁和间隙锁组合，同时锁住数据，并锁住数据前面的间隙Gap。在RR隔离级别下支持</li>
+</ul>
+<h5 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h5><ul>
+<li>分类<ul>
+<li>共享锁（S）：允许一个事务去读一行，阻止其他事务获得相同数据集的排它锁</li>
+<li>排他锁（X）：允许获取排他锁的事务更新数据，阻止其他事务获得相同数据集的共享锁和排他锁</li>
+<li><img src="https://pic.imgdb.cn/item/65e5d2e49f345e8d03ed06fe.jpg" alt="alt text"></li>
+</ul>
+</li>
+<li>常见sql语句加的行锁<br><img src="https://pic.imgdb.cn/item/65e5d3339f345e8d03ee27b8.jpg" alt="alt text"></li>
+<li>默认情况下，InnoDB在 REPEATABLE READ事务隔离级别运行，InnoDB使用 next-key 锁进行搜索和索引扫描，以防止幻读<ul>
+<li>针对<strong>唯一索引</strong>进行检索时，对已存在的记录进行等值匹配时，将会<strong>自动优化为行锁</strong></li>
+<li>InnoDB的行锁是<strong>针对于索引</strong>加的锁，不通过索引条件检索数据，那InnoDB将对表中的所有记录加锁，此时就会升级为表锁</li>
+<li><code>select object_schema,object_name,index_name,lock_type,lock_mode,lock_data from performance_schema.data_locks;</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="间隙锁-临键锁"><a href="#间隙锁-临键锁" class="headerlink" title="间隙锁&amp;临键锁"></a>间隙锁&amp;临键锁</h5><p>默认情况下，InnoDB在 REPEATABLE READ事务隔离级别运行，InnoDB使用 next-key 锁进行搜索和索引扫描，以防止幻读</p>
+<ul>
+<li>索引上的<strong>等值查询(唯一索引)<strong>，给不存在的记录加锁时, 优化为</strong>间隙锁</strong></li>
+<li>索引上的<strong>等值查询(非唯一普通索引)<strong>，向右遍历时最后一个值不满足查询需求时，next-key lock 退化为</strong>间隙锁</strong></li>
+<li>索引上的范围查询(唯一索引)–会访问到不满足条件的第一个值为止</li>
+</ul>
+<p>注意：间隙锁唯一目的是<strong>防止其他事务插入间隙</strong>。间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上采用间隙锁。</p>
+<h3 id="InnoDB引擎"><a href="#InnoDB引擎" class="headerlink" title="InnoDB引擎"></a>InnoDB引擎</h3><h4 id="逻辑存储结构"><a href="#逻辑存储结构" class="headerlink" title="逻辑存储结构"></a>逻辑存储结构</h4><p><img src="https://pic.imgdb.cn/item/65e6e8389f345e8d0322c09a.png" alt="alt text"></p>
+<ul>
+<li>表<br>是InnoDB存储引擎逻辑结构的最高层， 如果用户启用了参数 innodb_file_per_table(在8.0版本中默认开启)，则每张表都会有一个表空间（xxx.ibd，一个mysql实例可以对应多个表空间，用于<strong>存储记录、索引</strong>等数据</li>
+<li>段<br>分为数据段（Leaf node segment）、索引段（Non-leaf node segment）、回滚段（Rollback segment），InnoDB是索引组织表，数据段就是B+树的<strong>叶子节点</strong>， 索引段即为B+树的<strong>非叶子节点</strong>。段用来管理多个Extent（区）</li>
+<li>区<br>表空间的单元结构，每个区的大小为1M。 默认情况下，InnoDB存储引擎页大小为16K， 即一个区中一共有64个连续的页</li>
+<li>页<br>是InnoDB 存储引擎磁盘管理的最小单元，每个页的大小默认为 <strong>16KB</strong>。为了保证页的连续性，InnoDB 存储引擎每次从磁盘申请 4-5 个区</li>
+<li>行<br>InnoDB 存储引擎数据是按行进行存放的。<br>默认有两个隐藏字段：<ul>
+<li>Trx_id：每次对某条记录进行改动时，都会把对应的事务id赋值给trx_id隐藏列</li>
+<li>Roll_pointer：每次对某条引记录进行改动时，都会把旧的版本写入到undo日志中，然后这个隐藏列就相当于一个指针，可以通过它来找到该记录修改前的信息</li>
+</ul>
+</li>
+</ul>
+<h4 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h4><p><img src="https://pic.imgdb.cn/item/65e6ae819f345e8d0397e0be.jpg" alt="alt text"></p>
+<h5 id="内存结构"><a href="#内存结构" class="headerlink" title="内存结构"></a>内存结构</h5><p><img src="https://pic.imgdb.cn/item/65e6aea89f345e8d03983ecd.jpg" alt="alt text"></p>
+<ul>
+<li><p>Buffer Pool<br>可以<strong>缓存磁盘</strong>上经常操作的真实数据，在执行增删改查操作时，先操作缓冲池中的数据（若缓冲池没有数据，则从磁盘加载并缓存），然后再以一定频率刷新到磁盘，从而减少磁盘IO，加快处理速度<br>缓冲池以Page页为单位，底层采用<strong>链表</strong>数据结构管理Page</p>
+<ul>
+<li>free page：空闲page，未被使用</li>
+<li>clean page：被使用page，数据没有被修改过</li>
+<li>dirty page：脏页，被使用page，数据被修改过，也中数据与磁盘的数据产生了不一致</li>
+</ul>
+</li>
+<li><p>Change Buffer<br>更改缓冲区（针对于<strong>非唯一二级索引页</strong>），在执行DML语句时，如果这些数据Page没有在Buffer Pool中，不会直接操作磁盘，而会将数据变更存在更改缓冲区 Change Buffer中，在未来数据被读取时，再将数据合并恢复到Buffer Pool中，再将合并后的数据刷新到磁盘中</p>
+</li>
+<li><p>Adaptive Hash Index<br>InnoDB存储引擎会监控对表上各索引页的查询，如果观察到在特定的条件下hash索引可以提升速度，则建立hash索引</p>
+</li>
+<li><p>Log Buffer</p>
+<ul>
+<li>用来保存要写入到磁盘中的log日志数据（redo log 、undo log），默认大小为 16MB，日志缓冲区的日志会定期刷新到磁盘中。如果需要更新、插入或删除许多行的事务，增加日志缓冲区的大小可以节省磁盘 I&#x2F;O</li>
+<li>参数<br><code>innodb_log_buffer_size</code>：缓冲区大小<br><code>innodb_flush_log_at_trx_commit</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h5><p><img src="https://pic.imgdb.cn/item/65e6d4869f345e8d03f472f4.jpg" alt="alt text"></p>
+<ul>
+<li>System Tablespace<br><strong>更改缓冲区</strong>的存储区域。如果表是在系统表空间而不是每个表文件或通用表空间中创建的，它也可能包含表和索引数据。(在MySQL5.x版本中还包含InnoDB数据字典、undolog等)</li>
+<li>File-Per-Table Tablespaces<br>如果开启了innodb_file_per_table开关，则每个表的文件表空间包含单个InnoDB表的<strong>数据和索引</strong>，并存储在文件系统上的单个数据文件中</li>
+<li>General Tablespaces<ul>
+<li>创建表空间<br><code>CREATE TABLESPACE ts_name ADD DATAFILE &#39;file_name&#39; ENGINE = engine_name;</code></li>
+<li>创建时指定表空间<br><code>CREATE TABLE xxx ... TABLESPACE ts_name;</code></li>
+</ul>
+</li>
+<li>Undo Tablespaces<br><strong>撤销</strong>表空间，MySQL实例在初始化时会自动创建两个默认的undo表空间（初始大小16M），用于存储undo log日志</li>
+<li>Temporary Tablespaces<br>存储用户创建的<strong>临时表</strong>等数据</li>
+<li>Doublewrite Buffer Files<br>双写缓冲区，innoDB引擎将数据页从Buffer Pool刷新到磁盘前，先将数据页写入<strong>双写缓冲区</strong>文件中，便于系统异常时恢复数据</li>
+<li>Redo Log<br>用来实现事务的<strong>永久性</strong>，该日志文件由两部分组成：重做日志缓冲（redo log buffer）以及重做日志文件（redo log）,前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都会存到该日志中, 用于在刷新脏页到磁盘时,发生错误时, 进行数据恢复使用</li>
+</ul>
+<h5 id="后台线程"><a href="#后台线程" class="headerlink" title="后台线程"></a>后台线程</h5><p><strong>作用</strong>：将缓存区的数据在合适的时机刷新到磁盘文件中<br><img src="https://pic.imgdb.cn/item/65e6d7299f345e8d03fa665b.jpg" alt="alt text"></p>
+<p>分类：</p>
+<ul>
+<li>Master Thread<br>核心后台线程，负责调度其他线程，还负责将缓冲池中的数据异步刷新到磁盘中, 保持数据的一致性，还包括脏页的刷新、合并插入缓存、undo页的回收</li>
+<li>IO Thread<br>InnoDB存储引擎中大量使用了AIO来处理IO请求, 这样可以极大地提高数据库的性能，IO Thread主要负责这些IO请求的回调<br><img src="https://pic.imgdb.cn/item/65e6d7f49f345e8d03fc3a61.jpg" alt="alt text"></li>
+<li>Purge Thread<br>用于回收事务已经提交了的undo log，在事务提交之后，undo log可能不用了，就用它来回收</li>
+<li>Page Cleaner Thread<br>协助 Master Thread 刷新脏页到磁盘的线程，减轻 Master Thread 的工作压力，减少阻塞</li>
+</ul>
+<h4 id="事务原理"><a href="#事务原理" class="headerlink" title="事务原理"></a>事务原理</h4><p><img src="https://pic.imgdb.cn/item/65e6d9ae9f345e8d03005377.jpg" alt="alt text"></p>
+<ul>
+<li><p>redo log<br><strong>重做日志</strong>，记录的是事务提交时数据页的物理修改，是用来实现事务的持久性</p>
+<ul>
+<li>件由两部分组成：重做日志缓冲（redo log buffer）以及重做日志文件（redo log file）,前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都存到该日志文件中, 用于在刷新脏页到磁盘,发生错误时进行数据恢复使用</li>
+<li><img src="https://pic.imgdb.cn/item/65e737bb9f345e8d032a3f2a.jpg" alt="alt text"></li>
+</ul>
+</li>
+<li><p>undo log<br><strong>回滚日志</strong>，用于记录数据被修改前的信息,提供<strong>回滚</strong>(保证事务的原子性)和<strong>MVCC</strong>(多版本并发控制),是<strong>逻辑日志</strong></p>
+<ul>
+<li>销毁：undo log在事务执行时产生，事务提交时，并不会立即删除undo log，因为这些日志可能还<strong>用于MVCC</strong></li>
+<li>存储：undo log采用段的方式进行管理和记录，存放在前面介绍的 rollback segment回滚段中，内部包含1024个undo log segment</li>
+</ul>
+</li>
+</ul>
+<h4 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h4><h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><ul>
+<li>当前读：<br>读取的是记录的最新版本，读取时还要保证其他并发事务不能修改当前记录，会对读取的记录进行加锁。<br><code>select ... lock in share mode(共享锁)</code> <code>select ...for update、update、insert、delete(排他锁)</code>都是一种当前读</li>
+<li>快照读：<br>简单的select（不加锁）就是快照读，读取的是记录数据的可见版本，有可能是历史数据(保证<strong>可重复读</strong>)，不加锁，是非阻塞读<ul>
+<li><code>Read Committed</code>：每次select，都生成一个快照读</li>
+<li><code>Repeatable Read</code>：开启事务后第一个select语句才是快照读的地方</li>
+<li><code>Serializable</code>：快照读会退化为当前读</li>
+</ul>
+</li>
+<li>MVCC<br>多版本并发控制<br>指维护一个数据的多个版本，使得读写操作没有冲突，快照读为MySQL实现MVCC提供了一个非阻塞读功能</li>
+</ul>
+<h5 id="隐藏字段"><a href="#隐藏字段" class="headerlink" title="隐藏字段"></a>隐藏字段</h5><p>三个隐藏字段<br><img src="https://pic.imgdb.cn/item/65e7cfd49f345e8d0337f257.jpg" alt="alt text"></p>
+<h5 id="undo-log"><a href="#undo-log" class="headerlink" title="undo log"></a>undo log</h5><ul>
+<li>undo log<br>回滚日志</li>
+<li>版本链<ul>
+<li>不同事务或相同事务对同一条记录进行修改，会导致该记录的undo log生成一条记录版本链表，链表的头部是最新的旧记录，链表尾部是最早的旧记录</li>
+<li><img src="https://pic.imgdb.cn/item/65e7f1459f345e8d039b0375.jpg" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<h5 id="readview"><a href="#readview" class="headerlink" title="readview"></a>readview</h5><p>快照读 SQL执行时MVCC提取数据的依据，记录并维护系统当前活跃的事务（未提交的）id</p>
+<ul>
+<li>核心字段<br><img src="https://pic.imgdb.cn/item/65e7f8e39f345e8d03b441e4.jpg" alt="alt text"></li>
+<li>版本链数据访问规则<br><img src="https://pic.imgdb.cn/item/65e7fb109f345e8d03bb5d3b.jpg" alt="alt text"></li>
+<li>不同隔离级别生成readview时机不同<ul>
+<li><code>READ COMMITTED</code>:在事务中每一次执行快照读时生成ReadView</li>
+<li><code>REPEATABLE READ</code>:仅在事务中第一次执行快照读时生成ReadView，后续复用该ReadView</li>
+</ul>
+</li>
+</ul>
+<h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><ul>
+<li>RC<br><img src="https://pic.imgdb.cn/item/65e7fec99f345e8d03c64c41.jpg" alt="alt text"></li>
+<li>RR<br><img src="https://pic.imgdb.cn/item/65e800a29f345e8d03cbd099.jpg" alt="alt text"><br>复用第一次快照读readview–实现<strong>可重复读</strong></li>
+<li>总体原理<br><img src="https://pic.imgdb.cn/item/65e801529f345e8d03cdc110.jpg" alt="alt text"></li>
+</ul>
+<h3 id="MySQL管理"><a href="#MySQL管理" class="headerlink" title="MySQL管理"></a>MySQL管理</h3><h4 id="系统数据库"><a href="#系统数据库" class="headerlink" title="系统数据库"></a>系统数据库</h4><p>自带四大数据库<br><img src="https://pic.imgdb.cn/item/65e6dc7f9f345e8d0306a008.jpg" alt="alt text"></p>
+<h4 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h4><h5 id="mysql-客户端工具"><a href="#mysql-客户端工具" class="headerlink" title="mysql-客户端工具"></a>mysql-客户端工具</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">语法 ：</span><br><span class="line">mysql [options] [database]</span><br><span class="line">选项 ：</span><br><span class="line"><span class="operator">-</span>u, <span class="comment">--user=name #指定用户名</span></span><br><span class="line"><span class="operator">-</span>p, <span class="comment">--password[=name] #指定密码</span></span><br><span class="line"><span class="operator">-</span>h, <span class="comment">--host=name #指定服务器IP或域名</span></span><br><span class="line"><span class="operator">-</span>P, <span class="comment">--port=port #指定连接端口</span></span><br><span class="line"><span class="operator">-</span>e, <span class="comment">--execute=name #执行SQL语句并退出</span></span><br></pre></td></tr></table></figure>
+
+<p><code>-e</code>可以直接在mysql客户端执行sql语句，无需连接到数据库再执行</p>
+<h5 id="mysqladmin-管理工具"><a href="#mysqladmin-管理工具" class="headerlink" title="mysqladmin-管理工具"></a>mysqladmin-管理工具</h5><p>执行管理操作，检查服务器的配置和当前状态、创建并删除数据库等</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">语法:</span><br><span class="line">mysqladmin [options] command ...</span><br><span class="line">选项:</span><br><span class="line"><span class="operator">-</span>u, <span class="comment">--user=name #指定用户名</span></span><br><span class="line"><span class="operator">-</span>p, <span class="comment">--password[=name] #指定密码</span></span><br><span class="line"><span class="operator">-</span>h, <span class="comment">--host=name #指定服务器IP或域名</span></span><br><span class="line"><span class="operator">-</span>P, <span class="comment">--port=port #指定连接端口</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="mysqlbinlog-二进制日志查看工具"><a href="#mysqlbinlog-二进制日志查看工具" class="headerlink" title="mysqlbinlog-二进制日志查看工具"></a>mysqlbinlog-二进制日志查看工具</h5><p>检查二进制日志文件的文本格式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">语法 ：</span><br><span class="line">mysqlbinlog [options] log<span class="operator">-</span>files1 log<span class="operator">-</span>files2 ...</span><br><span class="line">选项 ：</span><br><span class="line"><span class="operator">-</span>d, <span class="comment">--database=name 指定数据库名称，只列出指定的数据库相关操作。</span></span><br><span class="line"><span class="operator">-</span>o, <span class="comment">--offset=# 忽略掉日志中的前n行命令。</span></span><br><span class="line"><span class="operator">-</span>r,<span class="comment">--result-file=name 将输出的文本格式日志输出到指定文件。</span></span><br><span class="line"><span class="operator">-</span>s, <span class="comment">--short-form 显示简单格式， 省略掉一些信息。</span></span><br><span class="line"><span class="comment">--start-datatime=date1 --stop-datetime=date2 指定日期间隔内的所有日志。</span></span><br><span class="line"><span class="comment">--start-position=pos1 --stop-position=pos2 指定位置间隔内的所有日志。</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="mysqlshow-查看数据库-表-字段统计信息"><a href="#mysqlshow-查看数据库-表-字段统计信息" class="headerlink" title="mysqlshow-查看数据库&#x2F;表&#x2F;字段统计信息"></a>mysqlshow-查看数据库&#x2F;表&#x2F;字段统计信息</h5><p>客户端对象查找工具，用来快速查找存在哪些数据库、数据库中的表、表中的列或者索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">语法 ：</span><br><span class="line">mysqlshow [options] [db_name [table_name [col_name]]]</span><br><span class="line">选项 ：</span><br><span class="line"><span class="comment">--count 显示数据库及表的统计信息（数据库，表 均可以不指定）</span></span><br><span class="line"><span class="operator">-</span>i 显示指定数据库或者指定表的状态信息</span><br><span class="line">示例：</span><br><span class="line">#查询test库中每个表中的字段书，及行数</span><br><span class="line">mysqlshow <span class="operator">-</span>uroot <span class="operator">-</span>p2143 test <span class="comment">--count</span></span><br><span class="line">#查询test库中book表的详细情况</span><br><span class="line">mysqlshow <span class="operator">-</span>uroot <span class="operator">-</span>p2143 test book <span class="comment">--count</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="mysqldump-数据备份工具"><a href="#mysqldump-数据备份工具" class="headerlink" title="mysqldump-数据备份工具"></a>mysqldump-数据备份工具</h5><p>来备份数据库或在不同数据库之间进行数据迁移,备份内容包含创建表，及插入表的SQL语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">语法 ：</span><br><span class="line">mysqldump [options] db_name [tables]</span><br><span class="line">mysqldump [options] <span class="comment">--database/-B db1 [db2 db3...]</span></span><br><span class="line">mysqldump [options] <span class="comment">--all-databases/-A</span></span><br><span class="line">连接选项 ：</span><br><span class="line"><span class="operator">-</span>u, <span class="comment">--user=name 指定用户名</span></span><br><span class="line"><span class="operator">-</span>p, <span class="comment">--password[=name] 指定密码</span></span><br><span class="line"><span class="operator">-</span>h, <span class="comment">--host=name 指定服务器ip或域名</span></span><br><span class="line"><span class="operator">-</span>P, <span class="comment">--port=# 指定连接端口</span></span><br><span class="line">输出选项：</span><br><span class="line"><span class="comment">--add-drop-database 在每个数据库创建语句前加上 drop database 语句</span></span><br><span class="line"><span class="comment">--add-drop-table 在每个表创建语句前加上 drop table 语句 , 默认开启 ; 不</span></span><br><span class="line">开启 (<span class="comment">--skip-add-drop-table)</span></span><br><span class="line"><span class="operator">-</span>n, <span class="comment">--no-create-db 不包含数据库的创建语句</span></span><br><span class="line"><span class="operator">-</span>t, <span class="comment">--no-create-info 不包含数据表的创建语句</span></span><br><span class="line"><span class="operator">-</span>d <span class="comment">--no-data 不包含数据</span></span><br><span class="line"><span class="operator">-</span>T, <span class="comment">--tab=name 自动生成两个文件：一个.sql文件，创建表结构的语句；一</span></span><br><span class="line">个.txt文件，数据文件</span><br></pre></td></tr></table></figure>
+
+<h5 id="mysqlimport-source-数据导入工具"><a href="#mysqlimport-source-数据导入工具" class="headerlink" title="mysqlimport&#x2F;source-数据导入工具"></a>mysqlimport&#x2F;source-数据导入工具</h5><p>客户端数据导入工具</p>
+<ul>
+<li>mysqlimport–导入mysqldump 加 -T 参数后导出的文本文件<br><code>mysqlimport [options] db_name textfile1 [textfile2...]</code></li>
+<li>source–导入sql文件<br><code>source /root/xxxxx.sql</code></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/01/MySQL%E9%AB%98%E7%BA%A7/" data-id="cm2gbt82t0006f4gp64mu1mwz" data-title="MySQL高级" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-关于redis的种种坑" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/11/%E5%85%B3%E4%BA%8Eredis%E7%9A%84%E7%A7%8D%E7%A7%8D%E5%9D%91/" class="article-date">
+  <time class="dt-published" datetime="2024-02-10T16:00:00.000Z" itemprop="datePublished">2024-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learn/">Learn</a>►<a class="article-category-link" href="/categories/Learn/Redis/">Redis</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/11/%E5%85%B3%E4%BA%8Eredis%E7%9A%84%E7%A7%8D%E7%A7%8D%E5%9D%91/">关于Redis配置及使用的种种坑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
+<li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑坑</li>
+<li>想到哪就更哪，可能不够全面，有点回忆不起来了</li>
+<li>如有错误欢迎指正</li>
+</ul>
+<hr>
+<p><strong>后续2</strong><br>学习了Docker,果然还是用工具好的多…<br>推荐学习！</p>
+<p><strong>后续1</strong><br>重安了一次虚拟机和redis…少了很多bug…也许是第一次安重复了导致的诸多问题</p>
+<p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
+<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><ol>
+<li><p><strong>VMware虚拟机</strong><br><strong>官方正版</strong>：不免费，仅30天试用期，曾经为了完成学校课程把30天免费全耗尽<br><strong>解决方法</strong>：下载vmware player 官方个人免费版，据说更新到现在功能也还算是完善，支持建虚拟机，暂时不知道后续使用有无需求，也许以后还是回归正版</p>
+</li>
+<li><p><strong>Linux</strong><br>linux有很多版本 这里选了ubuntu 可视化<br>主要就是下载镜像文件(清华大学开源镜像站)，新建虚拟机 balabala 不多赘述，有很多教程<br><strong>注意</strong>：安在一个空间较大的磁盘，别都挤在C盘里(没错，第一次安虚拟机不知道安了什么乱七八糟，最后C盘仅剩8G，这次长个教训😎)</p>
+</li>
+<li><p><strong>Ubuntu</strong></p>
+<ol>
+<li>ubuntu里采用的是apt-get安装，并非yum，如果很不幸的采用了yum安装，必然喜提报错<code>E:Unable to locate package yum</code><br><strong>解决方法</strong>：不使用yum</li>
+<li>ubuntu的bug问题 输入密码的时候光标不动，也不显示输入的密码或者隐式密码<br><strong>解决方法</strong>：实际上已经输进去了，输完直接enter就好</li>
+<li>redis基于C语言编写，编译需要有gcc，正常已经安装(build-essential)，如果没有gcc还需自行安装</li>
+<li>修改配置文件 由于没有vim 故采用vi命令<br>保存文件并退出 <code>:wq!</code> 后来发现ubuntu里面有test.editor，直接用很方便</li>
+<li>解压文件 tar -zxvf 这个出现问题的话可能是别的问题，比如压缩包，解压命令问题概率很小</li>
+</ol>
+</li>
+</ol>
+<h3 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h3><p>据说用docker很方便，没试过</p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>官网 <a target="_blank" rel="noopener" href="https://redis.io/">https://redis.io</a> 下载安装包(建议稳定版)</p>
+<p><strong>缺点</strong>：直接下载到win系统，需要把压缩包上传到linux，很麻烦<br><strong>解决方法</strong>：这里选取的是FileZilla工具，这之中需要连接虚拟机，可能会产生一些报错(忘记什么报错了，依稀记得是虚拟机连接不上)</p>
+<h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>直接在linux里安装，很快很爽</p>
+<p>命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h4 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h4><p>解压：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>安装：<br>先切换到刚刚安的redis-7.2.4目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>可能出现权限问题 前面加上sudo即可</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><h5 id="前台运行"><a href="#前台运行" class="headerlink" title="前台运行"></a>前台运行</h5><p><code>sudo redis-server</code></p>
+<ul>
+<li>报错一：运行后出现Failed listening on port 6379(TCP)<br>说明6379端口被占用问题<br><strong>解决方法</strong>：查看redis端口情况<code>ps -ef | grep redis</code><br>发现有两行，将第一行进程杀掉<code>sudo kill -9 (PID)</code></li>
+<li>报错二：kill后重新查看端口发现还是有两行<br><strong>解决方法</strong>：百度了一下是redis保护问题，即使杀掉又回有一个新的出来，直接采取命令<code>sudo /etc/init.d/redis-server stop</code>，再查看发现杀掉了，再次启动成功</li>
+</ul>
+<p>可能出现</p>
+<h5 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h5><p>修改redis.conf配置文件(修改最终想指定执行的那个文件，不要修改错文件了)</p>
+<p>主要以下四条：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">daemonize yes 允许后台运行</span><br><span class="line">protected-mode no 关闭守护模式，允许除了本机以外的其他连接</span><br><span class="line"># bind 127.0.0.1 注释掉</span><br><span class="line">requirepass 666(密码设置)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>报错一 <code>set-pro-title yes</code>balabala(后面忘了)<br><strong>解决方法</strong>：多半是redis配置问题，或者安装路径混了，找不到文件，为了省事—重新下载redis，一定一定注意下载、安装目录等</li>
+<li>报错二 重安了一次，没有报错一了(果然遇到困难解决不了的方法就是重头再来！！！)，但这次有了新的报错<code>You need tcl 8.5 or ...</code><br><strong>解决方法</strong>：安！tcl 8.5+版本 不多赘述，直接在linux里下载即可</li>
+<li>报错三 终于终于解决了报错一二，又出现了三🙄，果然人生充满起起落落，这次是<code>Memory overcommit must be enabled!</code><br><strong>解决方法</strong>：后面给出了解决方法,输入命令<code>sudo sysctl vm.overcommit_memory=1</code><br><strong>注意</strong>：这个是每次都要重新声明，很麻烦(唉…)<br>可以采取修改配置文件的方式，一劳永逸(自行百度，忘了)</li>
+</ul>
+<p>报错解决后<br><code>sudo redis-server /启动的配置文件路径(redis.conf)</code><br>启动成功</p>
+<h4 id="redis连接"><a href="#redis连接" class="headerlink" title="redis连接"></a>redis连接</h4><p>此时此刻终于可以启动redis了</p>
+<h5 id="redis-cli客户端连接"><a href="#redis-cli客户端连接" class="headerlink" title="redis-cli客户端连接"></a>redis-cli客户端连接</h5><p><code>redis-cli</code>进入交互控制台<br>输入ping 回应pong说明redis已启动<br><code>redis-cli shutdown</code><br>取消连接</p>
+<p>常用指令</p>
+<ul>
+<li><code>-h 127.0.0.1</code>：指定要连接的redis节点的IP地址，默认是127.0.0.1</li>
+<li><code>-p 6379</code>：指定要连接的redis节点的端口，默认是6379</li>
+<li><code>-a 666</code>：指定redis的访问密码</li>
+</ul>
+<h5 id="RESP-APP可视化redis"><a href="#RESP-APP可视化redis" class="headerlink" title="RESP.APP可视化redis"></a>RESP.APP可视化redis</h5><p>卡了我好久的麻烦来了</p>
+<p>首先安装包<br><a target="_blank" rel="noopener" href="https://github.com/lework/RedisDesktopManager-Windows/releases">https://github.com/lework/RedisDesktopManager-Windows/releases</a></p>
+<p>很好安 然后点击连接到redis服务器</p>
+<p><strong>！！！报错：连接不上</strong></p>
+<p>127.0.0.1连接不上<br>改成虚拟机ip也连接不上</p>
+<p>查阅了各大佬的解决方案，操作如下</p>
+<ul>
+<li>查看虚拟机ip <code>ifconfig</code></li>
+<li>win上cmd查看是否能与虚拟机联通  –发现能ping通</li>
+<li>连接规则桥接模式  –应该跟这个没啥关系，寄</li>
+<li>检查redis.conf配置文件  –没啥毛病</li>
+<li>查看linux防火墙是否开放6379端口  –发现根本没有firewalld。。。遂安装<ul>
+<li>开放6379端口 命令自行百度   –开放了但还是寄</li>
+<li>重载防火墙，查看开放的端口(后来又添加了3306端口)</li>
+</ul>
+</li>
+<li>检查windows防火墙入站规则</li>
+<li>重新加载redis</li>
+<li>命令 <code>redis-cli -h 虚拟机ip -p 6379</code> 如果出现 虚拟机ip:6379&gt;即为连接成功</li>
+</ul>
+<p><strong>总结</strong><br>继防火墙端口开放，win防火墙新建入站规则、更改保存redis.conf后还是寄<br>最终猜测我的成功路径应该是先杀掉占用6379的进程(…stop)–&gt;重新启动redis-server–&gt;redis-cli -h ip -p 6379</p>
+<p><strong>成功啦！</strong></p>
+<h3 id="redis的java客户端"><a href="#redis的java客户端" class="headerlink" title="redis的java客户端"></a>redis的java客户端</h3><p>这里先采取Jedis简单测试了一下</p>
+<p>test成功</p>
+<p>如果RESP连接不上，那Jedis多半连接凉凉<br>本质应该是一样的，都是在win上连接linux当中运行的redis</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/11/%E5%85%B3%E4%BA%8Eredis%E7%9A%84%E7%A7%8D%E7%A7%8D%E5%9D%91/" data-id="cm2gbt8340010f4gp3gyehypz" data-title="关于Redis配置及使用的种种坑" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/31/Git/" class="article-date">
+  <time class="dt-published" datetime="2024-01-30T16:00:00.000Z" itemprop="datePublished">2024-01-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learn/">Learn</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/01/31/Git/">Git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://pic3.zhimg.com/v2-69597b03ba6afc47776a8c580485e586_r.jpg">操作导图</a></li>
+</ul>
+<hr>
+<p><strong>采用图形化工具 tortoiseGit sourcetree vscode IDEA貌似比命令行更简单一点点…emm</strong><br>🤔</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904191203213326?searchId=20240131232835AD0B7611A99476C949E7#heading-71">Git使用以及很多很多问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37883866/article/details/114375872">IDEA回滚</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/01/31/Git/" data-id="cm2gbt82f0000f4gp7z1u0xbp" data-title="Git" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-JavaWeb" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/15/JavaWeb/" class="article-date">
+  <time class="dt-published" datetime="2024-01-14T16:00:00.000Z" itemprop="datePublished">2024-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learn/">Learn</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/01/15/JavaWeb/">JavaWeb</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Web前端开发"><a href="#Web前端开发" class="headerlink" title="Web前端开发"></a>Web前端开发</h2><h3 id="前端技术"><a href="#前端技术" class="headerlink" title="前端技术"></a>前端技术</h3><p>Web标准：</p>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript</li>
+</ul>
+<h4 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML CSS"></a>HTML CSS</h4><h5 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h5><ul>
+<li>控制页面结构</li>
+<li>超文本标记语言</li>
+</ul>
+<h5 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h5><ul>
+<li>控制页面样式</li>
+<li>层叠样式表</li>
+</ul>
+<h5 id="基础标签和样式"><a href="#基础标签和样式" class="headerlink" title="基础标签和样式"></a>基础标签和样式</h5><h6 id="基础标签"><a href="#基础标签" class="headerlink" title="基础标签"></a>基础标签</h6><ul>
+<li><p><code>&lt;img&gt;</code>图片标签</p>
+<ul>
+<li>src 指定url</li>
+<li>url–&gt;绝对路径(绝对磁盘&#x2F;绝对网络)<br>相对路径(.&#x2F;当前目录  ..&#x2F;上一目录)</li>
+<li>width 像素&#x2F;百分比</li>
+<li>height</li>
+</ul>
+</li>
+<li><p><code>&lt;h1&gt;-&lt;h6&gt;</code>标题标签</p>
+</li>
+<li><p><code>&lt;hr&gt;</code>水平线标签</p>
+</li>
+<li><p><code>&lt;a href=&quot;(url)&quot; target=&quot;_self(当前窗口) (_blank新标签页)&quot;&gt;&lt;/a&gt;</code>超链接标签</p>
+</li>
+<li><p><code>&lt;video&gt;</code>视频标签</p>
+<ul>
+<li><code>src/width/heigth</code></li>
+<li><code>controls</code>播放插件</li>
+</ul>
+</li>
+<li><p><code>&lt;audio&gt;</code>音频标签 </p>
+</li>
+<li><p><code>&lt;p&gt;</code>段落标签</p>
+</li>
+<li><p><code>&lt;b&gt;/&lt;strong&gt;</code>文本加粗</p>
+</li>
+<li><p><code>&lt;span&gt;</code>无语义标签 一行多个 <code>&lt;div&gt;</code> 一行独个</p>
+</li>
+<li><p><code>&lt;table&gt;</code>表格标签 <code>&lt;tr&gt;</code>行  <code>&lt;th&gt;</code> 表头单元格 <code>&lt;tb&gt;</code>单元格</p>
+<ul>
+<li>border 边框宽度</li>
+<li>cellspacing 单元格之间的空间</li>
+</ul>
+</li>
+<li><p><code>&lt;form&gt;</code>表单标签</p>
+<ul>
+<li>action url</li>
+<li>method 提交方式</li>
+<li><code>&lt;input&gt;</code>  type<br><code>&lt;select&gt;</code> <code>&lt;textarea&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h6 id="CSS样式"><a href="#CSS样式" class="headerlink" title="CSS样式"></a>CSS样式</h6><p>引入CSS(行内&#x2F;内嵌(写在head里)&#x2F;外联)</p>
+<ul>
+<li>内嵌 <code>&lt;style&gt; h1&#123;color: rgb(0,0,0);&#125;&lt;/style&gt;</code></li>
+<li>外联 <code>&lt;link rel=&quot;stylesheet&quot; href=&quot;./css/style.css&quot;&gt;</code></li>
+</ul>
+<p>CSS选择器</p>
+<ul>
+<li>优先级依次++</li>
+<li>元素选择器</li>
+<li>类选择器 <code>.cls&#123;&#125;</code></li>
+<li>id选择器 <code>#id &#123;&#125;</code></li>
+</ul>
+<p>样式</p>
+<ul>
+<li><code>color</code>颜色<br><code>font-size</code>字体大小<br><code>text-decoration</code>文本修饰<br><code>text-indent</code>缩进<br><code>text-align</code>属性</li>
+<li>盒子模型<br><code>box-sizing</code>盒子宽高<br><code>padding</code>内边距<br><code>border</code>边框<br><code>margin</code>外边距上右下左</li>
+</ul>
+<h4 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h4><p>外部脚本 <code>&lt;script src=&quot;#path&quot;&gt;&lt;/script&gt;</code>(不能采取自闭合)</p>
+<h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><ul>
+<li>分号可有可无</li>
+<li><code>window.alert() document.write() console.log()</code></li>
+<li>变量<br>var 可存放不同类型，全局变量，可重复声明<br>let 只在相应代码块里有效，不可重复<br>const 常量</li>
+<li>数据类型<br>number string boolean null undefined</li>
+<li>运算符<br>&#x3D;&#x3D;会进行类型转换 &#x3D;&#x3D;&#x3D;不会<br>类型转换 字符串转数字 其他转boolean</li>
+<li>函数<br><code>function name(a,b)</code> 无需参数和返回类型</li>
+<li>JS对象</li>
+</ul>
+<h5 id="JS对象"><a href="#JS对象" class="headerlink" title="JS对象"></a>JS对象</h5><ul>
+<li>基础对象<ul>
+<li>Array<br>长度可变 类型可变<br><code>forEach()遍历</code> <code>push()</code> <code>splice()</code></li>
+<li>String<br><code>charAt()</code> <code>indexOf()检索</code> <code>trim()去除字符串两边空格</code> <code>substring()</code></li>
+<li>JSON<br>js对象标记法–文本<br><code>var a=&#39;&#123;&quot;key1&quot;:value1&#125;&#39;</code><br><code>var jso=JSON.parse(a) var jsons=JSON.stringify(jso)</code>转换</li>
+</ul>
+</li>
+<li>BOM<br>浏览器模型对象<ul>
+<li>Window 浏览器窗口<br><code>alert() confirm() setInterval()周期性执行某个函数 setTimeout()延迟执行</code></li>
+<li>Navigator 浏览器</li>
+<li>Screen 屏幕</li>
+<li>History 历史记录</li>
+<li>Location 地址栏<br><code>location.href()</code></li>
+</ul>
+</li>
+<li>DOM<br>文档对象模型<ul>
+<li>Document 文档</li>
+<li>Element 元素<br>获取Element元素 <code>document.getElementById(); //ByTagName() ByName() ByClassName()</code></li>
+<li>Attribute 属性</li>
+<li>Text 文本</li>
+<li>Comment 注释</li>
+</ul>
+</li>
+</ul>
+<h5 id="JS事件"><a href="#JS事件" class="headerlink" title="JS事件"></a>JS事件</h5><p>事件绑定</p>
+<ul>
+<li><p>HTML标签中事件属性绑定</p>
+</li>
+<li><p>DOM绑定</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;btn&#x27;</span>).<span class="property">onclick</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常见事件 事件监听</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">onblur</span>();<span class="comment">//元素失去焦点</span></span><br><span class="line"><span class="title function_">onfocus</span>();<span class="comment">//获得焦点</span></span><br><span class="line"><span class="title function_">onload</span>();<span class="comment">//页面/图像加载完毕</span></span><br><span class="line"><span class="title function_">onsubmit</span>();<span class="comment">//表单提交</span></span><br><span class="line"><span class="title function_">onkeydown</span>();</span><br><span class="line"><span class="title function_">onmouseover</span>();<span class="comment">//鼠标移到</span></span><br><span class="line"><span class="title function_">onmouseout</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="异步交页Ajax"><a href="#异步交页Ajax" class="headerlink" title="异步交页Ajax"></a>异步交页Ajax</h3><p>异步的JavaScript和XML<br>数据交换–异步交互</p>
+<p>Axios 封装原生Ajax</p>
+<h3 id="前端开发框架"><a href="#前端开发框架" class="headerlink" title="前端开发框架"></a>前端开发框架</h3><h4 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h4><p>基于MVVM模型的js框架<br>免除原生JavaScript中DOM操作 数据双向绑定</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>:<span class="string">&quot;#id&quot;</span>,</span><br><span class="line">    <span class="attr">data</span>:&#123;</span><br><span class="line">      <span class="attr">url</span>:<span class="string">&quot;path&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">method</span>:&#123;</span><br><span class="line">      <span class="attr">a1</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">v-bind 绑定<span class="variable constant_">HTML</span>标签属性值 设置href css等</span><br><span class="line">v-model 表单上创建双向数据绑定</span><br><span class="line">v-on 为<span class="variable constant_">HTML</span>标签绑定事件</span><br><span class="line">v-<span class="keyword">if</span> 条件渲染</span><br><span class="line">v-<span class="keyword">else</span>-<span class="keyword">if</span></span><br><span class="line">v-<span class="keyword">else</span></span><br><span class="line">v-show 条件展示</span><br><span class="line">v-<span class="keyword">for</span> 列表渲染</span><br></pre></td></tr></table></figure>
+
+<h5 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h5><p>八个阶段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mounted 挂载完成--<span class="title class_">Vue</span>初始化完成，<span class="variable constant_">HTML</span>页面渲染成功--发送请求到服务端 加载数据</span><br></pre></td></tr></table></figure>
+
+<h5 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h5><ul>
+<li>YApi–api管理平台</li>
+<li>环境 vue-cli 脚手架<br>依赖环境 nodejs</li>
+</ul>
+<h4 id="组件库Element"><a href="#组件库Element" class="headerlink" title="组件库Element"></a>组件库Element</h4><p>官方文档cv</p>
+<ul>
+<li>Table</li>
+<li>Pagination 分页</li>
+<li>Dialog</li>
+<li>Form</li>
+</ul>
+<h5 id="vue路由"><a href="#vue路由" class="headerlink" title="vue路由"></a>vue路由</h5><p>url中的hash与组件间的对应关系<br>Vue Router</p>
+<h5 id="打包部署"><a href="#打包部署" class="headerlink" title="打包部署"></a>打包部署</h5><ul>
+<li>build 打包</li>
+<li>Nginx 部署 dist–&gt;nginx&#x2F;html</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link&gt;</span><br><span class="line">&lt;router-view&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Web后端开发"><a href="#Web后端开发" class="headerlink" title="Web后端开发"></a>Web后端开发</h2><h3 id="项目构建–Maven"><a href="#项目构建–Maven" class="headerlink" title="项目构建–Maven"></a>项目构建–Maven</h3><ul>
+<li>安装配置(略)</li>
+<li>IDEA集成Maven 配置–创建–导入</li>
+</ul>
+<h4 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h4><h5 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="依赖传递"><a href="#依赖传递" class="headerlink" title="依赖传递"></a>依赖传递</h5><p>依赖有传递性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//断开指定依赖</span></span><br><span class="line">&lt;exclusions&gt;&lt;/exclusions&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//控制依赖作用范围</span></span><br><span class="line">&lt;scope&gt;&lt;/scope&gt;</span><br><span class="line"><span class="comment">//scope值</span></span><br><span class="line">compile   主程序 测试 打包 ---log4j</span><br><span class="line">test             测试     ---junit</span><br><span class="line">provided  主程序 测试      ---servlet-api</span><br><span class="line">runtime          测试 打包 ---jdbc</span><br></pre></td></tr></table></figure>
+
+<h5 id="生命周期-1"><a href="#生命周期-1" class="headerlink" title="生命周期"></a>生命周期</h5><ul>
+<li>clean</li>
+<li>default<ul>
+<li>compile</li>
+<li>test</li>
+<li>package</li>
+<li>install</li>
+</ul>
+</li>
+<li>site</li>
+</ul>
+<h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><h4 id="SpringBootWeb"><a href="#SpringBootWeb" class="headerlink" title="SpringBootWeb"></a>SpringBootWeb</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//端口号8080可能会被占用</span></span><br><span class="line">Application.java--&gt;server.port=<span class="number">8015</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h4><ul>
+<li>基于TCP协议</li>
+<li>请求-响应模型</li>
+<li>无状态协议–请求间不能共享，但速度快</li>
+</ul>
+<h5 id="请求协议"><a href="#请求协议" class="headerlink" title="请求协议"></a>请求协议</h5><p>请求数据格式</p>
+<ul>
+<li>请求行<ul>
+<li>请求方式 资源路径 协议及版本</li>
+<li>请求方式：</li>
+<li>GET:请求参数在请求行，无请求体，有大小限制</li>
+<li>POST:请求参数在请求体，无大小限制</li>
+</ul>
+</li>
+<li>请求头<ul>
+<li>常见请求头</li>
+<li>Host </li>
+<li>User-Agent 浏览器版本</li>
+<li>Accept 浏览器能接收的资源类型</li>
+<li>Accept-Language </li>
+<li>Accept-Encoding 浏览器支持的压缩类型</li>
+<li>Content-Type 请求主体的数据类型</li>
+<li>Content-Length</li>
+</ul>
+</li>
+<li>请求体</li>
+</ul>
+<h5 id="响应协议"><a href="#响应协议" class="headerlink" title="响应协议"></a>响应协议</h5><p>响应格式</p>
+<ul>
+<li>响应行<ul>
+<li>协议 状态码 描述</li>
+<li>响应状态码：</li>
+<li>1xx 响应中</li>
+<li>2xx 成功</li>
+<li>3xx 重定向</li>
+<li>4xx 客户端错误</li>
+<li>5xx 服务器错误</li>
+<li><img src="https://pic.imgdb.cn/item/65e2e3f79f345e8d03046d5b.png" alt="Alt text"></li>
+</ul>
+</li>
+<li>响应头<ul>
+<li>Content-Type 相应内容类型</li>
+<li>Content-Length</li>
+<li>Content-Encoding 响应压缩算法</li>
+<li>Cache-Control 客户端应如何缓存</li>
+<li>Set-Cookie 所在域设置Cookie</li>
+</ul>
+</li>
+<li>响应体</li>
+</ul>
+<h5 id="协议解析"><a href="#协议解析" class="headerlink" title="协议解析"></a>协议解析</h5><p>繁琐–封装 使用Web服务器</p>
+<h5 id="Tomcat-略"><a href="#Tomcat-略" class="headerlink" title="Tomcat(略)"></a>Tomcat(略)</h5><p>SpringBoot已内嵌依赖</p>
+<h4 id="请求响应"><a href="#请求响应" class="headerlink" title="请求响应"></a>请求响应</h4><h5 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h5><p>接口测试–postman Apipost</p>
+<p>参数</p>
+<ul>
+<li>简单参数<ul>
+<li>SpringBoot接收参数</li>
+<li>名不一致 手动映射--@RequestParam注释(必须传递参数)</li>
+</ul>
+</li>
+<li>实体参数–封装实体类</li>
+<li>数组集合参数<ul>
+<li>如前端传回的checkbox 多个参数</li>
+<li>数组 <code>Array.toString(String[])</code> 默认封装到数组</li>
+<li>集合 <code>@RequestParam List&lt;String&gt;</code></li>
+</ul>
+</li>
+<li>日期参数<ul>
+<li>日期参数格式化<code>@DateTimeFormat(pattern=&quot;yyyy-MM-dd&quot;) LocalDateTime time)</code></li>
+</ul>
+</li>
+<li>JSON参数<ul>
+<li>将其封装为实体类 注解<code>@RequestBody</code></li>
+</ul>
+</li>
+<li>路径参数<ul>
+<li>请求路径参数<code>@RequestMapping(&quot;/path/&#123;id&#125;&quot;)</code></li>
+<li>接收路径参数<code>@PathVariable Integer id</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h5><ul>
+<li><p><code>@ResponseBody</code> 方法返回值直接响应(实体类&#x2F;集合–&gt;JSON)<br><code>@RestController=@Controller+@ResponseBody</code></p>
+</li>
+<li><p>统一响应结果(返回类型)–封装 <code>Result(code,msg,data)</code><br>全部转为JSON格式数据</p>
+</li>
+</ul>
+<h5 id="分层解耦"><a href="#分层解耦" class="headerlink" title="分层解耦"></a>分层解耦</h5><ul>
+<li>三层架构 控制层controller–逻辑处理service–数据访问dao</li>
+<li>分层解耦<ul>
+<li>高内聚低耦合</li>
+<li>解耦合<ul>
+<li>控制反转 IOC</li>
+<li>依赖注入 DI</li>
+<li>Bean对象</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IOC<ul>
+<li><code>@Component</code> 若想切换 将注解注释掉即可(不属于以下三类衍生注解时，采用此注解)</li>
+<li>衍生注解<ul>
+<li>标注在控制器类上<code>@Controller</code>(可省)</li>
+<li>标注在业务类上<code>@Service</code></li>
+<li>标注在数据访问类上<code>@Repository</code></li>
+<li>Bean组件扫描 <code>@ComponentScan(&#123;包名&#125;)</code> 启动类<code>@SpringBootApplication</code>包含扫描，但默认扫描当前包及其子包</li>
+</ul>
+</li>
+<li>规范！！推荐放入启动类所在包机器子包下</li>
+</ul>
+</li>
+<li>DI<ul>
+<li><code>@Autowired</code> Spring框架提供的注解 按类型注入</li>
+<li>若存在多个类型相同的Bean对象<ul>
+<li><code>@Primary</code>不推荐</li>
+<li><code>@Autowired+@Qualifier(&quot;bean名称&quot;)</code></li>
+<li><code>@Resource(name=&quot;bean名&quot;)</code> JDK提供的注解，按名称注入(注意与@Autowired的区别)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><ul>
+<li>关系型数据库(表结构 SQL语句操作)</li>
+<li>SQL语句<ul>
+<li>DDL 定义对象</li>
+<li>DML 操作数据</li>
+<li>DQL 查询表</li>
+<li>DCL 控制权限</li>
+</ul>
+</li>
+</ul>
+<h4 id="数据库设计-DDL"><a href="#数据库设计-DDL" class="headerlink" title="数据库设计-DDL"></a>数据库设计-DDL</h4><ul>
+<li>SQL语句</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">search</span></span><br><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line"><span class="keyword">select</span> database();</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>use</span><br><span class="line">use ...;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">create</span></span><br><span class="line"><span class="keyword">create</span> database if <span class="keyword">not</span> <span class="keyword">exists</span> ...;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">delete</span></span><br><span class="line"><span class="keyword">drop</span> database if exits ...;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>图形化界面操作–navicat等</p>
+</li>
+<li><p>DDL表操作–创建 查询修改删除(略)</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">create</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb(</span><br><span class="line">  字段 类型 [约束] comment [<span class="string">&#x27;注释&#x27;</span>]</span><br><span class="line">) comment [<span class="string">&#x27;表注释&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>约束</span><br><span class="line"><span class="keyword">not</span> <span class="keyword">null</span> <span class="comment">--非空</span></span><br><span class="line"><span class="keyword">unique</span> <span class="comment">--唯一</span></span><br><span class="line"><span class="keyword">primary</span> key <span class="comment">--非空唯一</span></span><br><span class="line"><span class="keyword">default</span> <span class="comment">--默认</span></span><br><span class="line">auto_increment <span class="comment">--自增</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>字段类型</span><br><span class="line">数值类型 </span><br><span class="line">tinyint <span class="type">int</span> <span class="type">bigint</span> <span class="keyword">double</span> <span class="type">decimal</span>(精度更高) unsigned(无符号)</span><br><span class="line">字符串类型</span><br><span class="line"><span class="type">char</span> <span class="type">varchar</span>(可变长度) <span class="type">blob</span> text </span><br><span class="line">日期类型</span><br><span class="line"><span class="type">date</span> <span class="type">time</span> <span class="keyword">year</span> datetime </span><br></pre></td></tr></table></figure>
+
+<h4 id="数据库操作-DML-DQL"><a href="#数据库操作-DML-DQL" class="headerlink" title="数据库操作-DML DQL"></a>数据库操作-DML DQL</h4><h5 id="操作-DML"><a href="#操作-DML" class="headerlink" title="操作-DML"></a>操作-DML</h5><ul>
+<li>INSERT</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名 (字段名,...) <span class="keyword">values</span> (值,...)(值,...);</span><br><span class="line">now()<span class="operator">/</span><span class="operator">/</span>获取当前时间</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>UPDATE</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> 表名 <span class="keyword">set</span> 字段名<span class="number">1</span><span class="operator">=</span>值<span class="number">1</span>,... [<span class="keyword">where</span> 条件];</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DELETE</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> 表名 [<span class="keyword">where</span> 条件];</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>删除某一字段的值<span class="comment">--UPDATE修改为null</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="查询-DQL"><a href="#查询-DQL" class="headerlink" title="查询-DQL"></a>查询-DQL</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段 <span class="keyword">from</span> 表名 </span><br><span class="line"><span class="keyword">where</span> 条件 </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> 分组字段 <span class="keyword">having</span> 分组后条件 <span class="operator">-</span><span class="operator">&gt;</span>聚合统计</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> 排序字段 </span><br><span class="line">limit 分页参数</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">where</span> 与 <span class="keyword">having</span></span><br><span class="line"><span class="keyword">where</span> 分组前过滤，不能对聚合函数判断</span><br><span class="line"><span class="keyword">having</span> 分组后过滤</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>去除重复查询</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> 字段 <span class="keyword">from</span> 表名</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>逻辑运算符</span><br><span class="line">between...and... (包含左右)</span><br><span class="line"><span class="keyword">in</span>(...) 在...之中</span><br><span class="line"><span class="keyword">like</span> 模糊查询 _匹配单个字符 <span class="operator">/</span> <span class="operator">%</span>匹配任意个字符</span><br><span class="line"><span class="keyword">is</span> <span class="keyword">null</span> 判空</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>聚合函数</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>() <span class="keyword">from</span> <span class="operator">-</span><span class="operator">&gt;</span>统计数量</span><br><span class="line"><span class="keyword">select</span> min<span class="operator">/</span><span class="built_in">max</span>() <span class="keyword">from</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>() <span class="keyword">from</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">sum</span>() <span class="keyword">from</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>排序</span><br><span class="line"><span class="keyword">ASC</span> 升序 默认</span><br><span class="line"><span class="keyword">DESC</span> 降序</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>查询</span><br><span class="line">limit 起始索引,查询数量</span><br></pre></td></tr></table></figure>
+
+<h5 id="多表设计"><a href="#多表设计" class="headerlink" title="多表设计"></a>多表设计</h5><ul>
+<li>外键约束–物理外键–容易引发数据库死锁(不推荐)</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(表外<span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span>) <span class="keyword">constraint</span> 外键名称 <span class="keyword">foreign</span> key (字段) <span class="keyword">references</span> 主表</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>外键约束–逻辑约束(推荐)<br>业务层逻辑关联</p>
+</li>
+<li><p>一对一–采取unique 多对多–采取中间表</p>
+</li>
+</ul>
+<h5 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h5><p>消除无效笛卡尔积(where 限制)</p>
+<ul>
+<li>连接查询<ul>
+<li>内连接–交集部分<ul>
+<li>隐式内连接 <code>select 字段 from 表1，表2 where ...</code></li>
+<li>显示内连接 <code>select 字段 from 表1 [inner] join 表2 on ...</code></li>
+</ul>
+</li>
+<li>外连接–完整包含某表<ul>
+<li>左外连接 <code>select 字段 from 表1 left [outer] join 表2 on ...</code></li>
+<li>右外连接 <code>select 字段 from 表1 right [outer] join 表2 on ...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>子查询–嵌套查询<ul>
+<li><code>select 字段 from 表1 where ...(select ...)</code></li>
+<li>标量子查询 单行单列</li>
+<li>列子查询 in &#x2F; not in</li>
+<li>行子查询</li>
+<li>表子查询</li>
+</ul>
+</li>
+</ul>
+<h5 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h5><p>事务控制</p>
+<ul>
+<li>开启事务<code>start transaction / begin;</code></li>
+<li>提交事务<code>commit;</code></li>
+<li>回滚事务<code>rollback;</code></li>
+</ul>
+<h4 id="数据库优化-DCL"><a href="#数据库优化-DCL" class="headerlink" title="数据库优化-DCL"></a>数据库优化-DCL</h4><h5 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h5><ul>
+<li><p>提高查询效率 降低排序成本 降低CPU消耗</p>
+</li>
+<li><p>索引会占用存储空间 降低增删改的效率</p>
+</li>
+<li><p>结构</p>
+</li>
+<li><p>默认为B+Tree结构组织的索引</p>
+</li>
+<li><p>二叉搜索树<br>很容易产生斜树,效率–<br>红黑树<br>与二叉搜索树 <strong>一个节点均只有两个子节点–大数据量层级深，检索速度慢</strong></p>
+</li>
+<li><p>B+Tree 多路平衡搜索树</p>
+<ol>
+<li>每个节点多个key</li>
+<li>所有数据都在叶子节点中 非叶子节点用来索引</li>
+<li>叶子节点间双向链表且有序</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>创建索引 主键会自动创建索引 唯一约束的字段也会自动创建索引</span><br><span class="line"><span class="keyword">create</span> [<span class="keyword">unique</span>] index idx_id <span class="keyword">on</span> tb(id1,id2...);</span><br><span class="line"><span class="keyword">show</span> index <span class="keyword">from</span> tb;</span><br><span class="line"><span class="keyword">drop</span> index idx <span class="keyword">on</span> tb;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MyBatis"><a href="#MyBatis" class="headerlink" title="MyBatis"></a>MyBatis</h3><p>简化JDBC开发(操作关系型数据库的API)</p>
+<h4 id="MyBatis入门"><a href="#MyBatis入门" class="headerlink" title="MyBatis入门"></a>MyBatis入门</h4><ul>
+<li>mybatis相关配置</li>
+<li>Mapper接口</li>
+</ul>
+<h5 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h5><p>类似线程池</p>
+<ul>
+<li>SpringBoot–默认Hikari连接池</li>
+<li>其他数据库连接池 Druid</li>
+</ul>
+<h5 id="lombok"><a href="#lombok" class="headerlink" title="lombok"></a>lombok</h5><p>解决实体类中需要写get set toString等方法冗杂的问题</p>
+<ul>
+<li><p>常用注解</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Getter</span><span class="operator">/</span><span class="variable">@Setter</span></span><br><span class="line"><span class="variable">@ToString</span></span><br><span class="line"><span class="variable">@EqualsAndHashCode</span></span><br><span class="line"><span class="variable">@Data</span>(<span class="operator">=</span>上面四个之和)</span><br><span class="line"><span class="variable">@NoArgsConstructor</span></span><br><span class="line"><span class="variable">@AllArgsConstructor</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Mybatis基础操作–注解开发"><a href="#Mybatis基础操作–注解开发" class="headerlink" title="Mybatis基础操作–注解开发"></a>Mybatis基础操作–注解开发</h4><h5 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>动态传值 不要将<span class="keyword">where</span>条件限制为id<span class="operator">=</span><span class="number">1</span>这样</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>若有返回 <span class="operator">-</span>void改成<span class="type">int</span> 返回<span class="number">0</span><span class="operator">/</span><span class="number">1</span></span><br><span class="line"><span class="variable">@Mapper</span></span><br><span class="line">public interface usermapper &#123;</span><br><span class="line">    <span class="variable">@Delete</span>(&quot;delete from emp where id= #&#123;id&#125;&quot;)</span><br><span class="line">    public void <span class="keyword">delete</span>(<span class="type">Integer</span> id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Mybatis预编译SQL<ul>
+<li>性能高</li>
+<li>安全 防SQL语句注入</li>
+</ul>
+</li>
+<li>参数占位符<ul>
+<li>#{..} 参数传值，预编译替换成? </li>
+<li>${..} 对表名等动态设置时使用拼接SQL，易产生SQL注入问题</li>
+</ul>
+</li>
+</ul>
+<h5 id="新增"><a href="#新增" class="headerlink" title="新增"></a>新增</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>字段名通常采用下划线命名 如user_id</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>实体类属性名通常采用驼峰式命名 如userId</span><br><span class="line"><span class="variable">@Insert</span>(&quot;insert into emp(id,...字段名) values (#&#123;id&#125;,...属性名)&quot;)</span><br><span class="line">public void <span class="keyword">insert</span>(Emp emp);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>主键返回</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Options</span>(keyProperty<span class="operator">=</span>&quot;id&quot;,useGeneratedKeys<span class="operator">=</span><span class="literal">true</span>)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>将主键id的值返回给对象emp</span><br><span class="line"><span class="variable">@Insert</span>(&quot;insert into emp(id,...字段名) values (#&#123;id&#125;,...属性名)&quot;)</span><br><span class="line">public void <span class="keyword">insert</span>(Emp emp);</span><br></pre></td></tr></table></figure>
+
+<h5 id="更新-修改"><a href="#更新-修改" class="headerlink" title="更新(修改)"></a>更新(修改)</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Update</span>(&quot;update emp set user_name=#&#123;userName&#125;,... where id=1&quot;)<span class="operator">/</span><span class="operator">/</span>根据主键确定</span><br><span class="line">public void <span class="keyword">update</span>(Emp emp);</span><br></pre></td></tr></table></figure>
+
+<h5 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Select</span>(&quot;select * from emp where id= #&#123;id&#125;&quot;)</span><br><span class="line">public Emp <span class="keyword">select</span>(<span class="type">Integer</span> id);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>出现的问题–mybatis智慧自动封装实体属性名与字段名一致的</p>
+</li>
+<li><p>解决方案一：<br>给字段起别名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Select</span>(&quot;select user_id userId from emp where id= #&#123;id&#125;&quot;)</span><br><span class="line">public Emp <span class="keyword">select</span>(<span class="type">Integer</span> id);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方案二:<br>mybatis注解手动映射封装 @Results @Result</p>
+</li>
+<li><p>解决方案三：<br><strong>mybatis驼峰命名自动映射</strong><br>application.properties里配置</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mybatis.configuration.map<span class="operator">-</span>underscore<span class="operator">-</span><span class="keyword">to</span><span class="operator">-</span>camel<span class="operator">-</span><span class="keyword">case</span><span class="operator">=</span><span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>条件查询–封装到集合 可能采用like模糊查询–特殊注意 如查询姓名时不可以<code>%#&#123;name&#125;%</code>预编译不能通过 应采取<code>%$&#123;name&#125;%</code></p>
+<p>或使用concat函数 <code>concat(&#39;%&#39;,&#39;#&#123;name&#125;&#39;,&#39;%&#39;)</code></p>
+<h4 id="XML映射文件–动态开发"><a href="#XML映射文件–动态开发" class="headerlink" title="XML映射文件–动态开发"></a>XML映射文件–动态开发</h4><p>规范：</p>
+<p><img src="/image-1.png" alt="Alt text"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>mapper namespace<span class="operator">=</span>&quot;com.mapper.usermapper&quot;<span class="operator">&gt;</span></span><br><span class="line">    <span class="operator">&lt;</span><span class="keyword">select</span> id<span class="operator">=</span>&quot;list&quot; resultType<span class="operator">=</span>&quot;com.pojo.user&quot;<span class="operator">&gt;</span></span><br><span class="line">        <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> id <span class="operator">=</span> #&#123;id&#125;</span><br><span class="line">    <span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">select</span><span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>mapper<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用注解–完成简单增删改查<br>XML–实现复杂SQL功能</p>
+<h4 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h4><p>动态查询–多条件查询时可只输入其中几项查询<br>动态更新–更新其中几项(这样不会将其他项更新为null)</p>
+<ul>
+<li><p><code>&lt;if&gt;</code><br>条件成立则拼接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">where</span> 需要改成标签<span class="operator">-</span>自动判断需要哪几个条件去掉多余的<span class="keyword">and</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>同理若为动态更新(<span class="keyword">update</span>) 则将<span class="keyword">set</span> 改为标签</span><br><span class="line"><span class="operator">&lt;</span><span class="keyword">select</span> id<span class="operator">=</span>&quot;list&quot; resultType<span class="operator">=</span>&quot;com.pojo.emp&quot;<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">from</span> emp</span><br><span class="line"><span class="operator">&lt;</span><span class="keyword">where</span><span class="operator">&gt;</span></span><br><span class="line">  <span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;id!=null&quot;<span class="operator">&gt;</span></span><br><span class="line">    id <span class="operator">=</span>#&#123;id&#125;</span><br><span class="line">  <span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br><span class="line">  <span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;user!=null&quot;<span class="operator">&gt;</span></span><br><span class="line">    <span class="keyword">and</span> <span class="keyword">user</span> <span class="keyword">like</span> concat(<span class="string">&#x27;%&#x27;</span>,#&#123;name&#125;,<span class="string">&#x27;%&#x27;</span>)</span><br><span class="line">  <span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">where</span><span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">select</span><span class="operator">&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>动态删除–批量删除</p>
+<ul>
+<li><p><code>&lt;foreach&gt;</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span><span class="keyword">delete</span> id<span class="operator">=</span>&quot;delid&quot;<span class="operator">&gt;</span></span><br><span class="line">  <span class="keyword">delete</span> <span class="keyword">from</span> emp</span><br><span class="line">  <span class="keyword">where</span> id <span class="keyword">in</span></span><br><span class="line">  <span class="operator">&lt;</span>foreach collection<span class="operator">=</span>&quot;idlist&quot; item<span class="operator">=</span>&quot;id&quot; separator<span class="operator">=</span>&quot;,&quot; <span class="keyword">open</span><span class="operator">=</span>&quot;(&quot; <span class="keyword">close</span><span class="operator">=</span>&quot;)&quot;<span class="operator">&gt;</span></span><br><span class="line">    #&#123;id&#125;</span><br><span class="line">    <span class="operator">/</span><span class="operator">/</span>可采用Arrays.asList</span><br><span class="line">  <span class="operator">&lt;</span><span class="operator">/</span>foreach<span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">delete</span><span class="operator">&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>查询全部字段时不建议使用<code>select *</code> 而是将所有字段列出来–可能会重复使用</p>
+<ul>
+<li><p><code>&lt;sql&gt;</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>单独抽取成片段</span><br><span class="line"><span class="operator">&lt;</span><span class="keyword">sql</span> id<span class="operator">=</span>&quot;commonselect&quot;<span class="operator">&gt;</span></span><br><span class="line">  <span class="keyword">select</span> id,user... <span class="keyword">from</span> emp</span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">sql</span><span class="operator">&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>在查询时引入代替原来的<span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="operator">&lt;</span>include refid<span class="operator">=</span>&quot;commonselect&quot;<span class="operator">/</span><span class="operator">&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="other"><a href="#other" class="headerlink" title="other"></a>other</h3><h4 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h4><p>会话跟踪</p>
+<ul>
+<li>客户端 Cookie</li>
+<li>服务端 Session</li>
+<li>令牌</li>
+</ul>
+<h4 id="JWT令牌"><a href="#JWT令牌" class="headerlink" title="JWT令牌"></a>JWT令牌</h4><ul>
+<li><p>生成&#x2F;解析令牌</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line">Map&lt;String,Object&gt; claims=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">claims.put(<span class="string">&quot;id&quot;</span>,<span class="number">1</span>);</span><br><span class="line">String jwt= Jwts.builder().</span><br><span class="line">        signWith(SignatureAlgorithm.HS256,<span class="string">&quot;lxh11111&quot;</span>)</span><br><span class="line">        .setClaims(claims)</span><br><span class="line">        .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis()+<span class="number">3600</span>*<span class="number">1000</span>))</span><br><span class="line">        .compact();</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">Claims claim1=Jwts.parser()</span><br><span class="line">        .setSigningKey(<span class="string">&quot;lxh11111&quot;</span>)</span><br><span class="line">        .parseClaimsJws(<span class="string">&quot;...&quot;</span>)</span><br><span class="line">        .getBody();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>校验</p>
+</li>
+</ul>
+<h4 id="过滤器Filter-拦截器Interceptor"><a href="#过滤器Filter-拦截器Interceptor" class="headerlink" title="过滤器Filter&#x2F;拦截器Interceptor"></a>过滤器Filter&#x2F;拦截器Interceptor</h4><ul>
+<li>Filter(Web)<ul>
+<li>执行流程</li>
+<li>拦截路径</li>
+<li>过滤器链 多个过滤器</li>
+<li><img src="https://pic.imgdb.cn/item/65e2e3ab9f345e8d03038d0a.png" alt="Alt text"></li>
+</ul>
+</li>
+<li>Interceptor(Spring)<ul>
+<li>定义拦截器 实现HandlerInterceptor接口-&gt;注册拦截器(config)</li>
+<li>拦截路径<ul>
+<li>&#x2F;* 拦截一级路径</li>
+<li>&#x2F;** 拦截任意级路径</li>
+</ul>
+</li>
+<li>执行流程<br><img src="https://pic.imgdb.cn/item/65e2e3c79f345e8d0303e22b.png" alt="Alt text"></li>
+</ul>
+</li>
+</ul>
+<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><p>全局异常处理器</p>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><h4 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h4><p>事务属性–回滚 传播</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span> ---事务</span><br><span class="line"><span class="comment">//默认只有runtime时才回滚 rollbackFor控制出现何种异常才回滚</span></span><br><span class="line"><span class="meta">@Transactional(rollbackFor=Exception.class)</span></span><br><span class="line"><span class="comment">//传播</span></span><br><span class="line"><span class="meta">@Transactional</span>（propagation=Propagation.值)</span><br><span class="line"><span class="comment">//值</span></span><br><span class="line">REQUIRES_NEW -创建新事务 默认是直接加入事务(REQUIRED)</span><br></pre></td></tr></table></figure>
+
+<h4 id="AOP-1"><a href="#AOP-1" class="headerlink" title="AOP"></a>AOP</h4><h5 id="执行-动态代理"><a href="#执行-动态代理" class="headerlink" title="执行 (动态代理)"></a>执行 (动态代理)</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入aop依赖</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span> AOP类</span><br><span class="line"><span class="meta">@Around(&quot;execution(*包名.*(..))&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h5><ul>
+<li>通知类型<ul>
+<li><code>@Around</code> 环绕通知–需要ProceedingJoinPoint.proceed()调用原始方法，返回值必须指定为Object</li>
+<li><code>@Before</code> <code>@After</code></li>
+<li><code>@AfterReturning</code> <code>@AfterThrowing</code></li>
+<li><code>@Pointcut(&quot;execution(*..)&quot;)</code>抽取公共切点表达式</li>
+</ul>
+</li>
+<li>通知顺序<ul>
+<li>按字符顺序</li>
+<li><code>@Order(1)</code>指定顺序</li>
+</ul>
+</li>
+<li>切入点表达式<ul>
+<li><code>execution(访问修饰符(可省) 返回值 包名.类名.方法(参数) throws 异常(可省))</code></li>
+<li>通配符 * 单个独立，通配任一值</li>
+<li>通配符 .. 多个连续，通配任意层级</li>
+<li><code>@annotation(com...mylog)</code>在需要的方法上加上<code>@mylog</code>注解(可以起别的名，要定义注解类，在里面定义注解名)</li>
+</ul>
+</li>
+<li>连接点<ul>
+<li>spring中采取JoinPoint抽象连接点，获取方法参数等</li>
+<li><code>@Around</code>只能使用<code>ProceedingJoinPoint</code></li>
+<li>其他四个注解只能<code>JoinPoint</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="SpringBoot原理"><a href="#SpringBoot原理" class="headerlink" title="SpringBoot原理"></a>SpringBoot原理</h3><h4 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h4><ul>
+<li>命令行参数 –server.port&#x3D; (maven package打包成jar包后在命令行后面写入)</li>
+<li>java系统属性 –Dserver.port&#x3D;</li>
+<li>application.properties</li>
+<li><strong>application.yml(推荐)</strong></li>
+<li>application.yaml</li>
+</ul>
+<p>优先级依次下降</p>
+<h4 id="bean原理"><a href="#bean原理" class="headerlink" title="bean原理"></a>bean原理</h4><ul>
+<li>获取bean<ul>
+<li>根据bean名称获取<code>applicationContext.getBean(&quot;controller&quot;)</code>默认bean名为类名首字母小写</li>
+<li>bean类型获取<code>applicationContext.getBean(Controller.class)</code></li>
+<li>名称及类型获取</li>
+</ul>
+</li>
+<li>bean作用域<ul>
+<li>singleton 单例</li>
+<li>prototype 非单例</li>
+<li><code>@Scope(&quot;prototype&quot;)</code> 默认是单例的</li>
+</ul>
+</li>
+<li>第三方bean<ul>
+<li>需要管理的bean对象来自第三方，无法通过@component注入</li>
+<li>采用@Bean注解</li>
+<li>建议新建配置类 在其中配置@Bean</li>
+<li>第三方bean依赖注入 在配置bean的方法中直接传入参数即可</li>
+</ul>
+</li>
+</ul>
+<h4 id="SpringBoot原理-1"><a href="#SpringBoot原理-1" class="headerlink" title="SpringBoot原理"></a>SpringBoot原理</h4><h5 id="SpringBoot起步依赖"><a href="#SpringBoot起步依赖" class="headerlink" title="SpringBoot起步依赖"></a>SpringBoot起步依赖</h5><p>简化spring需要配置大量依赖<br>起步依赖原理–maven依赖传递</p>
+<h5 id="SpringBoot自动配置"><a href="#SpringBoot自动配置" class="headerlink" title="SpringBoot自动配置"></a>SpringBoot自动配置</h5><p>自动配置如bean对象存入IOC容器中<br>自动配置：</p>
+<ol>
+<li>方案一 <code>@ComponentScan</code>扫描</li>
+<li>方案二 <code>@Import</code>导入 采用第三方依赖<code>@Enablexxx</code>注解封装</li>
+</ol>
+<h3 id="Maven其他"><a href="#Maven其他" class="headerlink" title="Maven其他"></a>Maven其他</h3><h4 id="分模块设计和开发"><a href="#分模块设计和开发" class="headerlink" title="分模块设计和开发"></a>分模块设计和开发</h4><p>将项目拆分为若干模块<br>注意引入依赖</p>
+<h4 id="继承与聚合"><a href="#继承与聚合" class="headerlink" title="继承与聚合"></a>继承与聚合</h4><h5 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h5><h6 id="继承管理"><a href="#继承管理" class="headerlink" title="继承管理"></a>继承管理</h6><p>解决各个模块依赖配置冗杂 统一管理</p>
+<ul>
+<li>创建parent父工程 打包方式为pom(默认jar) –仅用来配置依赖 <code>&lt;packaging&gt;pom&lt;/packaging&gt;</code></li>
+<li>父工程继承父类spring-boot-starter-parent</li>
+<li>子工程配置关系<code>&lt;parent&gt;&lt;/parent&gt;里面添加&lt;relativePath&gt;../xxparent/pom.xml&lt;/relativePath&gt;</code></li>
+</ul>
+<h6 id="版本锁定"><a href="#版本锁定" class="headerlink" title="版本锁定"></a>版本锁定</h6><ul>
+<li>父工程中添加<code>&lt;dependencyManagement&gt;&lt;/dependencyManagement&gt;</code>其中只用于声明依赖版本，子工程仍需引入依赖(无需写入版本号)</li>
+<li>自定义属性(统一管理版本) <code>&lt;properties&gt;&lt;lombok.version&gt;1.18.24&lt;/lombok.version&gt;&lt;/properties&gt;</code><br>这样在<code>&lt;dependencyManagement&gt;..&lt;version&gt;$&#123;lombok.version&lt;/version&gt;..&lt;/dependencyManagement&gt;</code>即可</li>
+</ul>
+<h5 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h5><p>将父工程作为聚合工程–快速构建项目<br>pom里声明<code>&lt;modules&gt;&lt;module&gt;(要聚合的模块)&lt;/module&gt;&lt;/modules&gt;</code></p>
+<h4 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h4><p>本地仓库-&gt;私服(release snapshot central)-&gt;中央仓库</p>
+<p>配置私服</p>
+<ul>
+<li>server标签配置个人凭证</li>
+<li>mirror,profiles配置</li>
+<li>pom.xml添加私服地址</li>
+<li>运行deploy生命周期</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/01/15/JavaWeb/" data-id="cm2gbt82j0001f4gp6a5ve5lz" data-title="JavaWeb" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-base" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/11/base/" class="article-date">
+  <time class="dt-published" datetime="2024-01-10T16:00:00.000Z" itemprop="datePublished">2024-01-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Learn/">Learn</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/01/11/base/">BASE</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><p>updating…<br>是的，如你所见，正在从后往前补，还没补到 :-(</p>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>updating….<br>是的，如你所见，正在从后往前补，还没补到 :-(</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><h3 id="常用API-一"><a href="#常用API-一" class="headerlink" title="常用API(一)"></a>常用API(一)</h3><p>updating…<br>是的，如你所见，正在从后往前补，还没补到 :-(</p>
+<h3 id="常用API-二"><a href="#常用API-二" class="headerlink" title="常用API(二)"></a>常用API(二)</h3><h3 id="Objects类"><a href="#Objects类" class="headerlink" title="Objects类"></a>Objects类</h3><h4 id="base"><a href="#base" class="headerlink" title="base"></a>base</h4><p>所有类的对象都可以用，默认继承</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>&#123;<span class="comment">//默认输出地址,主要用于子类重载方法，返回具体内容</span></span><br><span class="line">     <span class="keyword">return</span> ...;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object o)</span>&#123;<span class="comment">//默认比较地址（==），重载比较内容</span></span><br><span class="line">     <span class="keyword">return</span> ...;<span class="comment">//1.比较地址2.null||比较类型 getClass()3.比较成员</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">clone</span><span class="params">()</span>&#123;<span class="comment">//需要标记接口 implements Cloneable</span></span><br><span class="line">     <span class="keyword">return</span> <span class="built_in">super</span>.clone();<span class="comment">//子类重载，抛出异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="浅克隆-深克隆"><a href="#浅克隆-深克隆" class="headerlink" title="浅克隆&#x2F;深克隆"></a>浅克隆&#x2F;深克隆</h4><p>浅拷贝：堆内存中拷贝地址<br>深拷贝：数据直接拷贝，字符串拷贝地址（字符串常量池），其他对象则创建新对象—–重载</p>
+<h4 id="一些静态方法"><a href="#一些静态方法" class="headerlink" title="一些静态方法"></a>一些静态方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Objects.equals(s1,s2);<span class="comment">//相比字符串的equals方法（注意空指针异常），先进行非空判断</span></span><br><span class="line">Objects.isNull(s1);<span class="comment">//s1==null</span></span><br><span class="line">Objects.nonNull(s1);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><p>把基本数据类型包装成对象<br><img src="/image-1.png" alt="Alt text"></p>
+<h4 id="一些静态方法-用于泛型和集合（引用数据类型）"><a href="#一些静态方法-用于泛型和集合（引用数据类型）" class="headerlink" title="一些静态方法(用于泛型和集合（引用数据类型）)"></a>一些静态方法(用于泛型和集合（引用数据类型）)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//应用于泛型和集合</span></span><br><span class="line">ArrayList&lt;Integer&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//转换成字符串</span></span><br><span class="line">String s1=Integer.toString(a);</span><br><span class="line">String s1=a.toString();<span class="comment">//继承Objects类toString()方法</span></span><br><span class="line">String s1=a+<span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串类型的数值转换成对应</span></span><br><span class="line"><span class="type">int</span> a=Integer.parseInt(s1);<span class="comment">//注意转换类型</span></span><br><span class="line"><span class="type">int</span> a=Integer.valueOf(s1);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h3><p>容器，方便修改字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder s=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;111&quot;</span>);<span class="comment">//直接返回内容</span></span><br><span class="line"><span class="comment">//拼接 支持链式编程</span></span><br><span class="line">s.append(<span class="number">1</span>);</span><br><span class="line">s.append(<span class="number">1</span>).append(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//反转</span></span><br><span class="line">s.reverse();</span><br><span class="line"><span class="comment">//长度</span></span><br><span class="line">s.length();</span><br><span class="line"><span class="comment">//转换成String类型</span></span><br><span class="line">String s1=s.toString();</span><br></pre></td></tr></table></figure>
+
+<p>相比String，频繁拼接修改等效率更高</p>
+<h4 id="StringBuffer"><a href="#StringBuffer" class="headerlink" title="StringBuffer"></a>StringBuffer</h4><p>与StringBuilder用法一致</p>
+<p>StringBuilder  线程不安全<br>StringBuffer   线程安全</p>
+<h4 id="StringJoiner"><a href="#StringJoiner" class="headerlink" title="StringJoiner"></a>StringJoiner</h4><p>高效简洁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StringJoiner s1=<span class="keyword">new</span> <span class="title class_">StringJoiner</span>(<span class="string">&quot;,&quot;</span>,<span class="string">&quot;[&quot;</span>,<span class="string">&quot;]&quot;</span>);</span><br><span class="line">s1.add(<span class="number">1</span>+<span class="string">&quot;&quot;</span>);</span><br><span class="line">String s=s1.toString();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><h4 id="常用静态方法"><a href="#常用静态方法" class="headerlink" title="常用静态方法"></a>常用静态方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">abs</span><span class="params">(<span class="type">int</span> a)</span> <span class="comment">//绝对值 Math.abs(1.2)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">ceil</span><span class="params">(<span class="type">double</span> a)</span> <span class="comment">//向上取整 Math.ceil(1.2)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">floor</span><span class="params">(<span class="type">double</span> a)</span> <span class="comment">//向下取整</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">long</span> <span class="title function_">round</span><span class="params">(<span class="type">double</span> a)</span> <span class="comment">//四舍五入</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span> <span class="comment">//最大值</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">pow</span><span class="params">(<span class="type">double</span> a,<span class="type">double</span> b)</span> <span class="comment">//a的b次方</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">random</span><span class="params">()</span>; <span class="comment">//随机数[0.0,1.0)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="System"><a href="#System" class="headerlink" title="System"></a>System</h3><h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exit</span><span class="params">(<span class="type">int</span> status)</span><span class="comment">//终止Java虚拟机</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">long</span> <span class="title function_">currentTimeMillis</span><span class="params">()</span><span class="comment">//当前系统时间ms</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Runtime"><a href="#Runtime" class="headerlink" title="Runtime"></a>Runtime</h3><p>单例类</p>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Runtime r=Runtime.getRuntime();</span><br><span class="line">r.availableProcessors();<span class="comment">//虚拟机使用的处理器数</span></span><br><span class="line">r.totalMemory();<span class="comment">//虚拟机内存总量--字节</span></span><br><span class="line">r.freeMemory();<span class="comment">//虚拟机可用内存量</span></span><br><span class="line">Process p=r.exec(<span class="string">&quot;路径“);//启动</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="BigDecimal"><a href="#BigDecimal" class="headerlink" title="BigDecimal"></a>BigDecimal</h3><p>解决浮点运算失真</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//小数转字符串转BigDecimal</span></span><br><span class="line">BigDecimal a1=<span class="keyword">new</span> <span class="title class_">BigDecimal</span>.valueOf(a);</span><br><span class="line">BigDecimal b1=<span class="keyword">new</span> <span class="title class_">BigDecimal</span>.valueOf(b);</span><br><span class="line">BigDecimal c1=a1.add(b1);<span class="comment">//subtract multiply divide(可精确位数)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="时间日期"><a href="#时间日期" class="headerlink" title="时间日期"></a>时间日期</h3><h4 id="传统-非重点"><a href="#传统-非重点" class="headerlink" title="传统(非重点)"></a>传统(非重点)</h4><h5 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h5><p>获取时间&#x2F;日期</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Date d=<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">long</span> time=d.getTime();<span class="comment">//ms</span></span><br><span class="line">d.setTime(time+=<span class="number">2</span>*<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h5><p>日期格式化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间/日期格式化</span></span><br><span class="line">Date d=<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">long</span> time=d.getTime();<span class="comment">//ms</span></span><br><span class="line">SimpleDateFormat sdf=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy年MM月dd日 HH:mm:ss EEE a&quot;</span>);<span class="comment">//格式化</span></span><br><span class="line">String rs=sdf.format(d);<span class="comment">//日期转换成字符串</span></span><br><span class="line">String rs1=sdf.format(time);<span class="comment">//时间转换成字符串</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//解析</span></span><br><span class="line">String a=<span class="string">&quot;2024-1-11 20:07&quot;</span>;</span><br><span class="line">SimpleDateFormat sdf1=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm&quot;</span>);<span class="comment">//格式</span></span><br><span class="line">Date d1=sdf1.parse(a);<span class="comment">//解析 抛出异常</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Calender"><a href="#Calender" class="headerlink" title="Calender"></a>Calender</h5><p>当前日历,主要用于修改日期时间<br>***可变对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Calendar c=Calendar.getInstance();</span><br><span class="line"><span class="type">int</span> days=c.get(Calendar.DAY_OF_YEAR);</span><br><span class="line">Date d2=c.getTime();<span class="comment">//获取</span></span><br><span class="line"><span class="type">long</span> time1=c.getTimeInMillis();</span><br><span class="line">c.set(Calendar.YEAR,<span class="number">2025</span>);<span class="comment">//修改</span></span><br><span class="line">c.add(Calendar.YEAR,<span class="number">1</span>);<span class="comment">//增加</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="JDK8新增-主要"><a href="#JDK8新增-主要" class="headerlink" title="JDK8新增(主要)"></a>JDK8新增(主要)</h4><h5 id="LocalDate-LocalTime-LocalDateTime-代替Calendar"><a href="#LocalDate-LocalTime-LocalDateTime-代替Calendar" class="headerlink" title="LocalDate LocalTime LocalDateTime 代替Calendar"></a>LocalDate LocalTime LocalDateTime 代替Calendar</h5><p>均为不可变对象，三个用法几乎相同</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">LocalDate ld=LocalDate.now();</span><br><span class="line"><span class="type">int</span> year=ld.getYear();<span class="comment">//获取</span></span><br><span class="line">LocalDate ld1=ld.withYear(<span class="number">2025</span>);<span class="comment">//修改</span></span><br><span class="line">LocalDate ld2=ld.plusYears(<span class="number">1</span>);<span class="comment">//minus</span></span><br><span class="line">LocalDate ld3=LocalDate.of(<span class="number">2025</span>,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">ld1.equals(ld2);</span><br><span class="line"></span><br><span class="line"><span class="comment">//转换</span></span><br><span class="line">LocalDateTime ld1=LocalDateTime.now();</span><br><span class="line">LocalDate ld2=ld1.toLocalDate();</span><br><span class="line">LocalTime ld3=ld1.toLocalTime();</span><br></pre></td></tr></table></figure>
+
+<h5 id="ZoneId-ZoneDateTime-代替Calendar"><a href="#ZoneId-ZoneDateTime-代替Calendar" class="headerlink" title="ZoneId ZoneDateTime 代替Calendar"></a>ZoneId ZoneDateTime 代替Calendar</h5><h5 id="Instant"><a href="#Instant" class="headerlink" title="Instant"></a>Instant</h5><h5 id="DateTimeFormatter"><a href="#DateTimeFormatter" class="headerlink" title="DateTimeFormatter"></a>DateTimeFormatter</h5><h5 id="Duration-Period"><a href="#Duration-Period" class="headerlink" title="Duration Period"></a>Duration Period</h5><h3 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h3><h3 id="JDK8新特性"><a href="#JDK8新特性" class="headerlink" title="JDK8新特性"></a>JDK8新特性</h3><h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h4 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h4><h2 id="集合框架"><a href="#集合框架" class="headerlink" title="集合框架"></a>集合框架</h2><h2 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h2><h3 id="File-操作文本"><a href="#File-操作文本" class="headerlink" title="File(操作文本)"></a>File(操作文本)</h3><h4 id="一些操作"><a href="#一些操作" class="headerlink" title="一些操作"></a>一些操作</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">File f1=<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\hexo&quot;</span>);<span class="comment">//绝对路径</span></span><br><span class="line">File f2=<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;javase\\src\\f1.txt&quot;</span>);<span class="comment">//相对路径</span></span><br><span class="line">f1.length();</span><br><span class="line">f1.exists();</span><br><span class="line">f1.isFile();</span><br><span class="line">f1.isDirectory();</span><br><span class="line">f1.getName();</span><br><span class="line"><span class="type">long</span> time=f1.lastModified();</span><br><span class="line">f1.getPath();<span class="comment">//获取创建对象时的路径</span></span><br><span class="line">f1.getAbsolutePath();<span class="comment">//获取绝对路径</span></span><br><span class="line">        </span><br><span class="line">File f3=<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:/resource/111.txt&quot;</span>);</span><br><span class="line">f3.createNewFile();</span><br><span class="line">f3.mkdir();<span class="comment">//一级文件夹</span></span><br><span class="line">f3.mkdirs();<span class="comment">//创建多级文件夹</span></span><br><span class="line">f3.delete();<span class="comment">//不能删除非空文件夹</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历（一级）</span></span><br><span class="line">String[] names=f1.list();</span><br><span class="line"><span class="keyword">for</span> (String name: names) &#123;&#125;</span><br><span class="line">File[] files=f1.listFiles();</span><br><span class="line"><span class="keyword">for</span> (File file: files) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><p>遍历多级文件夹&#x2F;删除非空文件夹</p>
+<p>直接&#x2F;间接</p>
+<h3 id="IO-读写文本数据"><a href="#IO-读写文本数据" class="headerlink" title="IO(读写文本数据)"></a>IO(读写文本数据)</h3><h4 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h4><ul>
+<li>ASCII</li>
+<li>GBK 汉字2 英文数字1</li>
+<li>Unicode UTF-8 汉字3 英文数字1</li>
+</ul>
+<p>字符集编码<code>getBytes(&quot;GBK&quot;)</code>&#x2F;解码<code>new String(bytes1,&quot;GBK&quot;)</code></p>
+<h4 id="IO流-字节流-字符流"><a href="#IO流-字节流-字符流" class="headerlink" title="IO流-字节流 字符流"></a>IO流-字节流 字符流</h4><p>(抽象类)</p>
+<ul>
+<li><p>文件复制<br>字节输入流 InputStream-&gt;FileInputStream<br>字节输出流 OutputStream-&gt;FileOutputStream</p>
+</li>
+<li><p>读写文本<br>字符输入流 Reader-&gt;FileReader<br>字符输出流 Writer-&gt;FileWriter</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">InputStream is=<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;D:\\hexo&quot;</span>);<span class="comment">//覆盖</span></span><br><span class="line"><span class="comment">//后面加true-&gt;追加</span></span><br><span class="line"><span class="type">int</span> a=is.read();<span class="comment">//读取一个字节</span></span><br><span class="line"><span class="type">byte</span>[] b=<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">3</span>];</span><br><span class="line">String s=<span class="keyword">new</span> <span class="title class_">String</span>(b);</span><br><span class="line"><span class="type">byte</span>[] c=is.readAllBytes();</span><br><span class="line">is.flush();<span class="comment">//刷新流</span></span><br><span class="line">is.close();<span class="comment">//关闭流</span></span><br><span class="line"></span><br><span class="line">OutputStream os=<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\hexo&quot;</span>);</span><br><span class="line">os.write(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line"><span class="type">byte</span>[] bytes=<span class="string">&quot;abcd&quot;</span>.getBytes();</span><br><span class="line">os.write(bytes,<span class="number">0</span>,<span class="number">3</span>);</span><br><span class="line">os.write(<span class="string">&quot;\r\n&quot;</span>.getBytes());</span><br><span class="line">os.close();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>文件复制 输入流—&gt;输出流</li>
+</ul>
+<h4 id="释放资源"><a href="#释放资源" class="headerlink" title="释放资源"></a>释放资源</h4><ul>
+<li>try-catch-finally</li>
+<li>try-with-resource</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">OutputStream</span> <span class="variable">os</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\hexo&quot;</span>))&#123;</span><br><span class="line">     <span class="type">byte</span>[] bytes = <span class="string">&quot;abcd&quot;</span>.getBytes();</span><br><span class="line">     os.write(bytes, <span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">     os.write(<span class="string">&quot;\r\n&quot;</span>.getBytes());</span><br><span class="line">&#125;<span class="keyword">catch</span>(IOException e)&#123;</span><br><span class="line">     e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="IO流-缓冲流-转换流-打印流-数据流-序列化流"><a href="#IO流-缓冲流-转换流-打印流-数据流-序列化流" class="headerlink" title="IO流-缓冲流 转换流 打印流 数据流 序列化流"></a>IO流-缓冲流 转换流 打印流 数据流 序列化流</h4><ul>
+<li><p>缓冲流 BufferedInputStream &#x2F; BufferedOutputStream &#x2F; BufferedReader<code>br.readLine()</code> &#x2F; BufferedWriter<code>bw.newLine()</code><br>包装、提高原始流读写效率</p>
+</li>
+<li><p>转换流 InputStreamReader &#x2F; OutputStreamWriter<br>解决不同字符集乱码问题</p>
+</li>
+<li><p>打印流 PrintStream<code>ps.println() ps.write()</code> &#x2F; PrintWriter<br>高效打印数据</p>
+</li>
+</ul>
+<p>重定向<code>System.setOut(ps)</code></p>
+<ul>
+<li><p>数据流 DataInputStream<code>dis.writeUTF()</code> &#x2F; DataOutputStream<code>dos.writeUTF()</code><br>传入数据和数据类型</p>
+</li>
+<li><p>序列化流 ObjectInputStream<code>oos.writeObject()</code> &#x2F; ObjectOutputStream<code>oos.readObject()</code><br>序列化接口<code>implements Serializable</code><br>成员变量前加上<code>transient</code>不参与序列化<br>序列化多个对象： <code>ArrayList</code> 已实现序列化接口</p>
+</li>
+</ul>
+<h4 id="IO框架"><a href="#IO框架" class="headerlink" title="IO框架"></a>IO框架</h4><p>封装对文件、数据进行操作的代码</p>
+<p>Commons-io 框架</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入框架 融合</span></span><br><span class="line">FileUtils.copyDirectory(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\hexo&quot;</span>),<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\CodeField&quot;</span>));<span class="comment">//cpoyFile()</span></span><br><span class="line">FileUtils.deleteDirectory(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\aa&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="特殊文件"><a href="#特殊文件" class="headerlink" title="特殊文件"></a>特殊文件</h4><h5 id="Properties属性文件"><a href="#Properties属性文件" class="headerlink" title="Properties属性文件"></a>Properties属性文件</h5><p>本质-&gt;map</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Properties properties=<span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">properties.load(<span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;D:\\hexo\\sources&quot;</span>));</span><br><span class="line">properties.getProperty(<span class="string">&quot;key&quot;</span>);</span><br><span class="line">properties.setProperty(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>);</span><br><span class="line">properties.store(<span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;D:\\hexo\\sources&quot;</span>),<span class="string">&quot;save&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="XML文件"><a href="#XML文件" class="headerlink" title="XML文件"></a>XML文件</h5><p>本质-&gt;数据格式</p>
+<p><code>&lt;tags&gt;</code> 做系统的配置文件 &#x2F; 特殊数据结构网络传输</p>
+<p>Dom4j-&gt;解析XML框架</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解析</span></span><br><span class="line">SAXReader saxReader=<span class="keyword">new</span> <span class="title class_">SAXReader</span>();</span><br><span class="line">Document document=saxReader.read(<span class="string">&quot;path&quot;</span>);</span><br><span class="line">Element root=document.getRootElement();</span><br><span class="line"><span class="comment">//存入拼接成XML----io流</span></span><br></pre></td></tr></table></figure>
+
+<p>约束XML书写—限制格式</p>
+<h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><p>记录运行过程中的信息</p>
+<p>Logback框架</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//slf4j-api: 日志接口</span></span><br><span class="line"><span class="comment">//logback-core: 基础模块</span></span><br><span class="line"><span class="comment">//logback-classic: 实现slf4j API</span></span><br><span class="line"><span class="comment">//logback-access: http访问</span></span><br><span class="line"><span class="comment">//logback.xml---src下 配置</span></span><br><span class="line">Logger LOGGER=LoggerFactory.getLogger(<span class="string">&quot;Test&quot;</span>);</span><br><span class="line">LOGGER.info(<span class="string">&quot;start&quot;</span>);</span><br><span class="line">LOGGER.debug(<span class="string">&quot;a&quot;</span>+a);</span><br></pre></td></tr></table></figure>
+
+<p>设置日志级别</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(trace) debug <span class="comment">//最低级别</span></span><br><span class="line">info 输出</span><br><span class="line">warn</span><br><span class="line">error</span><br></pre></td></tr></table></figure>
+
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><h4 id="创建多线程"><a href="#创建多线程" class="headerlink" title="创建多线程"></a>创建多线程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.继承Thread</span></span><br><span class="line">Thread t=<span class="keyword">new</span> <span class="title class_">newThread</span>();</span><br><span class="line"><span class="comment">//子类继承Thread 重写run方法</span></span><br><span class="line"><span class="comment">//@Override</span></span><br><span class="line"><span class="comment">//public void run() &#123;</span></span><br><span class="line"><span class="comment">//   System.out.println(&quot;new&quot;);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line">t.start();<span class="comment">//自动执行run</span></span><br><span class="line">System.out.println(<span class="string">&quot;main&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.Runnable接口</span></span><br><span class="line">Runnable t=<span class="keyword">new</span> <span class="title class_">newRunnable</span>();<span class="comment">//子类实现Runnable接口 封装成Thread线程对象</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(t).start();<span class="comment">//也可以通过匿名内部类 使用Lambda简化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3.Callable接口 可返回执行结果</span></span><br><span class="line">Callable&lt;Object&gt; ca=<span class="keyword">new</span> <span class="title class_">newCallable</span>(<span class="number">10</span>);</span><br><span class="line">FutureTask&lt;Object&gt; fu=<span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;&gt;(ca);<span class="comment">//未来任务对象</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(fu).start();</span><br><span class="line">Object ob=fu.get();<span class="comment">//获取结果</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Thread常用方法"><a href="#Thread常用方法" class="headerlink" title="Thread常用方法"></a>Thread常用方法</h4><ul>
+<li>run()  start()</li>
+<li>currentThread()</li>
+<li>getName() setName() &#x2F;&#x2F;构造器直接写</li>
+<li>sleep()</li>
+<li>join() &#x2F;&#x2F;当前线程先执行完</li>
+</ul>
+<h4 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h4><h5 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h5><p>解决线程安全问题</p>
+<p>加锁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.同步代码块</span></span><br><span class="line"><span class="keyword">synchronized</span>(<span class="built_in">this</span>)<span class="comment">//共享资源</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2.同步方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> 返回值 方法名</span><br><span class="line"><span class="comment">//实例方法：this 静态方法：类名.class</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3.Lock锁 采用其实例类ReentrantLock创建对象</span></span><br><span class="line">Lock lk=<span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line">lk.lock();</span><br><span class="line">lk.unlock();<span class="comment">//可采用finally</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h5><p>各线程间告知状态</p>
+<ul>
+<li>this.wait()</li>
+<li>this.notifyAll()</li>
+</ul>
+<h4 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h4><p>复用线程</p>
+<h5 id="创建线程池-接口ExecutorService"><a href="#创建线程池-接口ExecutorService" class="headerlink" title="创建线程池 接口ExecutorService"></a>创建线程池 接口ExecutorService</h5><p>1.ExecutorService实现类ThreadPoolExecutor</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,BlockingQueue&lt;Runnable&gt; workQueue,ThreadFactory threadFactory,RejectedExecutionHandler handler)</span></span><br><span class="line">ExecutorService pool=<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,TimeUnit.SECONDS,<span class="keyword">new</span> <span class="title class_">ArrayBlockingQueue</span>&lt;&gt;(<span class="number">3</span>),Executors.defaultThreadFactory(),<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.AbortPolicy());</span><br><span class="line"></span><br><span class="line"><span class="comment">//处理Runnable任务</span></span><br><span class="line">Runnable t=<span class="keyword">new</span> <span class="title class_">newRunnable</span>();</span><br><span class="line">pool.execute(t);</span><br><span class="line">pool.shutdown();</span><br><span class="line"></span><br><span class="line"><span class="comment">//处理Callable任务</span></span><br><span class="line">Future&lt;Object&gt; f=pool.submit(<span class="keyword">new</span> <span class="title class_">newCallable</span>());</span><br></pre></td></tr></table></figure>
+
+<p>2.Executors(不使用 有弊端)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//底层基于ExecutorService实现</span></span><br><span class="line">ExecutorService pool=Executors.newCachedThreadPool(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="并发-并行-生命周期"><a href="#并发-并行-生命周期" class="headerlink" title="并发 并行 生命周期"></a>并发 并行 生命周期</h4><p>CPU轮询</p>
+<h4 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h4><p>线程安全+同时执行</p>
+<h3 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h3><p>基本的通信架构 CS&#x2F;BS</p>
+<ul>
+<li><p>IP地址<br>公网&#x2F;局域网&#x2F;特殊IP<br>InetAddress类 <code>InetAddress.getLocalHost(); InetAddress.getByName(); InetAddress.isReachable();</code></p>
+</li>
+<li><p>端口号<br>周知&#x2F;注册&#x2F;动态</p>
+</li>
+<li><p>协议<br>OSI TCP&#x2F;IP<br>传输层：UDP(效率高)&#x2F;TCP(可靠) –&gt;三次握手连接 四次挥手断开</p>
+</li>
+</ul>
+<h4 id="UDP通信"><a href="#UDP通信" class="headerlink" title="UDP通信"></a>UDP通信</h4><p>无连接，不可靠，发送数据包</p>
+<p>DatagramSocket类</p>
+<h4 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h4><p>面向连接，可靠通信，三次握手</p>
+<p>Socket类</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><h4 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h4><h4 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/01/11/base/" data-id="cm2gbt82n0004f4gp01ftbk2h" data-title="BASE" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-My-New-Post" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/23/My-New-Post/" class="article-date">
+  <time class="dt-published" datetime="2023-12-23T15:06:22.000Z" itemprop="datePublished">2023-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Test/">Test</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/12/23/My-New-Post/">My New Post</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/12/23/My-New-Post/" data-id="cm2gbt82q0005f4gpd3807zq1" data-title="My New Post" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+
     </footer>
   </div>
   
@@ -127,18 +1938,39 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/">Learn</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Docker/">Docker</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learn/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Docker/elasticsearch/">elasticsearch</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Test/">Test</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D/">文件批量重命名</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D/Windows%E6%89%B9%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E8%84%9A%E6%9C%AC/">Windows批处理文件脚本</a></li></ul></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/other/" rel="tag">other</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/other/" style="font-size: 10px;">other</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">July 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li></ul>
     </div>
   </div>
 
@@ -152,6 +1984,22 @@
         
           <li>
             <a href="/2024/10/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/03/%E6%96%87%E4%BB%B6%E6%8C%89%E6%97%B6%E9%97%B4%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%90%8D%E7%A7%B0%E9%A1%BA%E5%BA%8F%E6%89%B9%E9%87%8F%E5%8A%A0%E5%BA%8F%E5%8F%B7%E5%89%8D%E7%BC%80%E9%87%8D%E5%91%BD%E5%90%8D/">文件按时间顺序和名称顺序批量加序号前缀重命名</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85elasticsearch%20kibana%20ik%E5%88%86%E8%AF%8D%E5%99%A8%E4%BB%A5%E5%8F%8A%E8%B8%A9%E9%9B%B7/">使用docker安装elasticsearch kibana ik分词器以及踩雷</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/01/MySQL%E9%AB%98%E7%BA%A7/">MySQL高级</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/11/%E5%85%B3%E4%BA%8Eredis%E7%9A%84%E7%A7%8D%E7%A7%8D%E5%9D%91/">关于Redis配置及使用的种种坑</a>
           </li>
         
       </ul>
