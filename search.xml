@@ -13,20 +13,20 @@
       
       <categories>
           
-          <category> Interview Record </category>
-          
-          <category> 日常实习 </category>
-          
-          <category> 快手 </category>
-          
-          <category> 测试开发 </category>
+          <category> 面经 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 面经 </tag>
+            <tag> Interview Record </tag>
+            
+            <tag> 日常实习 </tag>
+            
+            <tag> 快手 </tag>
+            
+            <tag> 测试开发 </tag>
             
         </tags>
       
@@ -44,20 +44,20 @@
       
       <categories>
           
-          <category> Interview Record </category>
-          
-          <category> 日常实习 </category>
-          
-          <category> 百度 </category>
-          
-          <category> 后端开发 </category>
+          <category> 面经 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 面经 </tag>
+            <tag> Interview Record </tag>
+            
+            <tag> 日常实习 </tag>
+            
+            <tag> 后端开发 </tag>
+            
+            <tag> 百度 </tag>
             
         </tags>
       
@@ -75,20 +75,20 @@
       
       <categories>
           
-          <category> Interview Record </category>
-          
-          <category> 日常实习 </category>
-          
-          <category> 美团 </category>
-          
-          <category> 后端开发 </category>
+          <category> 面经 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 面经 </tag>
+            <tag> Interview Record </tag>
+            
+            <tag> 日常实习 </tag>
+            
+            <tag> 美团 </tag>
+            
+            <tag> 后端开发 </tag>
             
         </tags>
       
@@ -106,18 +106,18 @@
       
       <categories>
           
-          <category> Blog </category>
-          
-          <category> 文件批量重命名 </category>
-          
-          <category> Windows批处理文件脚本 </category>
+          <category> 记录 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 记录 </tag>
+            <tag> Blog </tag>
+            
+            <tag> 文件批量重命名 </tag>
+            
+            <tag> Windows批处理文件脚本 </tag>
             
         </tags>
       
@@ -135,20 +135,20 @@
       
       <categories>
           
-          <category> Blog </category>
-          
-          <category> 微服务 </category>
-          
-          <category> Docker </category>
-          
-          <category> elasticsearch </category>
+          <category> 记录 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 记录 </tag>
+            <tag> Blog </tag>
+            
+            <tag> 微服务 </tag>
+            
+            <tag> Docker </tag>
+            
+            <tag> elasticsearch </tag>
             
         </tags>
       
@@ -168,14 +168,14 @@
           
           <category> Note </category>
           
-          <category> MySQL </category>
-          
       </categories>
       
       
         <tags>
             
             <tag> Note </tag>
+            
+            <tag> MySQL </tag>
             
         </tags>
       
@@ -193,18 +193,18 @@
       
       <categories>
           
-          <category> Blog </category>
-          
-          <category> Redis </category>
-          
-          <category> Linux </category>
+          <category> 记录 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 记录 </tag>
+            <tag> Blog </tag>
+            
+            <tag> Redis </tag>
+            
+            <tag> Linux </tag>
             
         </tags>
       
@@ -224,14 +224,14 @@
           
           <category> Note </category>
           
-          <category> Git </category>
-          
       </categories>
       
       
         <tags>
             
             <tag> Note </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
@@ -251,14 +251,14 @@
           
           <category> Note </category>
           
-          <category> web </category>
-          
       </categories>
       
       
         <tags>
             
             <tag> Note </tag>
+            
+            <tag> web </tag>
             
         </tags>
       
@@ -278,14 +278,14 @@
           
           <category> Note </category>
           
-          <category> Java </category>
-          
       </categories>
       
       
         <tags>
             
             <tag> Note </tag>
+            
+            <tag> Java </tag>
             
         </tags>
       
