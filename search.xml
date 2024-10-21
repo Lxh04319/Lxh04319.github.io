@@ -4,6 +4,99 @@
   
     
     <entry>
+      <title>快手测试开发日常实习一面</title>
+      <link href="/2024/10/18/%E5%BF%AB%E6%89%8B%E4%B8%80%E9%9D%A210.18/"/>
+      <url>/2024/10/18/%E5%BF%AB%E6%89%8B%E4%B8%80%E9%9D%A210.18/</url>
+      
+        <content type="html"><![CDATA[<h3 id="快手测开一面-—不完整无序版"><a href="#快手测开一面-—不完整无序版" class="headerlink" title="快手测开一面   —不完整无序版"></a>快手测开一面   —不完整无序版</h3><ol><li>自我介绍</li><li>云教育平台介绍</li><li>java基础——怎么实现继承和接口</li><li>线程创建的方法</li><li>try catch final块各做什么</li><li>mysql方面——在java里面怎么做的</li><li>给项目新增查询方法，三层架构各个层加什么方法，怎么连接导入数据库，需要写什么东西等等</li><li>给项目加索引怎么设计的，考虑哪些，每个字段都加索引吗</li><li>sql书写 涉及聚合函数和分组 多条件</li><li>内连接喝外连接区别</li><li>mysql有哪些锁</li><li>死锁是怎么形成的</li><li>出现死锁了怎么办</li><li>计网方面——项目当中前后端做请求怎么实现</li><li>get post区别</li><li>url打开界面中间的流程</li><li>项目方面——mysql redis都做什么用的 存储什么</li><li>测开方面——对测试的了解</li><li>怎么对百度搜索栏做测试</li></ol><p><strong>算法</strong><br>最长回文子串 acm模式</p><p><strong>反问</strong><br>测开方面还需要学习什么<br>-测试总体流程</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Interview Record </category>
+          
+          <category> 日常实习 </category>
+          
+          <category> 快手 </category>
+          
+          <category> 测试开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面经 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>百度后端开发日常实习一面</title>
+      <link href="/2024/09/26/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A29.26/"/>
+      <url>/2024/09/26/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A29.26/</url>
+      
+        <content type="html"><![CDATA[<h3 id="百度一面-—不完整无序版"><a href="#百度一面-—不完整无序版" class="headerlink" title="百度一面   —不完整无序版"></a>百度一面   —不完整无序版</h3><ol><li>自我介绍</li><li>项目难点</li><li>学过哪些课</li><li>java基础</li><li>java关键字 数据类型 占字节</li><li>int和integer包装类区别与好处 int范围</li><li>string buffer builder区别 线程安全问题</li><li>object有哪些方法</li><li>java 三种io模型</li><li>异常分类</li><li>数据结构基础</li><li>包括哪些数据结构 栈和队列区别</li><li>java数据结构</li><li>hashmap hashtable 线程安全问题</li><li>redis数据结构</li><li>创建线程方法</li><li>sleep wait区别</li><li>volatile</li><li>sycronized reentrantlock 其他锁</li><li>线程池参数</li><li>死锁条件</li><li>网络分层模型</li><li>tcp udp区别，应用场景</li><li>tcp三次握手</li><li>java c++区别</li><li>讲讲spring</li><li>操作系统&#x2F;linux</li><li>websocket</li></ol><p><strong>算法</strong><br>acm 层序遍历</p><p><strong>反问</strong><br>无</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Interview Record </category>
+          
+          <category> 日常实习 </category>
+          
+          <category> 百度 </category>
+          
+          <category> 后端开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面经 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>美团后端开发日常实习一面</title>
+      <link href="/2024/08/26/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A28.26/"/>
+      <url>/2024/08/26/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A28.26/</url>
+      
+        <content type="html"><![CDATA[<h3 id="美团一面8-26-酒旅供给优化"><a href="#美团一面8-26-酒旅供给优化" class="headerlink" title="美团一面8.26 -酒旅供给优化"></a>美团一面8.26 -酒旅供给优化</h3><ol><li>自我介绍</li><li>项目是练手的吗还是？ rpc怎么做的，为什么实现个rpc</li><li>rpc和http thrift的区别 学过thrift吗</li><li>怎么去设计一个rpc协议</li><li>有一个加法方法的话，怎么去设计</li><li>netty和socket区别</li><li>打开idea看看netty那边的实现流程</li><li>netty线程池配置参数</li><li>打开idea实现加权轮询负载均衡</li><li>加权轮询负载均衡使用场景</li><li>四种序列化器的区别</li><li>怎么选择用哪种序列化器</li><li>打开idea用数组实现队列</li><li>这个数组能重复利用吗，知不知道循环数组</li><li>java有哪些队列？</li><li>这个循环数组实现的能保证多线程线程安全吗？怎么保证？</li><li>锁太重量了，一亿个生产者，一个消费者用锁不太好啊</li><li>xxl-job怎么实现任务调</li><li>生产者向mysql写数据，mysql又给二十个节点发，怎么保证消息不落</li><li>分布式锁是一种方式，但性能太差，还有没有别的</li></ol><p><strong>反问：</strong> 对日常实习生水平的期待<br>-代码能力 业务能力<br>-这是在学校里吗 什么时候能来实习</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Interview Record </category>
+          
+          <category> 日常实习 </category>
+          
+          <category> 美团 </category>
+          
+          <category> 后端开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面经 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>文件按时间顺序和名称顺序批量加序号前缀重命名</title>
       <link href="/2024/07/03/%E6%96%87%E4%BB%B6%E6%8C%89%E6%97%B6%E9%97%B4%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%90%8D%E7%A7%B0%E9%A1%BA%E5%BA%8F%E6%89%B9%E9%87%8F%E5%8A%A0%E5%BA%8F%E5%8F%B7%E5%89%8D%E7%BC%80%E9%87%8D%E5%91%BD%E5%90%8D/"/>
       <url>/2024/07/03/%E6%96%87%E4%BB%B6%E6%8C%89%E6%97%B6%E9%97%B4%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%90%8D%E7%A7%B0%E9%A1%BA%E5%BA%8F%E6%89%B9%E9%87%8F%E5%8A%A0%E5%BA%8F%E5%8F%B7%E5%89%8D%E7%BC%80%E9%87%8D%E5%91%BD%E5%90%8D/</url>
@@ -12,6 +105,8 @@
       
       
       <categories>
+          
+          <category> Blog </category>
           
           <category> 文件批量重命名 </category>
           
@@ -22,7 +117,7 @@
       
         <tags>
             
-            <tag> other </tag>
+            <tag> 记录 </tag>
             
         </tags>
       
@@ -40,7 +135,7 @@
       
       <categories>
           
-          <category> Learn </category>
+          <category> Blog </category>
           
           <category> 微服务 </category>
           
@@ -53,7 +148,7 @@
       
         <tags>
             
-            <tag> java </tag>
+            <tag> 记录 </tag>
             
         </tags>
       
@@ -71,7 +166,7 @@
       
       <categories>
           
-          <category> Learn </category>
+          <category> Note </category>
           
           <category> MySQL </category>
           
@@ -80,7 +175,7 @@
       
         <tags>
             
-            <tag> java </tag>
+            <tag> Note </tag>
             
         </tags>
       
@@ -98,16 +193,18 @@
       
       <categories>
           
-          <category> Learn </category>
+          <category> Blog </category>
           
           <category> Redis </category>
+          
+          <category> Linux </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> java </tag>
+            <tag> 记录 </tag>
             
         </tags>
       
@@ -125,14 +222,16 @@
       
       <categories>
           
-          <category> Learn </category>
+          <category> Note </category>
+          
+          <category> Git </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Git </tag>
+            <tag> Note </tag>
             
         </tags>
       
@@ -150,14 +249,16 @@
       
       <categories>
           
-          <category> Learn </category>
+          <category> Note </category>
+          
+          <category> web </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> java </tag>
+            <tag> Note </tag>
             
         </tags>
       
@@ -175,14 +276,16 @@
       
       <categories>
           
-          <category> Learn </category>
+          <category> Note </category>
+          
+          <category> Java </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> java </tag>
+            <tag> Note </tag>
             
         </tags>
       
