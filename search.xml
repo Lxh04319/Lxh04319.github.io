@@ -8,7 +8,7 @@
       <link href="/2024/10/28/%E4%BA%AC%E4%B8%9C%E4%B8%80%E9%9D%A210.28/"/>
       <url>/2024/10/28/%E4%BA%AC%E4%B8%9C%E4%B8%80%E9%9D%A210.28/</url>
       
-        <content type="html"><![CDATA[<h3 id="快手测开一面-—不完整无序版"><a href="#快手测开一面-—不完整无序版" class="headerlink" title="快手测开一面   —不完整无序版"></a>快手测开一面   —不完整无序版</h3><ol><li>云教育平台介绍</li><li>具体的流程是什么样的</li><li>需求怎么来的</li><li>项目难点 –分布式事务</li><li>项目做了哪些测试 单元测试&#x2F;前后端联调&#x2F;并发压测</li><li>了解的测试方法有哪些 怎么写测试用例</li><li>redis并发下的问题 雪崩&#x2F;穿透&#x2F;击穿</li><li>xxljob源码读过吗 在这里的作用是什么</li><li>为什么用xxljob去做，还有很多别的框架？</li><li>xxljob是一个一个分发任务吗 出现宕机网络等等问题怎么办</li><li>为什么做rpc</li><li>dubbo了解吗</li><li>rpc里面怎么防止粘包的</li><li>数据包的格式定义</li><li>看过什么源码</li><li>讲一下springboot源码 bean怎么处理的</li><li>未来规划怎么样的 对测试和开发的看法</li><li>平时做算法题吗</li></ol><p><strong>算法</strong><br>两数之和 (快排&#x2F;其他排序) 无写代码平台，记事本写完粘到idea里测试</p><p><strong>反问</strong><br>什么部门的 招聘没写</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="京东测开一面-—不完整无序版"><a href="#京东测开一面-—不完整无序版" class="headerlink" title="京东测开一面   —不完整无序版"></a>京东测开一面   —不完整无序版</h3><ol><li>云教育平台介绍</li><li>具体的流程是什么样的</li><li>需求怎么来的</li><li>项目难点 –分布式事务</li><li>项目做了哪些测试 单元测试&#x2F;前后端联调&#x2F;并发压测</li><li>了解的测试方法有哪些 怎么写测试用例</li><li>redis并发下的问题 雪崩&#x2F;穿透&#x2F;击穿</li><li>xxljob源码读过吗 在这里的作用是什么</li><li>为什么用xxljob去做，还有很多别的框架？</li><li>xxljob是一个一个分发任务吗 出现宕机网络等等问题怎么办</li><li>为什么做rpc</li><li>dubbo了解吗</li><li>防粘包方法 rpc里面怎么防止粘包的</li><li>数据包的格式定义</li><li>很大很大的数据包怎么处理</li><li>看过什么源码</li><li>讲一下springboot源码 bean怎么处理的</li><li>未来规划怎么样的 对测试和开发的看法</li><li>对哪一块感兴趣 云端&#x2F;客户端&#x2F;网页</li><li>平时做算法题吗</li></ol><p><strong>算法</strong><br>两数之和 (快排&#x2F;其他排序) 无写代码平台，记事本写完粘到idea里测试</p><p><strong>反问</strong><br>什么部门的 招聘没写</p>]]></content>
       
       
       <categories>
