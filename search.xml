@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>百度测试开发日常实习二面</title>
+      <link href="/2024/10/31/%E7%99%BE%E5%BA%A6%E4%BA%8C%E9%9D%A210.31/"/>
+      <url>/2024/10/31/%E7%99%BE%E5%BA%A6%E4%BA%8C%E9%9D%A210.31/</url>
+      
+        <content type="html"><![CDATA[<h3 id="百度测开二面-—不完整无序版"><a href="#百度测开二面-—不完整无序版" class="headerlink" title="百度测开二面   —不完整无序版"></a>百度测开二面   —不完整无序版</h3><ol><li>在学校吗，大三可以出来实习吗，希望时间久一点</li><li>自我介绍</li><li>云教育平台介绍</li><li>可以实习多久，能来北京吗</li><li>认为测试是做什么工作的</li><li>项目从0到1，开发和测试需要做的事情</li><li>为啥大文件断点续传</li><li>项目压测怎么做的 jmeter并发压测</li><li>如何对一个接口做测试，怎么写测试用例</li><li>怎么判断问题是前端还是后端的</li><li>怎么报告bug</li><li>自己的优势和劣势是什么</li><li>linux进程端口命令</li><li>linux解压缩命令</li><li>数据库事务四大特性</li><li>怎么理解面向对象和面向过程</li><li>封装继承多态怎么理解</li><li>静态和非静态</li><li>逻辑题 -十二个小球有一个不知轻重如何查找</li><li>一周几天 啥时候能来</li></ol><p><strong>算法</strong><br>-字符串反转<br>-字符串内部数字*2 加进位<br>-异位词分组<br>20min acm模式</p><p><strong>反问</strong><br>业务 流程</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面经 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Interview Record </tag>
+            
+            <tag> 日常实习 </tag>
+            
+            <tag> 测试开发 </tag>
+            
+            <tag> 百度 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>京东测试开发日常实习一面</title>
       <link href="/2024/10/28/%E4%BA%AC%E4%B8%9C%E4%B8%80%E9%9D%A210.28/"/>
       <url>/2024/10/28/%E4%BA%AC%E4%B8%9C%E4%B8%80%E9%9D%A210.28/</url>
@@ -39,7 +70,7 @@
       <link href="/2024/10/28/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A210.28/"/>
       <url>/2024/10/28/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A210.28/</url>
       
-        <content type="html"><![CDATA[<h3 id="百度测开一面-—不完整无序版"><a href="#百度测开一面-—不完整无序版" class="headerlink" title="百度测开一面   —不完整无序版"></a>百度测开一面   —不完整无序版</h3><ol><li>自我介绍</li><li>云教育平台介绍</li><li>redis五种基本类型</li><li>redis常用命令</li><li>osi七层模型 tcp在哪一层</li><li>tcp三握四挥</li><li>tcp udp区别</li><li>http https区别</li><li>get post区别</li><li>rabbitmq原理</li><li>linux命令</li><li>文件只读最后十行命令 过滤文件命令</li><li>git命令了解哪些</li><li>如何测试朋友圈功能</li><li>sql书写 涉及group by having</li><li>sql书写 删除&#x2F;更新</li></ol><p><strong>算法</strong><br>最长公共前缀 (快排) acm</p><p><strong>反问</strong><br>无</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="百度测开一面-—不完整无序版"><a href="#百度测开一面-—不完整无序版" class="headerlink" title="百度测开一面   —不完整无序版"></a>百度测开一面   —不完整无序版</h3><ol><li>自我介绍</li><li>云教育平台介绍</li><li>redis五种基本类型</li><li>redis常用命令</li><li>osi七层模型 tcp在哪一层</li><li>tcp三握四挥</li><li>tcp udp区别</li><li>http https区别</li><li>get post区别</li><li>cookie session区别</li><li>rabbitmq原理</li><li>linux命令</li><li>文件只读最后十行命令 过滤文件命令</li><li>git命令了解哪些</li><li>如何测试朋友圈功能</li><li>sql书写 涉及group by having</li><li>sql书写 删除&#x2F;更新</li></ol><p><strong>算法</strong><br>最长公共前缀 (快排) acm</p><p><strong>反问</strong><br>无</p>]]></content>
       
       
       <categories>
@@ -70,7 +101,7 @@
       <link href="/2024/10/18/%E5%BF%AB%E6%89%8B%E4%B8%80%E9%9D%A210.18/"/>
       <url>/2024/10/18/%E5%BF%AB%E6%89%8B%E4%B8%80%E9%9D%A210.18/</url>
       
-        <content type="html"><![CDATA[<h3 id="快手测开一面-—不完整无序版"><a href="#快手测开一面-—不完整无序版" class="headerlink" title="快手测开一面   —不完整无序版"></a>快手测开一面   —不完整无序版</h3><ol><li>自我介绍</li><li>云教育平台介绍</li><li>java基础——怎么实现继承和接口</li><li>线程创建的方法</li><li>try catch final块各做什么</li><li>mysql方面——在java里面怎么做的</li><li>给项目新增查询方法，三层架构各个层加什么方法，怎么连接导入数据库，需要写什么东西等等</li><li>给项目加索引怎么设计的，考虑哪些，每个字段都加索引吗</li><li>sql书写 涉及聚合函数和分组 多条件</li><li>内连接喝外连接区别</li><li>mysql有哪些锁</li><li>死锁是怎么形成的</li><li>出现死锁了怎么办</li><li>计网方面——项目当中前后端做请求怎么实现</li><li>get post区别</li><li>url打开界面中间的流程</li><li>项目方面——mysql redis都做什么用的 存储什么</li><li>测开方面——对测试的了解</li><li>怎么对百度搜索栏做测试</li></ol><p><strong>算法</strong><br>最长回文子串 acm模式</p><p><strong>反问</strong><br>测开方面还需要学习什么<br>-测试总体流程</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="快手测开一面-—不完整无序版"><a href="#快手测开一面-—不完整无序版" class="headerlink" title="快手测开一面   —不完整无序版"></a>快手测开一面   —不完整无序版</h3><ol><li>自我介绍</li><li>云教育平台介绍</li><li>java基础——怎么实现继承和接口</li><li>线程创建的方法</li><li>try catch final块各做什么</li><li>mysql方面——在java里面怎么做的</li><li>给项目新增查询方法，三层架构各个层加什么方法，怎么连接导入数据库，需要写什么东西等等</li><li>给项目加索引怎么设计的，考虑哪些，每个字段都加索引吗</li><li>sql书写 涉及聚合函数和分组 多条件</li><li>内连接和外连接区别</li><li>mysql有哪些锁</li><li>死锁是怎么形成的</li><li>出现死锁了怎么办</li><li>计网方面——项目当中前后端做请求怎么实现</li><li>get post区别</li><li>url打开界面中间的流程</li><li>项目方面——mysql redis都做什么用的 存储什么</li><li>测开方面——对测试的了解</li><li>怎么对百度搜索栏做测试</li></ol><p><strong>算法</strong><br>最长回文子串 acm模式</p><p><strong>反问</strong><br>测开方面还需要学习什么<br>-测试总体流程</p>]]></content>
       
       
       <categories>
