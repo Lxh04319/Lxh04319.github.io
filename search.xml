@@ -4,11 +4,42 @@
   
     
     <entry>
+      <title>美团测试开发日常实习一面</title>
+      <link href="/2024/11/01/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A211.1/"/>
+      <url>/2024/11/01/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A211.1/</url>
+      
+        <content type="html"><![CDATA[<h3 id="美团测开一面-—不完整无序版"><a href="#美团测开一面-—不完整无序版" class="headerlink" title="美团测开一面   —不完整无序版"></a>美团测开一面   —不完整无序版</h3><ol><li>部门介绍 分成三端</li><li>自我介绍</li><li>项目难点 -分布式事务</li><li>面向对象三大特征 解释多态 怎么实现多态</li><li>双亲委派机制</li><li>List怎么去重</li><li>spring aop&#x2F;ioc</li><li>linux命令</li><li><a href="http://www.meituan.com输入以后到显示界面的过程/">www.meituan.com输入以后到显示界面的过程</a></li><li>tcp udp区别</li><li>对算法写测试用例</li><li>美团app待评价功能怎么做测试</li><li>sql书写 -聚合函数</li><li>sql书写 -连接</li><li>大三能来吗 能来多久 啥时候来</li><li>倾向于哪个部门 基建&#x2F;容器&#x2F;业务</li></ol><p><strong>算法</strong><br>有效括号判断</p><p><strong>反问</strong><br>后续流程</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面经 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Interview Record </tag>
+            
+            <tag> 日常实习 </tag>
+            
+            <tag> 测试开发 </tag>
+            
+            <tag> 美团 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>百度测试开发日常实习二面</title>
       <link href="/2024/10/31/%E7%99%BE%E5%BA%A6%E4%BA%8C%E9%9D%A210.31/"/>
       <url>/2024/10/31/%E7%99%BE%E5%BA%A6%E4%BA%8C%E9%9D%A210.31/</url>
       
-        <content type="html"><![CDATA[<h3 id="百度测开二面-—不完整无序版"><a href="#百度测开二面-—不完整无序版" class="headerlink" title="百度测开二面   —不完整无序版"></a>百度测开二面   —不完整无序版</h3><ol><li>在学校吗，大三可以出来实习吗，希望时间久一点</li><li>自我介绍</li><li>云教育平台介绍</li><li>可以实习多久，能来北京吗</li><li>认为测试是做什么工作的</li><li>项目从0到1，开发和测试需要做的事情</li><li>为啥大文件断点续传</li><li>项目压测怎么做的 jmeter并发压测</li><li>如何对一个接口做测试，怎么写测试用例</li><li>怎么判断问题是前端还是后端的</li><li>怎么报告bug</li><li>自己的优势和劣势是什么</li><li>对测试和开发怎么看</li><li>linux进程端口命令</li><li>linux解压缩命令</li><li>jvm结构</li><li>数据库事务四大特性</li><li>怎么理解面向对象和面向过程</li><li>封装继承多态怎么理解</li><li>静态和非静态</li><li>逻辑题 -十二个小球有一个不知轻重如何查找</li><li>一周几天 啥时候能来</li></ol><p><strong>算法</strong><br>-字符串反转<br>-字符串内部数字*2 加进位<br>-异位词分组<br>20min acm模式</p><p><strong>反问</strong><br>业务 流程</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="百度测开二面-—不完整无序版"><a href="#百度测开二面-—不完整无序版" class="headerlink" title="百度测开二面   —不完整无序版"></a>百度测开二面   —不完整无序版</h3><ol><li>在学校吗，大三可以出来实习吗，希望时间久一点</li><li>自我介绍</li><li>云教育平台介绍</li><li>可以实习多久，能来北京吗</li><li>认为测试是做什么工作的</li><li>项目从0到1，开发和测试需要做的事情</li><li>为啥大文件断点续传</li><li>项目压测怎么做的 jmeter并发压测</li><li>如何对一个接口做测试，怎么写测试用例</li><li>怎么判断问题是前端还是后端的</li><li>怎么报告bug</li><li>自己的优势和劣势是什么</li><li>对测试和开发怎么看</li><li>linux进程端口命令</li><li>linux解压缩命令</li><li>jvm结构</li><li>数据库事务四大特性</li><li>怎么理解面向对象和面向过程</li><li>封装继承多态怎么理解</li><li>栈队列线性表区别</li><li>静态和非静态</li><li>逻辑题 -十二个小球有一个不知轻重如何查找</li><li>一周几天 啥时候能来</li></ol><p><strong>算法</strong><br>-字符串反转<br>-字符串内部数字*2 加进位<br>-异位词分组<br>20min acm模式</p><p><strong>反问</strong><br>业务 流程</p>]]></content>
       
       
       <categories>
@@ -179,9 +210,9 @@
             
             <tag> 日常实习 </tag>
             
-            <tag> 美团 </tag>
-            
             <tag> 后端开发 </tag>
+            
+            <tag> 美团 </tag>
             
         </tags>
       
