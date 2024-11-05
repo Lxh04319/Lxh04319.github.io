@@ -4,11 +4,42 @@
   
     
     <entry>
+      <title>美团测试开发日常实习二面</title>
+      <link href="/2024/11/05/%E7%BE%8E%E5%9B%A2%E4%BA%8C%E9%9D%A211.5/"/>
+      <url>/2024/11/05/%E7%BE%8E%E5%9B%A2%E4%BA%8C%E9%9D%A211.5/</url>
+      
+        <content type="html"><![CDATA[<h3 id="美团测开一面-—不完整无序版"><a href="#美团测开一面-—不完整无序版" class="headerlink" title="美团测开一面   —不完整无序版"></a>美团测开一面   —不完整无序版</h3><ol><li>部门介绍 –容器 自动化测试</li><li>大三允许实习吗</li><li><strong>算法</strong> 两个有序数组中位数</li><li><strong>算法</strong> 买卖股票的最大利润Ⅰ</li><li>为什么开发转测试</li><li>对测试的了解</li><li>如何对微信登录做测试</li><li>mysql的优点</li><li>开发时遇到什么样的困难</li><li>sql –涉及limit</li></ol><p><strong>反问</strong><br>-对开发测试的看法<br>-对日常实习生水平的期待</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面经 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Interview Record </tag>
+            
+            <tag> 日常实习 </tag>
+            
+            <tag> 测试开发 </tag>
+            
+            <tag> 美团 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>美团测试开发日常实习一面</title>
       <link href="/2024/11/01/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A211.1/"/>
       <url>/2024/11/01/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A211.1/</url>
       
-        <content type="html"><![CDATA[<h3 id="美团测开一面-—不完整无序版"><a href="#美团测开一面-—不完整无序版" class="headerlink" title="美团测开一面   —不完整无序版"></a>美团测开一面   —不完整无序版</h3><ol><li>部门介绍 分成三端</li><li>自我介绍</li><li>项目难点 -分布式事务</li><li>面向对象三大特征 解释多态 怎么实现多态</li><li>双亲委派机制</li><li>List怎么去重</li><li>spring aop&#x2F;ioc</li><li>linux命令</li><li><a href="http://www.meituan.com输入以后到显示界面的过程/">www.meituan.com输入以后到显示界面的过程</a></li><li>tcp udp区别</li><li>对算法写测试用例</li><li>美团app待评价功能怎么做测试</li><li>sql书写 -聚合函数</li><li>sql书写 -连接</li><li>大三能来吗 能来多久 啥时候来</li><li>倾向于哪个部门 基建&#x2F;容器&#x2F;业务</li></ol><p><strong>算法</strong><br>有效括号判断</p><p><strong>反问</strong><br>后续流程</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="美团测开一面-—不完整无序版"><a href="#美团测开一面-—不完整无序版" class="headerlink" title="美团测开一面   —不完整无序版"></a>美团测开一面   —不完整无序版</h3><ol><li>部门介绍 分成三端</li><li>自我介绍</li><li>项目难点 -分布式事务</li><li>面向对象三大特征 解释多态 怎么实现多态（三种）</li><li>深拷贝浅拷贝区别2</li><li>双亲委派机制</li><li>List怎么去重</li><li>mysql索引</li><li>spring aop&#x2F;ioc</li><li>linux命令</li><li><a href="http://www.meituan.com输入以后到显示界面的过程/">www.meituan.com输入以后到显示界面的过程</a></li><li>tcp udp区别</li><li>对算法写测试用例</li><li>美团app待评价功能怎么做测试</li><li>sql书写 -聚合函数</li><li>sql书写 -连接</li><li>大三能来吗 能来多久 啥时候来</li><li>倾向于哪个部门 基建&#x2F;容器&#x2F;业务</li></ol><p><strong>算法</strong><br>有效括号判断</p><p><strong>反问</strong><br>后续流程</p>]]></content>
       
       
       <categories>
