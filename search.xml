@@ -4,11 +4,104 @@
   
     
     <entry>
-      <title>美团测试开发日常实习二面</title>
+      <title>百度测试开发日常实习二面 -过</title>
+      <link href="/2024/11/13/%E7%99%BE%E5%BA%A6%E4%BA%8C%E9%9D%A211.13/"/>
+      <url>/2024/11/13/%E7%99%BE%E5%BA%A6%E4%BA%8C%E9%9D%A211.13/</url>
+      
+        <content type="html"><![CDATA[<h3 id="百度测开二面-不完整无序版"><a href="#百度测开二面-不完整无序版" class="headerlink" title="百度测开二面 不完整无序版"></a>百度测开二面 不完整无序版</h3><ol><li>自我介绍</li><li>讲要求能否接受</li><li>linux操作命令</li><li>项目介绍 主要负责什么</li><li>讲解发布课程和支付模块</li><li>如何测试支付模块</li><li>mysql事务讲解</li><li>个人对测试的意愿</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面经 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Interview Record </tag>
+            
+            <tag> 日常实习 </tag>
+            
+            <tag> 测试开发 </tag>
+            
+            <tag> 百度 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>百度测试开发日常实习一面 -过</title>
+      <link href="/2024/11/11/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A211.11/"/>
+      <url>/2024/11/11/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A211.11/</url>
+      
+        <content type="html"><![CDATA[<h3 id="百度测开一面-不完整无序版"><a href="#百度测开一面-不完整无序版" class="headerlink" title="百度测开一面 不完整无序版"></a>百度测开一面 不完整无序版</h3><ol><li><strong>算法</strong> 合并两个有序数组变形版</li><li><strong>算法</strong> 找出最长无重复子串变形版</li><li>https http</li><li>tcp三次握手</li><li>tcp udp区别</li><li>网络模型</li><li>子网掩码的作用</li><li>白盒黑盒测试</li><li>如何对电梯做测试</li><li>项目– 接口怎么写的</li><li>redis作用</li><li>es作用</li><li>nginx</li><li><strong>sql</strong> </li><li>聊天</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面经 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Interview Record </tag>
+            
+            <tag> 日常实习 </tag>
+            
+            <tag> 测试开发 </tag>
+            
+            <tag> 百度 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>百度测试开发日常实习一面 -寄</title>
+      <link href="/2024/11/06/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A211.6/"/>
+      <url>/2024/11/06/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A211.6/</url>
+      
+        <content type="html"><![CDATA[<h3 id="百度测开一面"><a href="#百度测开一面" class="headerlink" title="百度测开一面"></a>百度测开一面</h3><ol><li>自我介绍</li><li>java里整形最大上限是多少，如果很大很大的数，怎么做加减乘除运算，要求共享屏幕写</li><li>一个文件，将它分成十等分，但不完全十等分，在标点符号处截断，怎么写代码，共享屏幕</li><li>一句英文，翻转里面的单词，i am a student翻转成student a am i (中间不一定有几个空格，字符串自翻转，不额外开空间)，共享屏幕</li></ol><p><strong>反问</strong><br>-看重什么，面试风格不一样</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面经 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Interview Record </tag>
+            
+            <tag> 日常实习 </tag>
+            
+            <tag> 测试开发 </tag>
+            
+            <tag> 百度 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>美团测试开发日常实习二面 -过</title>
       <link href="/2024/11/05/%E7%BE%8E%E5%9B%A2%E4%BA%8C%E9%9D%A211.5/"/>
       <url>/2024/11/05/%E7%BE%8E%E5%9B%A2%E4%BA%8C%E9%9D%A211.5/</url>
       
-        <content type="html"><![CDATA[<h3 id="美团测开二面-—不完整无序版"><a href="#美团测开二面-—不完整无序版" class="headerlink" title="美团测开二面   —不完整无序版"></a>美团测开二面   —不完整无序版</h3><ol><li>部门介绍 –容器 自动化测试</li><li>大三允许实习吗</li><li><strong>算法</strong> 两个有序数组中位数</li><li><strong>算法</strong> 买卖股票的最大利润Ⅰ</li><li>为什么开发转测试</li><li>对测试的了解</li><li>如何对微信登录做测试</li><li>mysql的优点</li><li>开发时遇到什么样的困难</li><li>sql –涉及limit</li></ol><p><strong>反问</strong><br>-对开发测试的看法<br>-对日常实习生水平的期待</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="美团测开二面"><a href="#美团测开二面" class="headerlink" title="美团测开二面"></a>美团测开二面</h3><ol><li>部门介绍 –容器 自动化测试</li><li>大三允许实习吗</li><li><strong>算法</strong> 两个有序数组中位数</li><li><strong>算法</strong> 买卖股票的最大利润Ⅰ</li><li>为什么开发转测试</li><li>对测试的了解</li><li>如何对微信登录做测试</li><li>mysql的优点</li><li>开发时遇到什么样的困难</li><li>sql –涉及limit</li></ol><p><strong>反问</strong><br>-对开发测试的看法<br>-对日常实习生水平的期待</p>]]></content>
       
       
       <categories>
@@ -35,7 +128,7 @@
     
     
     <entry>
-      <title>美团测试开发日常实习一面</title>
+      <title>美团测试开发日常实习一面 -过</title>
       <link href="/2024/11/01/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A211.1/"/>
       <url>/2024/11/01/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A211.1/</url>
       
@@ -66,7 +159,7 @@
     
     
     <entry>
-      <title>百度测试开发日常实习二面</title>
+      <title>百度测试开发日常实习二面 -寄</title>
       <link href="/2024/10/31/%E7%99%BE%E5%BA%A6%E4%BA%8C%E9%9D%A210.31/"/>
       <url>/2024/10/31/%E7%99%BE%E5%BA%A6%E4%BA%8C%E9%9D%A210.31/</url>
       
@@ -97,7 +190,7 @@
     
     
     <entry>
-      <title>京东测试开发日常实习一面</title>
+      <title>京东测试开发日常实习一面 -未知(且视为寄)</title>
       <link href="/2024/10/28/%E4%BA%AC%E4%B8%9C%E4%B8%80%E9%9D%A210.28/"/>
       <url>/2024/10/28/%E4%BA%AC%E4%B8%9C%E4%B8%80%E9%9D%A210.28/</url>
       
@@ -128,7 +221,7 @@
     
     
     <entry>
-      <title>百度测试开发日常实习一面</title>
+      <title>百度测试开发日常实习一面 -过</title>
       <link href="/2024/10/28/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A210.28/"/>
       <url>/2024/10/28/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A210.28/</url>
       
@@ -159,7 +252,7 @@
     
     
     <entry>
-      <title>快手测试开发日常实习一面</title>
+      <title>快手测试开发日常实习一面 -寄</title>
       <link href="/2024/10/18/%E5%BF%AB%E6%89%8B%E4%B8%80%E9%9D%A210.18/"/>
       <url>/2024/10/18/%E5%BF%AB%E6%89%8B%E4%B8%80%E9%9D%A210.18/</url>
       
@@ -190,7 +283,7 @@
     
     
     <entry>
-      <title>百度后端开发日常实习一面</title>
+      <title>百度后端开发日常实习一面 -寄</title>
       <link href="/2024/09/26/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A29.26/"/>
       <url>/2024/09/26/%E7%99%BE%E5%BA%A6%E4%B8%80%E9%9D%A29.26/</url>
       
@@ -221,7 +314,7 @@
     
     
     <entry>
-      <title>美团后端开发日常实习一面</title>
+      <title>美团后端开发日常实习一面 -寄</title>
       <link href="/2024/08/26/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A28.26/"/>
       <url>/2024/08/26/%E7%BE%8E%E5%9B%A2%E4%B8%80%E9%9D%A28.26/</url>
       
