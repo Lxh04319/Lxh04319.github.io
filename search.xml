@@ -101,7 +101,7 @@
       <link href="/2024/11/05/%E7%BE%8E%E5%9B%A2%E4%BA%8C%E9%9D%A211.5/"/>
       <url>/2024/11/05/%E7%BE%8E%E5%9B%A2%E4%BA%8C%E9%9D%A211.5/</url>
       
-        <content type="html"><![CDATA[<h3 id="美团测开二面"><a href="#美团测开二面" class="headerlink" title="美团测开二面"></a>美团测开二面</h3><ol><li>部门介绍 –容器 自动化测试</li><li>大三允许实习吗</li><li><strong>算法</strong> 两个有序数组中位数</li><li><strong>算法</strong> 买卖股票的最大利润Ⅰ</li><li>为什么开发转测试</li><li>对测试的了解</li><li>如何对微信登录做测试</li><li>mysql的优点</li><li>开发时遇到什么样的困难</li><li>sql –涉及limit</li></ol><p><strong>反问</strong><br>-对开发测试的看法<br>-对日常实习生水平的期待</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="美团测开二面"><a href="#美团测开二面" class="headerlink" title="美团测开二面"></a>美团测开二面</h3><ol><li>部门介绍 –容器 自动化测试</li><li>大三允许实习吗</li><li><strong>算法</strong> 两个有序数组中位数</li><li><strong>算法</strong> 买卖股票的最大利润Ⅰ</li><li>为什么开发转测试</li><li>对测试的了解</li><li>如何对微信登录做测试</li><li>mysql的优点</li><li>开发时遇到什么样的困难</li><li>sql –涉及子查询 distinct limit offset</li></ol><p><strong>反问</strong><br>-对开发测试的看法<br>-对日常实习生水平的期待</p>]]></content>
       
       
       <categories>
@@ -334,9 +334,9 @@
             
             <tag> 日常实习 </tag>
             
-            <tag> 后端开发 </tag>
-            
             <tag> 美团 </tag>
+            
+            <tag> 后端开发 </tag>
             
         </tags>
       
